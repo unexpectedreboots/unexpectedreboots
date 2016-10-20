@@ -1,0 +1,19 @@
+{
+  "name": "unexpectedreboots",
+  "version": "1.0.0",
+  "description": "[![Stories in Ready](https://badge.waffle.io/unexpectedreboots/unexpectedreboots.png?label=ready&title=Ready)](https://waffle.io/unexpectedreboots/unexpectedreboots) # unexpectedreboots",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlecMaliwanag/unexpectedreboots.git"
+  },
+  "author": "Alec Maliwanag, Chris Tham, Dylan Larrabee, Manjula Kumarasamy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlecMaliwanag/unexpectedreboots/issues"
+  },
+  "homepage": "https://github.com/AlecMaliwanag/unexpectedreboots#readme"
+}
