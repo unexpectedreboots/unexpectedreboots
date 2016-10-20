@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     shell: {
       repoPush: {
         command: 'git add -A && git commit && git push origin master'
-      }
+      },
       upstream: {
         command: 'git pull upstream master'
       }
