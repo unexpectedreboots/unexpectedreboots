@@ -4,14 +4,19 @@
   "description": "[![Stories in Ready](https://badge.waffle.io/unexpectedreboots/unexpectedreboots.png?label=ready&title=Ready)](https://waffle.io/unexpectedreboots/unexpectedreboots) # unexpectedreboots",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server & babel . --watch --out-dir client/compiled --presets=es2015,react --ignore=node_modules,compiled,server,spec,extension --source-maps inline"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlecMaliwanag/unexpectedreboots.git"
-  },
-  "author": "Alec Maliwanag, Chris Tham, Dylan Larrabee, Manjula Kumarasamy",
+  "author": "alec maliwanag",
   "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
   "bugs": {
     "url": "https://github.com/AlecMaliwanag/unexpectedreboots/issues"
   },
