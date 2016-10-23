@@ -1,3 +1,3 @@
-angular.module('reboot.services', [])
-.factory('rebootFactory', function() {
+angular.module('reboot').factory('rebootFactory', function() {
+	return ({});
 }

@@ -1,5 +1,7 @@
-angular.module('reboot.control', [])
-.controller('rebootController', function($scope, rebootFactory) {
-
-
+myApp.controller('rebootController', function($scope) {
+	$scope.selectedText='';
+	$scope.sendText = function(message) {
+		$scope.selectedText = message;
+	}
+	//$scope.selectedText="test"
 })

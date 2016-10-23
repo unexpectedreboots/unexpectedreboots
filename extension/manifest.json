@@ -10,7 +10,24 @@
     "default_popup": "index.html"
   },
 
+
+  "background": {
+    "scripts": ["rebootBackground.js"]
+
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["rebootContent.js"]
+    }
+  ],
+
   "permissions": [
+    "http://*/*",
+    "https://*/*",
     "activeTab"
   ]
+
+ 
 }
