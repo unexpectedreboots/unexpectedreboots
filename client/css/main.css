@@ -2,6 +2,7 @@ html {
   height: 100%;
   width: 100%;
 }
+
 body {
   background: url(../assets/signupLanding.jpg) no-repeat bottom center scroll;
   -webkit-background-size: cover;
@@ -54,6 +55,8 @@ body {
   display: block;
   margin: 0 auto;
 }
+
 .signupButton {
   margin: 5px 5px 5px 5px;
 } 
+

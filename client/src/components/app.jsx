@@ -2,8 +2,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  render() {
 
+  render() {
     return (
       <div>
         <Signup /> 
@@ -11,4 +11,5 @@ class App extends React.Component {
     );
   }
 }
+
 window.App = App;
