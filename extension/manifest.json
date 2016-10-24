@@ -15,6 +15,10 @@
     "scripts": ["rebootBackground.js"]
   },
 
+   "web_accessible_resources" :[
+      "dropdownDashBaord.html"
+  ],
+
   "content_scripts": [
     {
       "matches": ["*://*/*"],
@@ -23,11 +27,7 @@
   ],
 
   "permissions": [
-
-    "http://*/*",
-    "https://*/*",
-    "activeTab",
-    "permissions"
+    "activeTab"
   ]
 
  
