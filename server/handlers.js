@@ -10,8 +10,8 @@ var sendBackTestMessages = function(req, res) {
 
 var saveTestMessage = function(req, res) {
   var text = req.body.text;
-  console.log(text); //undefined
   console.log(req.body); // {}
+  console.log(text); //undefined
   schemas.Message.create({text: text});
   res.send('POST recived');
 };
