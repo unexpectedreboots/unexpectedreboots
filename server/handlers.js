@@ -3,7 +3,7 @@ var schemas = require('../db/testSchema/testTable');
 
 //set up get and set handlers that query the database
 var sendBackTestMessages = function(req, res) {
-  schemas.Messages.findAll().then(function(messages) {
+  schemas.Message.findAll().then(function(messages) {
     res.send(messages);
   });
 };
