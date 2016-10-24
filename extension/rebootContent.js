@@ -1,13 +1,22 @@
 
+
 document.addEventListener('mouseup',function(event)
 {
   var selectedText = window.getSelection().toString();
 		
-  if(selectedText.length) {		
-  	console.log('rebootExt js, selectedText: ', selectedText)
-		chrome.runtime.sendMessage({data: "selectedText"}, function(response) {
-		  console.log(response);
+  if (selectedText.length) {
+  	
+		
+  	chrome.runtime.sendMessage(
+  		{action: 'reboot-content',
+  		data: selectedText,
+  		url: window.location}, function(response) {
+			console.log('rebootExt js, selectedText: ', selectedText)
+			console.log(response);
+		  
 		});
     
   }
 })
+
+
