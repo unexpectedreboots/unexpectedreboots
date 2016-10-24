@@ -7,6 +7,7 @@ var handlers = require('./handlers');
 var app = express(); 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //set up get and set routes
 app.get('/test', handlers.sendBackTestMessages);
