@@ -12,7 +12,7 @@ body {
   width: 100%;
 }
 
-#registerTwo {
+#SignUp {
   height: 350px;
   width: 20%;
   margin-left: 40%;
@@ -21,12 +21,12 @@ body {
   display: inline-block;
 }
 
-#registerTwo form {
+#SignUp form {
   text-align: center;
   margin-top: 0;
 }
 
-#registerTwo h2 {
+#SignUp h2 {
   background-color: rgba(192,79,71,0.7);
   padding: 3%;
   margin-top: 0;
@@ -34,13 +34,13 @@ body {
   margin-bottom: 40px;
 }
 
-#registerTwo input {
+#SignUp input {
   width: 80%;
   margin: 10px 0;
   padding: 5px;
 }
 
-#registerTwo button {
+#SignUp button {
   background-color: #72C08B;
   color: white;
   border: none;

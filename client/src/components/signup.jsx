@@ -2,7 +2,7 @@ var Signup = (props) => {
 
     return (
       <div>
-      <div id="registerTwo">
+      <div id="SignUp">
         <form>
           <h2>Welcome</h2>
           <input placeholder="what's your name?" id="newUsername" />
