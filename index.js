@@ -1,5 +1,5 @@
 var app = require('./server/server').app;
-var schemas = require('./db/testSchema/testTable');
+var schemas = require('./db/ORM/testSchema/testTable');
 var port = 3000;
 
 //sync and add dumy data to the test table

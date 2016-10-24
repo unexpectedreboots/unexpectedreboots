@@ -1,4 +1,4 @@
-var schemas = require('../db/testSchema/testTable'); 
+var schemas = require('../db/ORM/testSchema/testTable'); 
 //add our schemas?
 
 //set up get and set handlers that query the database
