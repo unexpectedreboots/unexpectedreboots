@@ -11,6 +11,7 @@ var sendBackTestMessages = function(req, res) {
 var saveTestMessage = function(req, res) {
   var text = req.body.text;
   schemas.Message.create({text: text});
+  res.send('POST recived');
 };
 
 //export handlers
