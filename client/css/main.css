@@ -1,0 +1,59 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background: url(../assets/signupLanding.jpg) no-repeat bottom center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+#SignUp {
+  height: 350px;
+  width: 20%;
+  margin-left: 40%;
+  margin-top: 20%;
+  background-color: rgba(255,255,255,0.1);
+  display: inline-block;
+}
+
+#SignUp form {
+  text-align: center;
+  margin-top: 0;
+}
+
+#SignUp h2 {
+  background-color: rgba(192,79,71,0.7);
+  padding: 3%;
+  margin-top: 0;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+#SignUp input {
+  width: 80%;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+#SignUp button {
+  background-color: #72C08B;
+  color: white;
+  border: none;
+  width: 45%;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto;
+}
+.signupButton {
+  margin: 5px 5px 5px 5px;
+} 
