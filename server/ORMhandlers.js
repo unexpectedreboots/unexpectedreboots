@@ -1,5 +1,5 @@
-var schemas = require('../db/testSchema/testTable'); 
-//add our schemas?
+var schemas = require('../db/ORM/testSchema/testTable'); 
+//include markable schemas
 
 //set up get and set handlers that query the database
 var sendBackTestMessages = function(req, res) {
