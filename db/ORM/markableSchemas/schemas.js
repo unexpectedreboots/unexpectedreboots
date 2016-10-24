@@ -12,8 +12,8 @@ var Users = sequelize.define('users', {
 });
 
 var Groups = sequelize.define('groups', {
-  nmae: Sequelize.STRING,
-  //owner: Sequelize.STRING
+  name: Sequelize.STRING,
+  owner: Sequelize.STRING
 });
 
 var Markups = sequelize.define('markups', {
@@ -27,14 +27,19 @@ var Sites = sequelize.define('sites', {
   title: Sequelize.STRING
 });
 
+var Owners = sequelize.define('owners', {
+  url: Sequelize.STRING,
+  title: Sequelize.STRING
+});
+
 
 //define relationships: (bi-directional)
 //users have many markups, markups belong to one user
 
-//groups have many users, users belong to many groups
+//groups belong to many users, users belong to many groups
 
 //??? how to specify group belongs to one user (owner)???
-//group belongs to one user, user has many groups
+//group belongs to one user, user belong to many groups
 
 //sites have many markups, markup belongs to one site
 
