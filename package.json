@@ -4,7 +4,7 @@
   "description": "[![Stories in Ready](https://badge.waffle.io/unexpectedreboots/unexpectedreboots.png?label=ready&title=Ready)](https://waffle.io/unexpectedreboots/unexpectedreboots) # unexpectedreboots",
   "main": "index.js",
   "scripts": {
-    "start": "live-server & babel . --watch --out-dir client/compiled --presets=es2015,react --ignore=node_modules,compiled,server,spec,extension,db --source-maps inline"
+    "start": "live-server & babel . --watch --out-dir client/compiled --presets=es2015,react --ignore=node_modules,compiled,server,spec,extension,db,Gruntfile.js --source-maps inline"
   },
   "author": "alec maliwanag",
   "license": "ISC",
