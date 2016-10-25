@@ -1,19 +1,21 @@
-//credentials (for the session secret)
 var express = require('express');
-//bcrypt
 var bodyParser = require('body-parser');
-//express session
 var handlers = require('./ORMhandlers');
-var app = express(); 
+var app = express();
+var routes = require('./routes/routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//set up get and set routes
-app.get('/test', handlers.sendBackTestMessages);
-
-app.post('/test', handlers.saveTestMessage);
-
+// Routes
+app.use('/api/register', routes.createUser);
+app.use('/api/login', routes.checkUser);
+app.use('/api/groups', routes.newGroup);
+app.use('/api/membership', routes.newMember);
+app.use('/api/websites', routes.createSite);
+app.use('/api/markups', route.createMarkup);
+app.use('/api/groups/markups', route.markupGroup);
+app.use('/api/groups/sites', route.shareSite);
 
 //export the express app
 module.exports.app = app;
