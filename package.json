@@ -9,6 +9,7 @@
   "author": "alec maliwanag",
   "license": "ISC",
   "dependencies": {
+    "angular-route": "^1.5.8",
     "babel-cli": "^6.16.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
