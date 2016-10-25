@@ -1,11 +1,33 @@
+var users = require('../../db/users');
+
 // registration endpoint
 exports.createUser = function(req, res) {
+  var username = req.query.username;
+  var email = req.query.email;
+  var password = req.query.password;
 
+  users.insertUser(username, email, password, function(err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+  });
 };
 
 // check login credentials
 exports.checkUser = function(req, res) {
+  var username = req.query.username;
+  var email = req.query.email;
+  var password = req.query.password;
 
+  users.checkUser(username, password, function(err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+  });
 };
 
 // TODO: edit/delete user
