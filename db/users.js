@@ -8,7 +8,17 @@ exports.insertUser = function(username, email, password, callback) {
   client.connect(function(err) {
     if (err) console.log(err);
 
-    // TODO check if the username exists first
+    client.query({
+      text: 'SELECT username FROM users \
+        WHERE username = \'' + username + '\';'
+    },
+
+    function(err, rows) {
+      if (rows) {
+        
+      }
+    })
+
     client.query({
       text: 'INSERT INTO users(username, email, password) \
         VALUES($1, $2, $3)',
@@ -33,16 +43,16 @@ exports.checkUser = function(username, password, callback) {
 
     client.query({
       text: 'SELECT username, password FROM users \
-        WHERE username = ' + username + ';'
+        WHERE username = \'' + username + '\';'
     },
 
     function(err, rows) {
       if (err) {
-        callback('user not found');
+        callback(err, null);
         client.end();
       } else {
         console.log(rows);
-        callback('user authentication success');
+        callback(null, rows);
         client.end();
       }
     });

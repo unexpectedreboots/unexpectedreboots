@@ -35,8 +35,10 @@ exports.checkUser = function(req, res) {
   users.checkUser(username, password, function(err, result) {
     if (err) {
       console.log(err);
+      res.send(err);
     } else {
-      console.log(result);
+      console.log(result.rows);
+      res.send(result);
     }
   });
 };
