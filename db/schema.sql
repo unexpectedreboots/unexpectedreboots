@@ -1,8 +1,8 @@
 CREATE TABLE users (
   id        BIGSERIAL PRIMARY KEY,
   username  VARCHAR(20) NOT NULL,
-  email     VARCHAR(32) NOT NULL,
-  password  VARCHAR(32) NOT NULL
+  email     VARCHAR(64) NOT NULL,
+  password  VARCHAR(64) NOT NULL
 );
 
 CREATE TABLE groups (
@@ -28,8 +28,8 @@ CREATE TABLE markups (
   siteid   BIGSERIAL references sites(id),
   authorid BIGSERIAL references users(id),
   anchor   VARCHAR(255),
-  text     VARCHAR(255) NOT NULL,
-  comment  VARCHAR(255)
+  text     VARCHAR(2048) NOT NULL,
+  comment  VARCHAR(2048)
 );
 
 CREATE TABLE markupsgroups (

@@ -9,7 +9,6 @@ exports.createUser = function(req, res) {
   var password = req.query.password || req.body.password;
 
   bcrypt.hash(password, saltRounds, function(error, hash) {
-    console.log('calling bcrypt hash');
     if (error) {
       console.log(error);
     } else {
