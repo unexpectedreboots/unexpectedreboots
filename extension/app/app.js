@@ -2,7 +2,7 @@ var myApp = angular.module('Markable', ['ngRoute','dropdownController'])
   myApp.config(function($routeProvider) {
   $routeProvider
     .when("/", {
-      templateUrl: '../views/dropdownDashBoard.html',
+      templateUrl: '../views/dropdown.html',
       controller: 'dropdown'
   })
 });
