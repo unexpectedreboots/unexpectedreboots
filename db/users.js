@@ -17,10 +17,10 @@ exports.insertUser = function(username, email, password, callback) {
 
     function(err, rows) {
       if (err) {
-        callback('user creation failure', err);
+        callback(err, null);
         client.end();
       } else {
-        callback('user creation success');
+        callback(null, 'user creation success');
         client.end();
       }
     });
@@ -32,17 +32,16 @@ exports.checkUser = function(username, password, callback) {
     if (err) console.log(err);
 
     client.query({
-      name: 'checkuser',
       text: 'SELECT username, password FROM users \
         WHERE username = ' + username + ';'
     },
 
     function(err, rows) {
       if (err) {
-        callback('check user failure');
-        client.end(err);
+        callback('user not found');
+        client.end();
       } else {
-        // check user password and if successful...
+        console.log(rows);
         callback('user authentication success');
         client.end();
       }
