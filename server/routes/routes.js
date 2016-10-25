@@ -36,6 +36,15 @@ exports.checkUser = function(req, res) {
     if (err) {
       console.log(err);
     } else {
+      var retrievedPassword = result[0].password;
+      bcrypt.compare(password,retrievedPassword, function(err, res) {
+        if (res === true) {
+          console.log("success")
+        } else {
+          console.log(res, "password wrong");
+        }
+      })
+
       console.log(result);
     }
   });
