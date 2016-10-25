@@ -1,6 +1,5 @@
 {
   "manifest_version": 2,
-
   "name": "unexpected-reboots",
   "description": "highlighting extensions",
   "version": "1.0",
@@ -24,9 +23,16 @@
 
     }
   ],
+  "oauth2": {
+    "client_id": "665859454684.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "identity"
   ]
 
  
