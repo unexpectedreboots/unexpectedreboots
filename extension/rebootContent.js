@@ -1,13 +1,15 @@
-
-document.addEventListener('mouseup',function(event) {
+document.addEventListener('mouseup', function(event) {
   var selectedText = window.getSelection().toString();
-	if (selectedText.length) {
-  	chrome.runtime.sendMessage({action: 'reboot-content',
-		data: selectedText,
-		url: window.location.href}, function(response) {
-			console.log('rebootExt js, selectedText: ', selectedText)
-			console.log(response);
-		})    
+  chrome.tabs.executeScript({
+    code: 'alert(document.title)'
+  });
+  if (selectedText.length) {
+    chrome.runtime.sendMessage({action: 'reboot-content',
+    data: selectedText,
+    url: window.location.href}, function(response) {
+      console.log('rebootExt js, selectedText: ', selectedText);     
+      console.log(response);
+    });   
   }
 });
 
