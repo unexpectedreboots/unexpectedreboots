@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "unexpected-reboots",
-  "description": "highlighting extensions",
+  "name": "markable",
+  "description": "markup, sharing, and highlighting extension",
   "version": "1.0",
 
   "browser_action": {
@@ -23,17 +23,9 @@
 
     }
   ],
-  "oauth2": {
-    "client_id": "665859454684.apps.googleusercontent.com",
-    "scopes": [
-      "https://www.googleapis.com/auth/drive"
-    ]
-  },
 
   "permissions": [
     "activeTab",
     "identity"
   ]
-
- 
 }
