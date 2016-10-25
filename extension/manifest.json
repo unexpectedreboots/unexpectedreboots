@@ -10,11 +10,6 @@
     "default_popup": "views/index.html"
   },
 
-
-  "background": {
-    "scripts": ["rebootBackground.js"]
-  },
-
    "web_accessible_resources" :[
       "dropdownDashBaord.html"
   ],
@@ -22,7 +17,11 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["rebootContent.js"]
+      "js": [
+        "lib/angular.min.js",
+        "app/scripts/selectionScript.js"
+      ]
+
     }
   ],
 
