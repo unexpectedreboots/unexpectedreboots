@@ -15,19 +15,23 @@ exports.insertUser = function(username, email, password, callback) {
   pool.query({
     text: 'SELECT username FROM users \
       WHERE username = \'' + username + '\';'
-  },
+  }, 
 
   function(err, rows) {
-  })
+    if (rows.rowCount > 0) {
+      callback('user already exists', null);
+    } else {
+      
+      pool.query({
+        text: 'INSERT INTO users(username, email, password) \
+          VALUES($1, $2, $3)',
+        values: [username, email, password]
+      },
 
-  pool.query({
-    text: 'INSERT INTO users(username, email, password) \
-      VALUES($1, $2, $3)',
-    values: [username, email, password]
-  },
-
-  function(err, success) {
-    err ? callback(err, null) : callback(null, true);
+      function(err, success) {
+        err ? callback(err, null) : callback(null, true);
+      });
+    }
   });
 };
 
