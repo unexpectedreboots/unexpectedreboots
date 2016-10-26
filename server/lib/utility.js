@@ -7,8 +7,9 @@ exports.sessionChecker = function(req, res, next) {
   }
 };
 
-exports.createSession = function(req, res, username) {
-  return req.session.regenerate(function() {
+exports.createSession = function(req, res, username, callback) {
+  req.session.regenerate(function() {
     req.session.username = username;
+    callback();
   }); 
 }; 

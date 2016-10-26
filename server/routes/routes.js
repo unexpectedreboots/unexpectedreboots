@@ -21,13 +21,15 @@ exports.createUser = function(req, res) {
         if (err) {
           res.send(err)
         } else {
-          createSession(req, res, username);
+          createSession(req, res, username, function() {
+            console.log(req.session);
+            var groupName = 'invisible-' + username;
 
-          var groupName = 'invisible-' + username;
-
-          groups.createGroup(groupName, username, function(err3, success2) {
-            err3 ? res.send(err3) : res.send(success2);
+            groups.createGroup(groupName, username, function(err3, success2) {
+              err3 ? res.send(err3) : res.send(success2);
+            });
           });
+          
         }
       });
     }
@@ -47,14 +49,12 @@ exports.checkUser = function(req, res) {
         res.send('user does not exist');
       } else {        
         var retrievedPassword = result.rows[0].password;
-
         bcrypt.compare(password, retrievedPassword, function(err2, success) {
-          if (!err2) {
-
-            if (success) {
-              createSession(req, res, username);
-            }
-
+          if (success) {
+            createSession(req, res, username, function(){
+              res.send(success);
+            });
+          } else {
             res.send(success);
           }
         });
