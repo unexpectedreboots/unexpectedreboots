@@ -97,11 +97,8 @@ exports.addMember = function(req, res) {
   */
 
   groups.addMember(groupName, username, newMember, function(err, success) {
-    if (err) res.send(err);
-
-
+    err ? res.send(err) : res.send(success);
   });
-
 };
 
 // TODO: edit/delete group
