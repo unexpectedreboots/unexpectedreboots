@@ -1,4 +1,5 @@
 exports.sessionChecker = function(req, res, next) {
+  console.log(req.session, 'req.session on session checker');
   if (req.session.username) {
     next();
   } else {
@@ -8,6 +9,6 @@ exports.sessionChecker = function(req, res, next) {
 
 exports.createSession = function(req, res, username) {
   return req.session.regenerate(function() {
-    req.session.user = username;
+    req.session.username = username;
   }); 
-};
+}; 
