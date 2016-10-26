@@ -4,7 +4,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      view: 'home',
+      view: 'homes'
     };
 
   }
@@ -28,18 +28,9 @@ class App extends React.Component {
 
   
   render() {
-
-    return (<Heading headingTitle={'Home'} />);
-     
-    //if (this.state === 'home') {
-     // return ( 
-     //   <Heading headingTitle={'Home'} />
-     // );
-    //} else if (this.state === 'groups') {
-     // return ( 
-     //   <Heading headingTitle={'Group'} />
-     // );
-    //}
+    return (
+      <Views viewType={this.state.view} />
+    );
   }
 }
 

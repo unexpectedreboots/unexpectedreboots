@@ -1,8 +1,7 @@
 var Heading = (props) => {
 
-  
+  return ( <div>{props.title}</div> );
 
-  return ( <div>{props.headingTitle}</div> );
 };
 
 
