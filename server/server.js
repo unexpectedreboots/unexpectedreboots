@@ -18,13 +18,13 @@ app.use(session({
   //check to see if request has session for everything except register and login
 
 // Routes
-app.use('/api/register', routes.createUser);
-app.use('/api/login', routes.checkUser);
-app.use('/api/updateinfo', sessionChecker, routes.updateUser);
+app.use('/api/users/register', routes.createUser);
+app.use('/api/users/login', routes.checkUser);
+app.use('/api/users/update', sessionChecker, routes.updateUser);
 app.use('/api/groups/create', sessionChecker, routes.createGroup);
-app.use('/api/groups/addmember', sessionChecker, routes.addMember);
-app.use('/api/websites', sessionChecker, routes.createSite);
-app.use('/api/markups', sessionChecker, routes.createMarkup);
+app.use('/api/groups/add', sessionChecker, routes.addMember);
+app.use('/api/websites/create', sessionChecker, routes.createSite);
+app.use('/api/markups/create', sessionChecker, routes.createMarkup);
 app.use('/api/groups/markups', sessionChecker, routes.markupGroup);
 app.use('/api/groups/sites', sessionChecker, routes.shareSite);
 
