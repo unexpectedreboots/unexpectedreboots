@@ -22,6 +22,11 @@
       ]
     }
   ],
+  "background": [
+    {
+      
+    }
+  ],
 
   "permissions": [
     "activeTab",

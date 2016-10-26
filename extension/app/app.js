@@ -1,6 +1,7 @@
 var myApp = angular.module('Markable', [
   'ngRoute',
-  'dropdownController'
+  'dropdownController',
+  'mainController' 
 ])
 
 .config(function($routeProvider) {
