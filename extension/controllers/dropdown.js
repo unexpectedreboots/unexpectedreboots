@@ -19,6 +19,8 @@ angular.module('dropdownController', [])
       }
     });
   };
+
+  
   $scope.logIn = function() {
 
     $http({ 

@@ -145,3 +145,9 @@ exports.addMember = function(groupName, username, newMember, callback) {
     }
   });
 };
+
+exports.getUserGroups = function(username, callback) {
+
+
+
+};
