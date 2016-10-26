@@ -1,4 +1,6 @@
 var users = require('../../db/users');
+var groups = require('../../db/groups');
+
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 
@@ -52,12 +54,12 @@ exports.updateUser = function(req, res) {
 };
 
 // create new groups
-exports.newGroup = function(req, res) {
-
+exports.createGroup = function(req, res) {
+  
 };
 
 // add group members
-exports.newMember = function(req, res) {
+exports.addMember = function(req, res) {
 
 };
 
