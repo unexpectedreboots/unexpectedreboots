@@ -1,31 +1,44 @@
 var users = require('../../db/users');
+var bcrypt = require('bcrypt');
+var saltRounds = 10;
 
 // registration endpoint
 exports.createUser = function(req, res) {
-  var username = req.query.username;
-  var email = req.query.email;
-  var password = req.query.password;
+  var username = req.query.username || req.body.username;
+  var email = req.query.email || req.body.email;
+  var password = req.query.password || req.body.password;
 
-  users.insertUser(username, email, password, function(err, result) {
-    if (err) {
-      console.log(err);
+  bcrypt.hash(password, saltRounds, function(error, hash) {
+    if (error) {
+      console.log(error);
     } else {
-      console.log(result);
+      password = hash;
+
+      users.insertUser(username, email, password, function(err, result) {
+        err ? res.send(err) : res.send(result);
+      });
     }
   });
 };
 
 // check login credentials
 exports.checkUser = function(req, res) {
-  var username = req.query.username;
-  var email = req.query.email;
-  var password = req.query.password;
+  var username = req.query.username || req.body.username;
+  var password = req.query.password || req.body.password;
 
   users.checkUser(username, password, function(err, result) {
     if (err) {
-      console.log(err);
+      res.send(err);
     } else {
-      console.log(result);
+      if (result.rowCount === 0) {
+        res.send('user does not exist');
+      } else {        
+        var retrievedPassword = result.rows[0].password;
+
+        bcrypt.compare(password, retrievedPassword, function(err, success) {
+          if (!err) res.send(success);
+        });
+      }
     }
   });
 };
