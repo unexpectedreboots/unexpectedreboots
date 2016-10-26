@@ -13,7 +13,7 @@ exports.createUser = function(req, res) {
 
   bcrypt.hash(password, saltRounds, function(error, hash) {
     if (error) {
-      console.log(error);
+      res.send(error);
     } else {
       password = hash;
 
@@ -22,7 +22,7 @@ exports.createUser = function(req, res) {
           res.send(err)
         } else {
           createSession(req, res, username, function() {
-            console.log(req.session);
+            console.log(req.session); // TODO remove
             var groupName = 'invisible-' + username;
 
             groups.createGroup(groupName, username, function(err3, success2) {
@@ -96,6 +96,9 @@ exports.addMember = function(req, res) {
   7. Insert member + group into UG join table 
   */
 
+  groups.addMember(groupName, username, newMember, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 // TODO: edit/delete group
@@ -104,6 +107,7 @@ exports.addMember = function(req, res) {
 exports.createSite = function(req, res) {
 
 };
+
 
 // create new markup
 exports.createMarkup = function(req, res) {

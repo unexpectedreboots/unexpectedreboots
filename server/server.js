@@ -28,6 +28,10 @@ app.use('/api/markups/create', sessionChecker, routes.createMarkup);
 app.use('/api/groups/markups', sessionChecker, routes.markupGroup);
 app.use('/api/groups/sites', sessionChecker, routes.shareSite);
 
+// Test Routes: no authentication required
+app.use('/test/groups/create', routes.createGroup);
+app.use('/test/groups/add', routes.addMember);
+
 
 
 app.listen(3000);
