@@ -83,7 +83,24 @@ exports.addMember = function(groupName, username, newMember, callback) {
       var ownerID = rows.rows[0].userid;
       var groupID = rows.rows[0].groupid; 
       
+      pool.query({
+        // check if new member already has membership to specified group
+        text: 'SELECT u.id AS userid FROM users u \
+        WHERE u.username = \'' + newMember + '\' \
+        AND u.id IN ( \
+          SELECT ug.userid FROM usersgroups ug \
+          WHERE ug.groupid = \'' + groupID + '\' \
+        )'
+      },
 
+      function(err2, rows2) {
+        if (rows.rowCount > 0) {
+          callback('cannot add a user that is already a member of the group');
+        } else {
+          
+        }
+
+      });
 
     }
 
