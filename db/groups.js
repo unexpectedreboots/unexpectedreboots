@@ -27,7 +27,6 @@ exports.createGroup = function(groupName, owner, callback) {
   },
 
   function(err, rows) {
-    console.log(rows);
     if (rows.rowCount > 0) {
       callback('duplicate group name for specified user', null);
     } else {
@@ -63,5 +62,4 @@ exports.createGroup = function(groupName, owner, callback) {
       });
     }
   });
-
 };

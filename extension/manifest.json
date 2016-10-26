@@ -20,12 +20,12 @@
         "lib/angular.min.js",
         "app/scripts/selectionScript.js"
       ]
-
     }
   ],
 
   "permissions": [
     "activeTab",
-    "identity"
+    "identity",
+    "storage"
   ]
 }
