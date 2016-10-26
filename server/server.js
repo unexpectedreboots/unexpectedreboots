@@ -21,7 +21,7 @@ app.use(session({
 app.use('/api/users/register', routes.createUser); // done
 app.use('/api/users/login', routes.checkUser); // done
 app.use('/api/users/update', sessionChecker, routes.updateUser);
-app.use('/api/users/groups', sessionChecker, routes.getUserGroups); // in progress
+app.use('/api/users/groups', sessionChecker, routes.getUserGroups); // done
 app.use('/api/groups/create', sessionChecker, routes.createGroup); // done
 app.use('/api/groups/add', sessionChecker, routes.addMember); // done
 app.use('/api/websites/create', sessionChecker, routes.createSite);

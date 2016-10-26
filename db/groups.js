@@ -147,7 +147,27 @@ exports.addMember = function(groupName, username, newMember, callback) {
 };
 
 exports.getUserGroups = function(username, callback) {
+  pool.query({
+    // find all groups user is a part of (and their owners)
+    text: 'SELECT u.id AS userid, g.id AS groupid, g.name AS groupname, \
+      g.owner AS groupowner FROM users u \
+      LEFT JOIN usersgroups ug \
+      ON u.id = ug.userid \
+      LEFT JOIN groups g \
+      ON g.id = ug.groupid \
+      WHERE userid IN ( \
+        SELECT u.id FROM users u \
+        WHERE u.username = \'' + username + '\' \
+      );'
+      // TODO implement invisible-group ignore
+  }, 
 
+  function(err, rows) {
+    if (rows.rowCount === 0) {
+      callback('user is not part of any groups', null)
+    }
+    err ? callback(err) : callback(rows.rows);
+  });
 
 
 };
