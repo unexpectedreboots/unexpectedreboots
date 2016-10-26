@@ -78,7 +78,7 @@ exports.addMember = function(groupName, username, newMember, callback) {
 
   function(err, rows) {
     if (rows.rowCount === 0) {
-      callback('current user is not owner of specified group');
+      callback('current user is not owner of specified group', null);
     } else {
       var ownerID = rows.rows[0].userid;
       var groupID = rows.rows[0].groupid; 
@@ -87,7 +87,7 @@ exports.addMember = function(groupName, username, newMember, callback) {
         // check if new member already has membership to specified group
         text: 'SELECT u.id AS userid FROM users u \
         WHERE u.username = \'' + newMember + '\' \
-        AND u.id IN ( \
+        AND userid IN ( \
           SELECT ug.userid FROM usersgroups ug \
           WHERE ug.groupid = \'' + groupID + '\' \
         )'
@@ -95,14 +95,39 @@ exports.addMember = function(groupName, username, newMember, callback) {
 
       function(err2, rows2) {
         if (rows.rowCount > 0) {
-          callback('cannot add a user that is already a member of the group');
+          console.log(rows);
+          callback('cannot add a user that is already a member of the group', null);
         } else {
-          
+
+          pool.query({
+            // check if group is full
+            text: 'SELECT * FROM usersgroups ug \
+            WHERE ug.groupid = \'' + groupID + '\''
+          },
+
+          function(err3, rows3) {
+            if (rows3.rowCount >= 6) {
+              callback('group is full', null);
+            } else {
+
+              pool.query({
+                // select newmemberID and insert it into the relevant group
+                text: 'INSERT INTO usersgroups \
+                  VALUES ( \
+                    ( \
+                    SELECT u.id FROM users u \
+                    WHERE u.username = \'' + newMember + '\' \
+                    ),' +
+                    groupID +
+                  ');'
+              }, function(err4, rows4) {
+                console.log(err4, rows4);
+
+              });
+            }
+          });
         }
-
       });
-
     }
-
   });
 }
