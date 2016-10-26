@@ -1,50 +1,49 @@
 var pg = require('pg');
-var CONNECTION = 'postgres://admin:rQUNyC8W9YT7ZZBW@localhost:5432/markable'
+var Pool = require('pg').Pool;
 
-var client = new pg.Client(CONNECTION);
+var CONFIG = {
+  host: 'localhost',
+  user: 'admin',
+  password: 'rQUNyC8W9YT7ZZBW',
+  database: 'markable'
+};
+
+var pool = new Pool(CONFIG);
 
 exports.insertUser = function(username, email, password, callback) {
-  console.log('db insert user called for: ', username, email, password);
-  client.connect(function(err) {
-    if (err) console.log(err);
 
-    // TODO check if the username exists first
-    client.query({
-      text: 'INSERT INTO users(username, email, password) \
-        VALUES($1, $2, $3)',
-      values: [username, email, password]
-    },
+  pool.query({
+    text: 'SELECT username FROM users \
+      WHERE username = \'' + username + '\';'
+  }, 
 
-    function(err, rows) {
-      if (err) {
-        callback(err, null);
-        client.end();
-      } else {
-        callback(null, 'user creation success');
-        client.end();
-      }
-    });
+  function(err, rows) {
+    if (rows.rowCount > 0) {
+      callback('user already exists', null);
+    } else {
+      
+      pool.query({
+        text: 'INSERT INTO users(username, email, password) \
+          VALUES($1, $2, $3)',
+        values: [username, email, password]
+      },
+
+      function(err, success) {
+        err ? callback(err, null) : callback(null, true);
+      });
+    }
   });
 };
 
 exports.checkUser = function(username, password, callback) {
-  client.connect(function(err) {
-    if (err) console.log(err);
 
-    client.query({
-      text: 'SELECT username, password FROM users \
-        WHERE username = ' + username + ';'
-    },
+  pool.query({
+    text: 'SELECT username, password FROM users \
+      WHERE username = \'' + username + '\';'
+  },
 
-    function(err, rows) {
-      if (err) {
-        callback('user not found');
-        client.end();
-      } else {
-        console.log(rows);
-        callback('user authentication success');
-        client.end();
-      }
-    });
+  function(err, success) {
+    err ? callback(err, null) : callback(null, success);
   });
+
 };
