@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/api/register', routes.createUser);
 app.use('/api/login', routes.checkUser);
+app.use('/api/updateinfo', routes.updateUser);
 app.use('/api/groups', routes.newGroup);
 app.use('/api/membership', routes.newMember);
 app.use('/api/websites', routes.createSite);
