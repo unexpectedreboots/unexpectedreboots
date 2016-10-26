@@ -13,7 +13,7 @@ exports.createUser = function(req, res) {
 
   bcrypt.hash(password, saltRounds, function(error, hash) {
     if (error) {
-      console.log(error);
+      res.send(error);
     } else {
       password = hash;
 
@@ -22,7 +22,7 @@ exports.createUser = function(req, res) {
           res.send(err)
         } else {
           createSession(req, res, username, function() {
-            console.log(req.session);
+            console.log(req.session); // TODO remove
             var groupName = 'invisible-' + username;
 
             groups.createGroup(groupName, username, function(err3, success2) {
