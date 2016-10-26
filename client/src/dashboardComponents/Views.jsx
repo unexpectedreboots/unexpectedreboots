@@ -1,7 +1,12 @@
 var Views = (props) => {
 
   if (props.viewType === 'home') {
-    return (<Heading title={'Home'} />);
+    return (
+      <div>
+        <Heading title={'Home'} />
+        <MarkupPannel markups={[1, 1, 1]} />
+      </div>
+    );
   } else {
     return (<Heading title={'Nope'} />); 
   }
