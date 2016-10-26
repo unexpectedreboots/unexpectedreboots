@@ -46,5 +46,8 @@ exports.checkUser = function(username, password, callback) {
   function(err, success) {
     err ? callback(err, null) : callback(null, success);
   });
-
 };
+
+exports.updateUser = function(username, password, newPassword, email, newEmail, callback) {
+  // TODO: implement user updating
+}
