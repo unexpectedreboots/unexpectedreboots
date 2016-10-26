@@ -15,13 +15,7 @@ exports.createUser = function(req, res) {
       password = hash;
 
       users.insertUser(username, email, password, function(err, result) {
-        if (err) {
-          console.log(err);
-          res.send(err);
-        } else {
-          console.log(result);
-          res.send(result);
-        }
+        err ? res.send(err) : res.send(result);
       });
     }
   });
@@ -34,18 +28,17 @@ exports.checkUser = function(req, res) {
 
   users.checkUser(username, password, function(err, result) {
     if (err) {
-      console.log(err);
+      res.send(err);
     } else {
-      var retrievedPassword = result[0].password;
-      bcrypt.compare(password,retrievedPassword, function(err, res) {
-        if (res === true) {
-          console.log("success")
-        } else {
-          console.log(res, "password wrong");
-        }
-      })
+      if (result.rowCount === 0) {
+        res.send('user does not exist');
+      } else {        
+        var retrievedPassword = result.rows[0].password;
 
-      console.log(result);
+        bcrypt.compare(password, retrievedPassword, function(err, success) {
+          if (!err) res.send(success);
+        });
+      }
     }
   });
 };
