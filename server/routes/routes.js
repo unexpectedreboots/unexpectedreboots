@@ -50,7 +50,12 @@ exports.checkUser = function(req, res) {
 
         bcrypt.compare(password, retrievedPassword, function(err2, success) {
           if (!err2) {
-            createSession(req, res, username);
+
+            if (success) {
+              createSession(req, res, username);
+            }
+
+            res.send(success);
           }
         });
       }
@@ -87,7 +92,8 @@ exports.addMember = function(req, res) {
   3. Check if user ID = owner of group ID --> callback false
   4. Get newmember ID from newmember username
   5. Check if new member already exists in UG join table --> callback false
-  6. Insert member + group into UG join table 
+  6. Check if group is full --> callback false
+  7. Insert member + group into UG join table 
   */
 
 };
