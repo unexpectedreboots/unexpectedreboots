@@ -5,6 +5,7 @@ var Views = (props) => {
       <div>
         <Heading title={'Home'} />
         <MarkupPannel markups={[1, 1, 1]} />
+        <GroupPannel groups={[1, 2, 3, 4]} />
       </div>
     );
   } else {

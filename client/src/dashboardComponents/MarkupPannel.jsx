@@ -6,7 +6,8 @@ var MarkupPannel = (props) => {
         { props.markups.map(function(markup) {
           return (
            <div>
-              <div>Markup Entry</div>
+              <MarkupEntry />
+              <MarkupAnnotes />
             </div>
         ); })
       }
