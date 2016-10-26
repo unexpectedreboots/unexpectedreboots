@@ -96,6 +96,12 @@ exports.addMember = function(req, res) {
   7. Insert member + group into UG join table 
   */
 
+  groups.addMember(groupName, username, newMember, function(err, success) {
+    if (err) res.send(err);
+
+
+  });
+
 };
 
 // TODO: edit/delete group
@@ -105,13 +111,6 @@ exports.createSite = function(req, res) {
 
 };
 
-select u.id as userid, g.id as groupid from users u
-left join usersgroups UG
-on u.id = ug.userid
-left join groups g
-on g.id = ug.groupid
-where u.username = 'asdfasdgasdgfsa'
-and g.name = 'invisible-asdfasdgasdgfsa';
 
 // create new markup
 exports.createMarkup = function(req, res) {

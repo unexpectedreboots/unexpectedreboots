@@ -66,6 +66,7 @@ exports.createGroup = function(groupName, owner, callback) {
 
 exports.addMember = function(groupName, username, newMember, callback) {
   pool.query({
+    // retrieve ownerID, groupID & check if current user is owner of group
     text: 'SELECT u.id AS userid, g.id AS groupid FROM users u \
       LEFT JOIN usersgroups ug \
       ON u.id = ug.userid \
@@ -73,12 +74,18 @@ exports.addMember = function(groupName, username, newMember, callback) {
       on g.id = ug.groupid \
       WHERE u.username = \'' + username + '\' \
       AND g.name = \'' + groupName + '\''
-  }, function(err, rows) {
+  }, 
+
+  function(err, rows) {
     if (rows.rowCount === 0) {
       callback('current user is not owner of specified group');
     } else {
-      console.log(rows);
+      var ownerID = rows.rows[0].userid;
+      var groupID = rows.rows[0].groupid; 
+      
+
+
     }
 
-  })
+  });
 }
