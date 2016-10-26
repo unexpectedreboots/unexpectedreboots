@@ -76,6 +76,19 @@ exports.createGroup = function(req, res) {
 
 // add group members
 exports.addMember = function(req, res) {
+  var groupName = req.query.groupName || req.body.groupName;
+  var username = req.query.username || req.body.username;
+  var newMember = req.query.newMember || req.body.newMember;
+
+  /*
+  Logical checks for DB:
+  1. Get user ID from username
+  2. Get group ID from groupname
+  3. Check if user ID = owner of group ID --> callback false
+  4. Get newmember ID from newmember username
+  5. Check if new member already exists in UG join table --> callback false
+  6. Insert member + group into UG join table 
+  */
 
 };
 
