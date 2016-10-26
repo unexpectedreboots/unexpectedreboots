@@ -28,8 +28,6 @@ class App extends React.Component {
     this.setState({
       view: state
     });
-
-    console.log(state);
   }
 
   

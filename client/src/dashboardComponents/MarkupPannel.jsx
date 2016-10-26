@@ -7,7 +7,6 @@ var MarkupPannel = (props) => {
           return (
            <div>
               <MarkupEntry />
-              <MarkupAnnotes />
             </div>
         ); })
       }

@@ -2,7 +2,9 @@ var MarkupEntry = (props) => {
 
   return (
     <div>
-      <div>Entry</div>
+      <div>(Entry)</div>
+      <div>Site</div>
+      <MarkupAnnotes />
     </div>
   );
 
