@@ -3,8 +3,9 @@ var groups = require('../../db/groups');
 
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
+var sessions = require('express-session');
+var createSession = require('../lib/utility.js').createSession;
 
-// registration endpoint
 exports.createUser = function(req, res) {
   var username = req.query.username || req.body.username;
   var email = req.query.email || req.body.email;
@@ -19,7 +20,12 @@ exports.createUser = function(req, res) {
       // TODO give user an individual group
 
       users.insertUser(username, email, password, function(err, result) {
-        err ? res.send(err) : res.send(result);
+        if (err) {
+          res.send(err)
+        } else {
+          createSession(req,res, username);
+          res.send(result);
+        }
       });
     }
   });
@@ -40,7 +46,10 @@ exports.checkUser = function(req, res) {
         var retrievedPassword = result.rows[0].password;
 
         bcrypt.compare(password, retrievedPassword, function(err, success) {
-          if (!err) res.send(success);
+          if (!err) {
+            createSession(req,res,username);
+            res.send(success);
+          }
         });
       }
     }
