@@ -17,14 +17,17 @@ exports.createUser = function(req, res) {
     } else {
       password = hash;
 
-      // TODO give user an individual group
-
       users.insertUser(username, email, password, function(err, result) {
         if (err) {
           res.send(err)
         } else {
-          createSession(req,res, username);
-          res.send(result);
+          createSession(req, res, username);
+
+          var groupName = 'invisible-' + username;
+
+          groups.createGroup(groupName, username, function(err3, success2) {
+            err3 ? res.send(err3) : res.send(success2);
+          });
         }
       });
     }
@@ -45,10 +48,9 @@ exports.checkUser = function(req, res) {
       } else {        
         var retrievedPassword = result.rows[0].password;
 
-        bcrypt.compare(password, retrievedPassword, function(err, success) {
-          if (!err) {
-            createSession(req,res,username);
-            res.send(success);
+        bcrypt.compare(password, retrievedPassword, function(err2, success) {
+          if (!err2) {
+            createSession(req, res, username);
           }
         });
       }
