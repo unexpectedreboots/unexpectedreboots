@@ -3,10 +3,20 @@ var bodyParser = require('body-parser');
 // var handlers = require('./ORMhandlers');
 var app = express();
 var routes = require('./routes/routes');
+var session = require('session');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//session middleware
+app.use(session({
+  secret: 'somesupersecret',
+  resave: false,
+  saveUnitialized: true
+}));
+  //check to see if request has session for everything except register and login
+
+  //
 // Routes
 app.use('/api/register', routes.createUser);
 app.use('/api/login', routes.checkUser);
