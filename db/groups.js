@@ -19,16 +19,17 @@ exports.createGroup = function(groupName, owner, callback) {
       ON u.id = ug.userid \
       LEFT JOIN groups g \
       ON g.id = ug.groupid \
-      WHERE u.id IN ( \
+      WHERE ug.userid IN ( \
         SELECT u.id FROM users u \
         WHERE u.username = \'' + owner + '\' \
       ) \
-      AND g.name = \' ' + groupName + '\';'
+      AND g.name = \'' + groupName + '\';'
   },
 
   function(err, rows) {
+    console.log(rows);
     if (rows.rowCount > 0) {
-      callback('duplicate group name for specified user');
+      callback('duplicate group name for specified user', null);
     } else {
 
       pool.query({
@@ -37,7 +38,28 @@ exports.createGroup = function(groupName, owner, callback) {
       },
 
       function(err2, rows2) {
-        console.log(rows2);
+        var ownerID = rows2.rows[0].id;
+
+        pool.query({
+          text: 'INSERT INTO groups(name, owner) \
+            VALUES($1, $2) \
+            RETURNING *',
+          values: [groupName, ownerID]
+        },
+
+        function(err3, rows3) {
+          var groupID = rows3.rows[0].id;
+
+          pool.query({
+            text: 'INSERT INTO usersgroups(userid, groupid) \
+              VALUES ($1, $2)',
+            values: [ownerID, groupID]
+          }, 
+
+          function(err4, rows4) {
+            err4 ? callback(false, null) : callback(null, true);
+          });
+        });
       });
     }
   });

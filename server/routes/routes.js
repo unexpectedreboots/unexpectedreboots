@@ -55,7 +55,12 @@ exports.updateUser = function(req, res) {
 
 // create new groups
 exports.createGroup = function(req, res) {
-  
+  var groupName = req.query.groupName || req.body.groupName;
+  var owner = req.query.owner || req.body.owner;
+
+  groups.createGroup(groupName, owner, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 // add group members
