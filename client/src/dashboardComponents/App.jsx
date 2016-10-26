@@ -14,22 +14,28 @@ class App extends React.Component {
     
   }
 
-  changeView() {
-    if (this.state === 'home') {
-      this.setState({
-        view: 'groups'
-      });
-    } else if (this.state === 'groups') {
-      this.setState({
-        view: 'home'
-      });
-    }
+  changeView(event, state) {
+    // if (this.state === 'home') {
+    //   this.setState({
+    //     view: 'groups'
+    //   });
+    // } else if (this.state === 'groups') {
+    //   this.setState({
+    //     view: 'home'
+    //   });
+    // }
+
+    this.setState({
+      view: state
+    });
+
+    console.log(state);
   }
 
   
   render() {
     return (
-      <Views viewType={this.state.view} />
+      <Views viewType={this.state.view} changeViewCb={this.changeView.bind(this)} />
     );
   }
 }

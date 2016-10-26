@@ -1,6 +1,12 @@
 var Heading = (props) => {
 
-  return ( <div>{props.title}</div> );
+  return ( 
+    <div>
+      <div>{props.title}</div> 
+      <div onClick={() => props.changeViewCb(event, 'home')}>Home</div>
+      <div>Logout</div>
+    </div>
+  );
 
 };
 

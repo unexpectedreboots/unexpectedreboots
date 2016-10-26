@@ -7,7 +7,7 @@ var GroupPannel = (props) => {
         { props.groups.map(function(group) {
           return (
            <div>
-              <Group name={group} />
+              <Group name={group} changeViewCb={props.changeViewCb} />
             </div>
         ); })
       }

@@ -2,7 +2,7 @@ var Group = (props) => {
 
   return (
     <div>
-      <div>Group {props.name}</div>
+      <div onClick={() => props.changeViewCb(event, props.name)} >Group {props.name}</div>
     </div>
   );
 
