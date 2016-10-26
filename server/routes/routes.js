@@ -1,4 +1,6 @@
 var users = require('../../db/users');
+var groups = require('../../db/groups');
+
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 var sessions = require('express-session');
@@ -14,6 +16,8 @@ exports.createUser = function(req, res) {
       console.log(error);
     } else {
       password = hash;
+
+      // TODO give user an individual group
 
       users.insertUser(username, email, password, function(err, result) {
         if (err) {
@@ -52,15 +56,24 @@ exports.checkUser = function(req, res) {
   });
 };
 
-// TODO: edit/delete user
+exports.updateUser = function(req, res) {
+  // TODO: edit user information, e.g. password or email
+  // users.updateUser(username, password, newpassword, email, newemail, callback)
+  // send in old pw as new pw if user does not change it, same for email
+};
 
 // create new groups
-exports.newGroup = function(req, res) {
+exports.createGroup = function(req, res) {
+  var groupName = req.query.groupName || req.body.groupName;
+  var owner = req.query.owner || req.body.owner;
 
+  groups.createGroup(groupName, owner, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 // add group members
-exports.newMember = function(req, res) {
+exports.addMember = function(req, res) {
 
 };
 

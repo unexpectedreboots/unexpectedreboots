@@ -5,6 +5,7 @@ exports.sessionChecker = function(req,res,next) {
     next();
   } else {
     console.log('session not found');
+    res.send('session not validated');
     res.end();
   }
   //
