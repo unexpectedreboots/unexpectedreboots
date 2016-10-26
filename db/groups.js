@@ -63,3 +63,22 @@ exports.createGroup = function(groupName, owner, callback) {
     }
   });
 };
+
+exports.addMember = function(groupName, username, newMember, callback) {
+  pool.query({
+    text: 'SELECT u.id AS userid, g.id AS groupid FROM users u \
+      LEFT JOIN usersgroups ug \
+      ON u.id = ug.userid \
+      LEFT JOIN groups g \
+      on g.id = ug.groupid \
+      WHERE u.username = \'' + username + '\' \
+      AND g.name = \'' + groupName + '\''
+  }, function(err, rows) {
+    if (rows.rowCount === 0) {
+      callback('current user is not owner of specified group');
+    } else {
+      console.log(rows);
+    }
+
+  })
+}
