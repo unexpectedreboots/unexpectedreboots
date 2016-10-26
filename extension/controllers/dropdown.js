@@ -15,4 +15,19 @@ angular.module('dropdownController',[])
     //   // }
     // });
   };
+  $scope.logIn = function() {
+    console.log('this clicked!')
+    $location.path('/main');
+    // $http({ 
+    //   method: 'POST',
+    //   url: '/api/login',
+    //   data: {email: $scope.email, username: $scope.username, password: $scope.password},
+    //   headers:{'Content-Type': 'application/json'} 
+    // }).then(function(err,response) {
+    //   // if(response) {
+    //   //   //redirect
+        
+    //   // }
+    // });
+  }
 });
