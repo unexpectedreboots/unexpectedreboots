@@ -1,5 +1,6 @@
 var pg = require('pg');
 var Pool = require('pg').Pool;
+var Promise = require('es6-promise').Promise;
 
 var CONFIG = {
   host: 'localhost',
@@ -21,7 +22,7 @@ exports.insertUser = function(username, email, password, callback) {
     if (rows.rowCount > 0) {
       callback('user already exists', null);
     } else {
-      
+
       pool.query({
         text: 'INSERT INTO users(username, email, password) \
           VALUES($1, $2, $3)',
