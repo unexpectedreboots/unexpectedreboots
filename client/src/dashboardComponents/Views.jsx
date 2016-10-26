@@ -9,7 +9,13 @@ var Views = (props) => {
       </div>
     );
   } else {
-    return (<Heading title={props.viewType} changeViewCb={props.changeViewCb} />); 
+    return (
+      <div>
+        <Heading title={props.viewType} changeViewCb={props.changeViewCb} />
+        <UserPannel users={['ron', 'fred', 'george', 'bill', 'charlie']}/>
+        <MarkupPannel markups={[1]}/>
+      </div>
+      ); 
   }
 
 
