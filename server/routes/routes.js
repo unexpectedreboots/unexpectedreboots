@@ -1,17 +1,9 @@
 var users = require('../../db/users');
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
-var sessions = require('sessions');
-// var passport = require('passport'),
-//   localStrategy = require('passport-local').strategy;
-  //create middleware function for assiginging sessions to register and login
-// registration endpoint
-//create session function.  Need to move it into another folder later
-var createSession = function(req,res,username) {
-  return req.session.regenerate(function() {
-    req.session.user = username;
-  }); 
-};
+var sessions = require('express-session');
+var createSession = require('../lib/utility.js').createSession;
+
 exports.createUser = function(req, res) {
   var username = req.query.username || req.body.username;
   var email = req.query.email || req.body.email;
