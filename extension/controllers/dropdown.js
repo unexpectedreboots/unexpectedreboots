@@ -30,7 +30,7 @@ angular.module('dropdownController', [])
       },
       headers:{'Content-Type': 'application/json'} 
     }).then(function(response) {
-      if (response.data) {
+      if (response.data === true) {
         $location.path('/main');
       }
     });
