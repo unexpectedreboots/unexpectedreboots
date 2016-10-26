@@ -14,6 +14,8 @@ exports.createUser = function(req, res) {
     } else {
       password = hash;
 
+      // TODO give user an individual group
+
       users.insertUser(username, email, password, function(err, result) {
         err ? res.send(err) : res.send(result);
       });
@@ -43,7 +45,11 @@ exports.checkUser = function(req, res) {
   });
 };
 
-// TODO: edit/delete user
+exports.updateUser = function(req, res) {
+  // TODO: edit user information, e.g. password or email
+  // users.updateUser(username, password, newpassword, email, newemail, callback)
+  // send in old pw as new pw if user does not change it, same for email
+};
 
 // create new groups
 exports.newGroup = function(req, res) {
