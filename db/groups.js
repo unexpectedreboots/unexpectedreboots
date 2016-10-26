@@ -94,8 +94,6 @@ exports.addMember = function(groupName, username, newMember, callback) {
         } else {
           var ownerID = rows2.rows[0].userid;
           var groupID = rows2.rows[0].groupid;
-
-          console.log('ownerid, groupid, ', ownerID, groupID)
           
           pool.query({
             // check if new member already has membership to specified group
@@ -133,7 +131,9 @@ exports.addMember = function(groupName, username, newMember, callback) {
                         ),' +
                         groupID +
                       ');'
-                  }, function(err5, rows5) {
+                  }, 
+
+                  function(err5, rows5) {
                     err5 ? callback(err5, null) : callback(null, true);
                   });
                 }
@@ -142,12 +142,6 @@ exports.addMember = function(groupName, username, newMember, callback) {
           });
         }
       });
-
-
-
     }
   });
-
-
-  
-}
+};
