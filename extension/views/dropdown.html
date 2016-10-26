@@ -3,9 +3,10 @@
   <h1> Test</h1>
   <form>
     <h2>Welcome</h2>
-    <input placeholder="what's your name?" id="newUsername" />
-    <input placeholder="password" id="newPassword" />
-    <button class="signupButton" type="button">Register</button>
-    <button class="signupButton" type="button">Log In</button>
+    <input placeholder="what's your name?" ng-model="username" />
+    <input placeholder="password" ng-model="password" />
+    <input placeholder="email" ng-model="email" />
+    <button ng-click="signUp()" class="signupButton" type="button">Register</button>
+    <button ng-click="logIn()" class="signupButton" type="button">Log In</button>
   </form>
 </div>
