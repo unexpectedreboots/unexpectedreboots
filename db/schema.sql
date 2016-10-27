@@ -39,6 +39,7 @@ CREATE TABLE markupsgroups (
 
 CREATE TABLE sitesgroups (
   groupid  BIGSERIAL references groups(id),
-  siteid   BIGSERIAL references sites(id)
+  siteid   BIGSERIAL references sites(id),
+  sharedby BIGSERIAL references useers(id)
 );
 

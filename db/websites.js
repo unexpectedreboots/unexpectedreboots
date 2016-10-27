@@ -36,3 +36,7 @@ exports.createSite = function(url, title, callback) {
     }
   });
 };
+
+exports.shareSite = function() {
+
+};
