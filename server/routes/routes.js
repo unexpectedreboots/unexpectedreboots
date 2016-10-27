@@ -1,5 +1,6 @@
 var users = require('../../db/users');
 var groups = require('../../db/groups');
+var websites = require('../../db/websites');
 
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
@@ -123,7 +124,12 @@ exports.addMember = function(req, res) {
 
 // create new site
 exports.createSite = function(req, res) {
+  var url = req.query.url || req.body.url;
+  var title = req.query.title || req.body.title;
 
+  websites.createSite(url, title, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 
