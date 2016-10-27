@@ -38,13 +38,15 @@ CREATE TABLE markups (
 
 CREATE TABLE markupsgroups (
   markupid  BIGSERIAL references markups(id),
-  groupid   BIGSERIAL references groups(id)
+  groupid   BIGSERIAL references groups(id),
+  PRIMARY KEY (markupid, groupid)
 );
 
 CREATE TABLE sitesgroups (
   groupid  BIGSERIAL   references groups(id),
   siteid   BIGSERIAL   references sites(id),
-  sharedby BIGSERIAL   references useers(id),
-  sharedat TIMESTAMPTZ NOT NULL DEFAULT now()
+  sharedby BIGSERIAL   references users(id),
+  sharedat TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (groupid, siteid, sharedat)
 );
 
