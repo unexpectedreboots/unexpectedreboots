@@ -2,7 +2,7 @@ var SharedPannel = (props) => {
 
   return (
     <div className='container col-sm-5 shared-pannel'>
-      <div>Shared Sites</div>
+      <div className='pannel-title'>Shared Sites</div>
         { props.sites.map(function(site) {
           return (
            <div>
