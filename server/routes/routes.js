@@ -106,7 +106,7 @@ exports.createGroup = function(req, res) {
 };
 
 exports.addMember = function(req, res) {
-  var groupName = req.query.groupName || req.body.groupName;
+  var groupID = req.query.groupID || req.body.groupID;
   var username = req.query.username || req.body.username;
   var newMember = req.query.newMember || req.body.newMember;
 
@@ -121,7 +121,7 @@ exports.addMember = function(req, res) {
   7. Insert member + group into UG join table 
   */
 
-  groups.addMember(groupName, username, newMember, function(err, success) {
+  groups.addMember(groupID, username, newMember, function(err, success) {
     err ? res.send(err) : res.send(success);
   });
 };
