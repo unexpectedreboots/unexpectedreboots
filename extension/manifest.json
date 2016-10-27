@@ -13,20 +13,27 @@
       "dropdownDashBaord.html"
   ],
 
+   "background": [
+     {
+     }
+   ],
+
   "content_scripts": [
     {
       "matches": ["*://*/*"],
       "js": [
+        "lib/rangy/lib/rangy-core.js",
+        "lib/rangy/lib/rangy-classapplier.js",
+        "lib/rangy/lib/rangy-highlighter.js",
+        "lib/rangy/lib/rangy-selectionsaverestore.js",
+        "lib/rangy/lib/rangy-serializer.js",
+        "lib/rangy/lib/rangy-textrange.js",
         "lib/angular.min.js",
         "app/scripts/selectionScript.js"
       ]
     }
   ],
-  "background": [
-    {
-      
-    }
-  ],
+
 
   "permissions": [
     "activeTab",

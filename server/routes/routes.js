@@ -132,6 +132,12 @@ exports.createSite = function(req, res) {
   });
 };
 
+// share site with a specific group
+exports.shareSite = function(req, res) {
+
+};
+
+// TODO delete site
 
 // create new markup
 exports.createMarkup = function(req, res) {
@@ -144,8 +150,3 @@ exports.markupGroup = function(req, res) {
 };
 
 // TODO: edit/delete markup
-
-// share site with a specific group
-exports.shareSite = function(req, res) {
-
-};
