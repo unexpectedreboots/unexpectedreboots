@@ -6,20 +6,35 @@ var myApp = angular.module('Markable', [
 
 .config(function($stateProvider) {
   $stateProvider
-  .state('/', {
+  .state('home', {
+    url: '/',
     templateUrl: '../views/main.html',
     controller: 'main',
     authenticate: true
   })
-  .when('/signIn', {
+  .state('login', {
+    url: '/login',
     templateUrl: '../views/signInOrUp.html',
     controller: 'dropdown',
     authenticate: false
   })
 })
-.run(function($rootScope,$location,Auth) {
-  $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    // if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-    //       $location.path('/signin');
-  })
-})
+.run(['$state', function ($state) {
+   console.log($state);
+}])
+.run(function ($rootScope, $state) {
+  $rootScope.$on('$stateChangeStart', function (evt, toState) {
+    chrome.cookies.getAll({url: 'http://104.237.1.118:3000/'}, function(cookie) {
+      console.log(cookie);
+      if(cookie){
+        if(!cookie.length>0) {
+          if (toState.authenticate) {
+            evt.preventDefault();
+            $state.transitionTo('login');
+          }  
+        }
+      }
+    })
+  });
+});
+

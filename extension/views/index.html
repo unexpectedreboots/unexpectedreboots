@@ -8,13 +8,16 @@
 	<script src="../lib/angular-ui-router.js"></script>
 	<script type="text/javascript" src="../controllers/dropdown.js"></script>
   <script type="text/javascript" src="../controllers/main.js"></script>
+  <script type="text/javascript" src="../services/authorization.js"></script>
 	<script type="text/javascript" src="../app/app.js"></script>
 	<script type="text/javascript" src="../app/scripts/test.js">
 
 	</script> 
 </head>
 <body>
-	<div ng-view> 
+	<a ui-sref="home" ui-sref-active="active">start</a>
+	<div ng-view></div>
+	<div ui-view> 
 
 	</div>
   <script type="text/javascript" src="../app/scripts/selectionScript.js"></script> 
