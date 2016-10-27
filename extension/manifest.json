@@ -22,7 +22,7 @@
     {
       "matches": ["*://*/*"],
       "js": [
-        "lib/angular.min.js",
+        "lib/medium-editor/dist/js/medium-editor.js",
         "app/scripts/selectionScript.js"
       ]
     }
