@@ -147,6 +147,7 @@ exports.addMember = function(groupName, username, newMember, callback) {
 };
 
 exports.getUserGroups = function(username, callback) {
+
   pool.query({
     // find all groups user is a part of (and their owners)
     text: 'SELECT u.id AS userid, g.id AS groupid, g.name AS groupname, \
@@ -164,14 +165,33 @@ exports.getUserGroups = function(username, callback) {
 
   function(err, rows) {
     if (rows.rowCount === 0) {
-      callback('user is not part of any groups', null)
+      callback('user is not part of any groups', null);
+    } else {
+      err ? callback(err, null) : callback(null, rows.rows);
     }
-    err ? callback(err) : callback(rows.rows);
   });
 };
 
 exports.getGroupMembers = function(groupID, callback) {
 
+  pool.query({
+    text: 'SELECT member, groupname, u2.username AS owner FROM ( \
+      SELECT u.username AS member, g.name AS groupname, g.owner AS ownerid \
+      FROM users u \
+      LEFT JOIN usersgroups ug \
+      ON u.id = ug.userid \
+      LEFT JOIN groups g \
+      ON g.id = ug.groupid \
+      WHERE g.id = \'' + groupID + '\' \
+      ) chris LEFT JOIN users u2 \
+      ON chris.ownerid = u2.id'
+  },
 
-
+  function(err, rows) {
+    if (rows.rowCount === 0) {
+      callback('group has no members', null);
+    } else {
+      err ? callback(err, null) : callback(null, rows.rows);
+    }
+  });
 };
