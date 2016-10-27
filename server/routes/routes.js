@@ -69,10 +69,20 @@ exports.updateUser = function(req, res) {
   // send in old pw as new pw if user does not change it, same for email
 };
 
+// get the groups a user is in
 exports.getUserGroups = function(req, res) {
   var username = req.query.username || req.body.username;
 
   groups.getUserGroups(username, function(err, result) {
+    err ? res.send(err) : res.send(result);
+  });
+}
+
+// get the users belonging to a group
+exports.getGroupMembers = function(req, res) {
+  var groupID = req.query.groupID || req.body.groupID;
+
+  groups.getGroupMembers(groupID, function(err, result) {
     err ? res.send(err) : res.send(result);
   });
 }
