@@ -13,7 +13,7 @@ exports.createUser = function(req, res) {
 
   bcrypt.hash(password, saltRounds, function(error, hash) {
     if (error) {
-      console.log(error);
+      res.send(error);
     } else {
       password = hash;
 
@@ -22,7 +22,7 @@ exports.createUser = function(req, res) {
           res.send(err)
         } else {
           createSession(req, res, username, function() {
-            console.log(req.session);
+            console.log(req.session); // TODO remove
             var groupName = 'invisible-' + username;
 
             groups.createGroup(groupName, username, function(err3, success2) {
@@ -69,6 +69,24 @@ exports.updateUser = function(req, res) {
   // send in old pw as new pw if user does not change it, same for email
 };
 
+// get the groups a user is in
+exports.getUserGroups = function(req, res) {
+  var username = req.query.username || req.body.username;
+
+  groups.getUserGroups(username, function(err, result) {
+    err ? res.send(err) : res.send(result);
+  });
+}
+
+// get the users belonging to a group
+exports.getGroupMembers = function(req, res) {
+  var groupID = req.query.groupID || req.body.groupID;
+
+  groups.getGroupMembers(groupID, function(err, result) {
+    err ? res.send(err) : res.send(result);
+  });
+}
+
 // create new groups
 exports.createGroup = function(req, res) {
   var groupName = req.query.groupName || req.body.groupName;
@@ -96,6 +114,9 @@ exports.addMember = function(req, res) {
   7. Insert member + group into UG join table 
   */
 
+  groups.addMember(groupName, username, newMember, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 // TODO: edit/delete group
@@ -104,6 +125,7 @@ exports.addMember = function(req, res) {
 exports.createSite = function(req, res) {
 
 };
+
 
 // create new markup
 exports.createMarkup = function(req, res) {
