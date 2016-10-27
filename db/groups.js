@@ -168,6 +168,10 @@ exports.getUserGroups = function(username, callback) {
     }
     err ? callback(err) : callback(rows.rows);
   });
+};
+
+exports.getGroupMembers = function(groupID, callback) {
+
 
 
 };
