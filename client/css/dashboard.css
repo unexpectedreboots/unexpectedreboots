@@ -13,12 +13,35 @@ span {
 
 .heading {
   background: #fff;
-  padding: 8px;
+  padding: 0px;
   margin: 20px 0px 10px 0px;
   border: 0;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
   height: 100px
+}
+
+.heading-bttn {
+  float: right;
+  text-align: center;
+  padding-top: 10px;
+  margin: 20px;
+  background-color: #bfbfbf;
+  width: 150px;
+  height: 50px;
+  border-radius: 3px;
+}
+
+.heading-title {
+  background-color: #bfbfbf;
+  position: absolute;
+
+  padding: 15px;
+  height: 100px;
+  width: 45%;
+  font-size: 2.1em;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px
 }
 
 .pannel {
@@ -30,13 +53,15 @@ span {
   border-radius: 3px
 }
 
-.user-pannel {
-  background: #fff;
-  padding: 8px;
-  border: 0;
-  margin: 20px 0px 10px 0px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.1);
-  border-radius: 3px
+.pannel-title {
+  background-color: #bfbfbf;
+  position: absolute;
+  padding: 15px;
+  height: 100px;
+  width: 45%;
+  font-size: 1em;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px
 }
 
 .shared-pannel {
@@ -66,17 +91,6 @@ span {
   border-radius: 3px
 }
 
-.heading-bttn {
-  float: right;
-  text-align: center;
-  padding-top: 10px;
-  margin: 20px;
-  background-color: #bfbfbf;
-  width: 150px;
-    height: 50px;
-    border-radius: 3px;
-}
-
 .group-bttn {
   background: #bfbfbf;
   padding: 0px;
@@ -91,11 +105,11 @@ span {
 .role-label {
   background-color: #fff;
   position: absolute;
-    bottom: 0;
-    height: 60px;
-    width: 100%;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px
 }
 
 .add-group-bttn {
@@ -110,18 +124,37 @@ span {
 }
 
 .add-group-label {
-  background-color: red;
+  background-color: #bfbfbf;
   position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 75px;
-    width: 19%;
-    font-size: 2.1em;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px
+  bottom: 0;
+  left: 0;
+  height: 75px;
+  width: 19%;
+  font-size: 2.1em;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px
 }
 
 .group-label {
   margin-left: 8px;
 }
 
+.user-pannel {
+  padding: 0px;
+  border: 0;
+  margin-top: 20px;
+  margin-bottom: : 20px;
+  border-radius: 3px
+}
+
+.user-bttn {
+  background: #bfbfbf;
+  text-align: center;
+  padding-top: 20px;
+  border: 0;
+  margin: 20px 0px 20px 3%;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  border-radius: 3px;
+  height: 100px;
+  width: 30%
+}
