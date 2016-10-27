@@ -1,6 +1,6 @@
 angular.module('dropdownController', [])
 
-.controller('dropdown', function($scope, $http, $location) {
+.controller('dropdown', function($scope, $http, $location, $state) {
 
   $scope.signUp = function() {
 
@@ -14,8 +14,9 @@ angular.module('dropdownController', [])
       },
       headers: {'Content-Type': 'application/json'}
     }).then(function(response) {
+      console.log('then statement sign up', response);
       if (response.data) {
-        $location.path('/main');
+        $state.transitionTo('home');
       }
     });
   };
@@ -32,8 +33,9 @@ angular.module('dropdownController', [])
       },
       headers:{'Content-Type': 'application/json'} 
     }).then(function(response) {
+      console.log('then statement logIn', response);
       if (response.data === true) {
-        $location.path('/main');
+        $state.transitionTo('home');
       }
     });
   }

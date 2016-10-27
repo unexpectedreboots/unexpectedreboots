@@ -31,6 +31,7 @@
   "permissions": [
     "activeTab",
     "identity",
-    "storage"
+    "storage",
+    "cookies","<all_urls>"
   ]
 }
