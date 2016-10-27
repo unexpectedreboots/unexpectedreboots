@@ -7,15 +7,24 @@ var session = require('express-session');
 var sessionChecker = require('./lib/utility.js').sessionChecker;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true 
+}));
 
-//session middleware
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
 app.use(session({
-  secret: 'somesupersecret',
+  secret: 'Soa8pI6QaoUsmUXR',
   resave: false,
   saveUninitialized: true
 }));
-  //check to see if request has session for everything except register and login
 
 // Routes
 app.use('/api/users/register', routes.createUser); // done
