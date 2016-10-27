@@ -1,8 +1,8 @@
-var MarkupPannel = (props) => {
+var MarkupPanel = (props) => {
 
   return (
-    <div className='container col-sm-6 pannel'>
-      <div className='pannel-title'>Markup Pannel</div>
+    <div className='container col-sm-6 panel'>
+      <div className='Panel-title'>Markup Panel</div>
         { props.markups.map(function(markup) {
           return (
            <div className='entry'>
@@ -16,4 +16,4 @@ var MarkupPannel = (props) => {
 };
 
 
-window.MarkupPannel = MarkupPannel;
+window.MarkupPanel = MarkupPanel;

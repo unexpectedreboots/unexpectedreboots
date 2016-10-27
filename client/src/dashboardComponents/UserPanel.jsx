@@ -1,7 +1,7 @@
-var UserPannel = (props) => {
+var UserPanel = (props) => {
 
   return (
-    <div className='row col-sm-12 user-pannel'>
+    <div className='row col-sm-12 user-panel'>
         { props.users.map(function(user) {
           return (
            <div>
@@ -15,4 +15,4 @@ var UserPannel = (props) => {
 };
 
 
-window.UserPannel = UserPannel;
+window.UserPanel = UserPanel;
