@@ -15,16 +15,6 @@ class App extends React.Component {
   }
 
   changeView(event, state) {
-    // if (this.state === 'home') {
-    //   this.setState({
-    //     view: 'groups'
-    //   });
-    // } else if (this.state === 'groups') {
-    //   this.setState({
-    //     view: 'home'
-    //   });
-    // }
-
     this.setState({
       view: state
     });

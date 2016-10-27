@@ -1,7 +1,7 @@
 var User = (props) => {
 
   return (
-    <div>
+    <div className='col-sm-4'>
       <div>{props.name}</div>
     </div>
   );

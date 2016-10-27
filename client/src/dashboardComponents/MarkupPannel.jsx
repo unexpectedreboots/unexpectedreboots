@@ -1,11 +1,11 @@
 var MarkupPannel = (props) => {
 
   return (
-    <div>
+    <div className='container col-sm-6 pannel'>
       <div>Markup Pannel</div>
         { props.markups.map(function(markup) {
           return (
-           <div>
+           <div className='entry'>
               <MarkupEntry />
             </div>
         ); })

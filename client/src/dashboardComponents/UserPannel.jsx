@@ -1,8 +1,7 @@
 var UserPannel = (props) => {
 
   return (
-    <div>
-      <div>(User Pannel)</div>
+    <div className='row col-sm-12 user-pannel'>
         { props.users.map(function(user) {
           return (
            <div>
