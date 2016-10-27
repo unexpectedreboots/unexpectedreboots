@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html ng-app="reboot" ng-csp>
+<html ng-app="Markable" ng-csp>
 <head>
 
-	<title>Unexpected Reboots</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="lib/angular.min.js"></script>
-	<script type="text/javascript" src="app/app.js"></script>
-	<script type="text/javascript" src="controllers/rebootCtrl.js"></script>
- 
+	<title>Markable</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../css/style.css"> -->
+	<script type="text/javascript" src="../lib/angular.min.js"></script>
+	<script src="../lib/angular-ui-router.js"></script>
+	<script type="text/javascript" src="../controllers/dropdown.js"></script>
+  <script type="text/javascript" src="../controllers/main.js"></script>
+  <script type="text/javascript" src="../services/authorization.js"></script>
+	<script type="text/javascript" src="../app/app.js"></script>
+	<script type="text/javascript" src="../app/scripts/test.js"></script> 
+
+	<script src="../lib/rangy/lib/rangy-classapplier.js"></script>
+	<script src="../lib/rangy/lib/rangy-core.js"></script>
+	<script src="../lib/rangy/lib/rangy-highlighter.js"></script>
+	<script src="../lib/rangy/lib/rangy-selectionsaverestore.js"></script>
+	<script src="../lib/rangy/lib/rangy-serializer.js"></script>
+	<script src="../lib/rangy/lib/rangy-textrange.js"></script>
+
 </head>
-<body ng-controller="rebootController" >
-	<div class="container"> 
-		<div calss="panel bg-primary">
-		<div class="panel-heading bg-success">Unexpected Reboots</div>
-		<div class="panel-body bg-primary">
-		 <span>Dashboard</span>
-		 <span>{{selectedText}}</span>	
-		</div>
-	 	</div>
+<body>
+	<a ui-sref="home" ui-sref-active="active">start</a>
+	<div ng-view></div>
+	<div ui-view> 
+
 	</div>
- 
+  <script type="text/javascript" src="../app/scripts/selectionScript.js"></script> 
 </body>
 </html>
