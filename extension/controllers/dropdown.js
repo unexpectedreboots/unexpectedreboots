@@ -21,6 +21,7 @@ angular.module('dropdownController', [])
     });
   };
 
+  $scope.usernamePattern = '^$|^[A-Za-z]+[A-Za-z0-9_-.]+';
   
   $scope.logIn = function() {
 
