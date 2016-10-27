@@ -16,14 +16,14 @@ CREATE TABLE groups (
 CREATE TABLE usersgroups (
   userid      BIGSERIAL   references users(id),
   groupid     BIGSERIAL   references groups(id),
-  membersince TIMESTAMPTZ NOT NULL DEFAULT now()
+  membersince TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (userid, groupid)
 );
 
 CREATE TABLE sites (
   id        BIGSERIAL    PRIMARY KEY,
   url       VARCHAR(255) NOT NULL,
-  title     VARCHAR(255) NOT NULL,
+  title     VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE markups (
