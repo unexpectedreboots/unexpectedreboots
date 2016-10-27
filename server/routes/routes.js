@@ -7,6 +7,12 @@ var saltRounds = 10;
 var sessions = require('express-session');
 var createSession = require('../lib/utility.js').createSession;
 
+
+/***************************************************
+  `/API/USERS/*` ENDPOINTS
+  Used for creation and management of user-based endpoints
+****************************************************/
+
 exports.createUser = function(req, res) {
   var username = req.query.username || req.body.username;
   var email = req.query.email || req.body.email;
@@ -37,7 +43,6 @@ exports.createUser = function(req, res) {
   });
 };
 
-// check login credentials
 exports.checkUser = function(req, res) {
   var username = req.query.username || req.body.username;
   var password = req.query.password || req.body.password;
@@ -70,7 +75,6 @@ exports.updateUser = function(req, res) {
   // send in old pw as new pw if user does not change it, same for email
 };
 
-// get the groups a user is in
 exports.getUserGroups = function(req, res) {
   var username = req.query.username || req.body.username;
 
@@ -79,7 +83,11 @@ exports.getUserGroups = function(req, res) {
   });
 }
 
-// get the users belonging to a group
+/***************************************************
+  `/API/GROUPS/*` ENDPOINTS
+  Used for all endpoints relating to information shared within groups
+****************************************************/
+
 exports.getGroupMembers = function(req, res) {
   var groupID = req.query.groupID || req.body.groupID;
 
@@ -88,7 +96,6 @@ exports.getGroupMembers = function(req, res) {
   });
 }
 
-// create new groups
 exports.createGroup = function(req, res) {
   var groupName = req.query.groupName || req.body.groupName;
   var owner = req.query.owner || req.body.owner;
@@ -98,7 +105,6 @@ exports.createGroup = function(req, res) {
   });
 };
 
-// add group members
 exports.addMember = function(req, res) {
   var groupName = req.query.groupName || req.body.groupName;
   var username = req.query.username || req.body.username;
@@ -120,9 +126,25 @@ exports.addMember = function(req, res) {
   });
 };
 
-// TODO: edit/delete group
+exports.editGroup = function(req, res) {
+  // TODO:
+  // This endpoint should allow owners to remove members from a group
+};
 
-// create new site
+exports.getGroupMarkups = function(req, res) {
+
+};
+
+exports.getGroupSites = function(req, res) {
+
+};
+
+
+/***************************************************
+  `/API/WEBSITES/*` ENDPOINTS
+  Used for creation and deletion of shared websites
+****************************************************/
+
 exports.createSite = function(req, res) {
   var url = req.query.url || req.body.url;
   var title = req.query.title || req.body.title;
@@ -132,21 +154,39 @@ exports.createSite = function(req, res) {
   });
 };
 
-// share site with a specific group
 exports.shareSite = function(req, res) {
+  var groupID = req.query.groupID || req.body.groupID;
+  var url = req.query.url || req.body.url;
+
+  /* DB query logic
+  1. Try to find matching URL + title in database
+  2. If match found, take the siteID
+  3. If not found, create the URL + title in sites table
+    -- RETURNING siteID
+  4. Using siteID and groupID, insert into sitesgroups table
+  5. Use siteID, groupID, sharedtime as PK
+  */
 
 };
 
-// TODO delete site
+exports.deleteSite = function(req, res) {
 
-// create new markup
+};
+
+
+/***************************************************
+  `/API/MARKUPS/*` ENDPOINTS
+  Used for creation and deletion of markups
+****************************************************/
+
 exports.createMarkup = function(req, res) {
 
 };
 
-// create markup/group reference
-exports.markupGroup = function(req, res) {
+exports.shareMarkup = function(req, res) {
 
 };
 
-// TODO: edit/delete markup
+exports.deleteMarkup = function(req, res) {
+
+};
