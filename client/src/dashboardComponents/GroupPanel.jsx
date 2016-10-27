@@ -1,4 +1,4 @@
-var GroupPannel = (props) => {
+var GroupPanel = (props) => {
 
   return (
     <div>
@@ -16,4 +16,4 @@ var GroupPannel = (props) => {
 };
 
 
-window.GroupPannel = GroupPannel;
+window.GroupPanel = GroupPanel;
