@@ -25,7 +25,7 @@ app.use('/api/users/groups', sessionChecker, routes.getUserGroups); // done
 app.use('/api/groups/create', sessionChecker, routes.createGroup); // done
 app.use('/api/groups/add', sessionChecker, routes.addMember); // done
 app.use('/api/groups/users', sessionChecker, routes.getGroupMembers); // done
-app.use('/api/websites/create', sessionChecker, routes.createSite); // remove once tested
+app.use('/api/websites/create', sessionChecker, routes.createSite); // done TOREMOVE
 app.use('/api/markups/create', sessionChecker, routes.createMarkup);
 app.use('/api/groups/markups', sessionChecker, routes.markupGroup);
 app.use('/api/groups/sites', sessionChecker, routes.shareSite);
