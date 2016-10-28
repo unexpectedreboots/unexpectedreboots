@@ -87,11 +87,7 @@ exports.create = function(url, title, username, anchor, text, comment, callback)
                   },
 
                   function(err5, rows5) {
-                    if (err5) {
-                      callback(err5, null);
-                    } else {
-                      callback(null, true);
-                    }
+                    err5 ? callback(err5, null) : callback(null, true);
                   });
                 }
               })
