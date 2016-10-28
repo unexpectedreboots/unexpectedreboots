@@ -38,22 +38,37 @@ exports.createSite = function(url, title, callback) {
   });
 };
 
-exports.shareSite = function(username, groupID, url, title) {
+exports.shareSite = function(username, groupID, url, title, callback) {
 
   pool.query({
-    // check if url & title already exist
-    text: 'SELECT s.id AS siteid FROM sites s \
-      WHERE url = \'' + url + '\' \
-      AND title = \'' + title + '\''
+    // create the site object in the sites table
+    text: 'INSERT INTO sites(url, title) \
+      VALUES($1, $2) \
+      RETURNING *',
+    values: [url, title]
   },
 
   function(err, rows) {
-    if (rows.rowCount > 0) {
-      var siteID = rows.rows.siteID;
-      console.log('found siteID: ', siteID);
+    if (err) {
+      callback(err, null);
     } else {
-      // doesnt exist
-      // so insert it into db returning siteid
+      var siteID = rows.rows[0].id;
+
+      pool.query({
+        text: 'INSERT INTO sitesgroups \
+          VALUES ( ' +
+            groupID + ', ' +
+            siteID + ', ' +
+            '( \
+            SELECT u.id FROM users u \
+            WHERE u.username = \'' + username + '\' \
+            ) \
+          );'
+      },
+
+      function(err2, rows2) {
+        err2 ? callback(err2, null) : callback(null, true);
+      });
     }
   });
 };
