@@ -52,20 +52,20 @@ $(document).ready(function() {
     }
 
   })
-
-  window.onkeyup = function(e) {
-    console.log('window');
-    editor.importSelection(testExport);
-    if (e.keyCode === 119) {
-      console.log('more stuff');
-      editor.importSelection(testExport);
-    }
-  };
-  // document.addEventListener('onscroll', function(event) {
-  //   editor.importSelection(testExport);
-  //   console.log('triggered');
-  // })
-});
+//need to send storage object from background script to server
+//   window.onkeyup = function(e) {
+//     console.log('window');
+//     editor.importSelection(testExport);
+//     if (e.keyCode === 119) {
+//       console.log('more stuff');
+//       editor.importSelection(testExport);
+//     }
+//   };
+//   // document.addEventListener('onscroll', function(event) {
+//   //   editor.importSelection(testExport);
+//   //   console.log('triggered');
+//   // })
+// });
 
 
 
