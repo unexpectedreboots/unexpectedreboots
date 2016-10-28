@@ -20,9 +20,11 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["lib/medium-editor/dist/css/medium-editor.css"],
       "js": [
         "lib/medium-editor/dist/js/medium-editor.js",
+        "lib/jquery.min.js",
         "app/scripts/selectionScript.js"
       ]
     }
