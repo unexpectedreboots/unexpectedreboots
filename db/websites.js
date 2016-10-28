@@ -40,6 +40,8 @@ exports.createSite = function(url, title, callback) {
 
 exports.shareSite = function(username, groupID, url, title, callback) {
 
+  console.log('/**', username, 'is sharing:', url, '(', title, ') with group:', groupID);
+
   var siteID;
 
   pool.query({

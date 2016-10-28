@@ -80,7 +80,7 @@ exports.createGroup = function(groupName, owner, callback) {
 
 exports.addMember = function(groupID, username, newMember, callback) {
 
-  console.log('/**', username, 'is adding:', newMember, 'to group:', groupID);
+  console.log('/**', username, 'is adding:', newMember, 'to group:', groupID, '**/');
 
   pool.query({
     // check if new user exists
