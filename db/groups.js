@@ -27,39 +27,51 @@ exports.createGroup = function(groupName, owner, callback) {
   },
 
   function(err, rows) {
-    if (rows.rowCount > 0) {
-      callback('duplicate group name for specified user', null);
+    if (err) {
+      callback(err, null);
     } else {
-
-      pool.query({
-        text: 'SELECT u.id FROM users u \
-        WHERE u.username = \'' + owner + '\''
-      },
-
-      function(err2, rows2) {
-        var ownerID = rows2.rows[0].id;
+      if (rows.rowCount > 0) {
+        callback('duplicate group name for specified user', null);
+      } else {
 
         pool.query({
-          text: 'INSERT INTO groups(name, owner) \
-            VALUES($1, $2) \
-            RETURNING *',
-          values: [groupName, ownerID]
+          text: 'SELECT u.id FROM users u \
+          WHERE u.username = \'' + owner + '\''
         },
 
-        function(err3, rows3) {
-          var groupID = rows3.rows[0].id;
+        function(err2, rows2) {
+          if (err2) {
+            callback(err2, null);
+          } else {
+            var ownerID = rows2.rows[0].id;
 
-          pool.query({
-            text: 'INSERT INTO usersgroups(userid, groupid) \
-              VALUES ($1, $2)',
-            values: [ownerID, groupID]
-          }, 
+            pool.query({
+              text: 'INSERT INTO groups(name, owner) \
+                VALUES($1, $2) \
+                RETURNING *',
+              values: [groupName, ownerID]
+            },
 
-          function(err4, rows4) {
-            err4 ? callback(false, null) : callback(null, true);
-          });
+            function(err3, rows3) {
+              if (err3) {
+                callback(err3, null);
+              } else {
+                var groupID = rows3.rows[0].id;
+
+                pool.query({
+                  text: 'INSERT INTO usersgroups(userid, groupid) \
+                    VALUES ($1, $2)',
+                  values: [ownerID, groupID]
+                }, 
+
+                function(err4, rows4) {
+                  err4 ? callback(false, null) : callback(null, true);
+                });
+              }
+            });
+          }
         });
-      });
+      }
     }
   });
 };
@@ -73,74 +85,90 @@ exports.addMember = function(groupID, username, newMember, callback) {
   }, 
 
   function(err, rows) {
-    if (rows.rowCount === 0) {
-      callback('new user does not exist', null);
+    if (err) {
+      callback(err, null);
     } else {
+      if (rows.rowCount === 0) {
+        callback('new user does not exist', null);
+      } else {
 
-      pool.query({
-        // retrieve ownerID, groupID & check if current user is owner of group
-        text: 'SELECT u.id AS userid, g.id AS groupid FROM users u \
-          LEFT JOIN usersgroups ug \
-          ON u.id = ug.userid \
-          LEFT JOIN groups g \
-          on g.id = ug.groupid \
-          WHERE u.username = \'' + username + '\' \
-          AND g.id = \'' + groupID + '\''
-      }, 
+        pool.query({
+          // retrieve ownerID, groupID & check if current user is owner of group
+          text: 'SELECT u.id AS userid, g.id AS groupid FROM users u \
+            LEFT JOIN usersgroups ug \
+            ON u.id = ug.userid \
+            LEFT JOIN groups g \
+            on g.id = ug.groupid \
+            WHERE u.username = \'' + username + '\' \
+            AND g.id = \'' + groupID + '\''
+        }, 
 
-      function(err2, rows2) {
-        if (rows2.rowCount === 0) {
-          callback('current user is not the owner of specified group', null);
-        } else {
-          var ownerID = rows2.rows[0].userid;
-          
-          pool.query({
-            // check if new member already has membership to specified group
-            text: 'SELECT u.id AS userid FROM users u \
-            WHERE u.username = \'' + newMember + '\' \
-            AND u.id IN ( \
-              SELECT ug.userid FROM usersgroups ug \
-              WHERE ug.groupid = \'' + groupID + '\' \
-            )'
-          },
-
-          function(err3, rows3) {
-            if (rows3.rowCount > 0) {
-              callback('cannot add a user that is already a member of the group', null);
+        function(err2, rows2) {
+          if (err2) {
+            callback(err2, null);
+          } else {
+            if (rows2.rowCount === 0) {
+              callback('current user is not the owner of specified group', null);
             } else {
-
+              var ownerID = rows2.rows[0].userid;
+              
               pool.query({
-                // check if group is full
-                text: 'SELECT * FROM usersgroups ug \
-                WHERE ug.groupid = \'' + groupID + '\''
+                // check if new member already has membership to specified group
+                text: 'SELECT u.id AS userid FROM users u \
+                WHERE u.username = \'' + newMember + '\' \
+                AND u.id IN ( \
+                  SELECT ug.userid FROM usersgroups ug \
+                  WHERE ug.groupid = \'' + groupID + '\' \
+                )'
               },
 
-              function(err4, rows4) {
-                if (rows4.rowCount >= 6) {
-                  callback('group is full', null);
+              function(err3, rows3) {
+                if (err3) {
+                  callback(err3, null);
                 } else {
+                  if (rows3.rowCount > 0) {
+                    callback('cannot add a user that is already a member of the group', null);
+                  } else {
 
-                  pool.query({
-                    // select newmemberID and insert it into the relevant group
-                    text: 'INSERT INTO usersgroups \
-                      VALUES ( \
-                        ( \
-                        SELECT u.id FROM users u \
-                        WHERE u.username = \'' + newMember + '\' \
-                        ),' +
-                        groupID +
-                      ');'
-                  }, 
+                    pool.query({
+                      // check if group is full
+                      text: 'SELECT * FROM usersgroups ug \
+                      WHERE ug.groupid = \'' + groupID + '\''
+                    },
 
-                  function(err5, rows5) {
-                    err5 ? callback(err5, null) : callback(null, true);
-                  });
+                    function(err4, rows4) {
+                      if (err4) {
+                        callback(err4, null);
+                      } else {
+                        if (rows4.rowCount >= 6) {
+                          callback('group is full', null);
+                        } else {
+
+                          pool.query({
+                            // select newmemberID and insert it into the relevant group
+                            text: 'INSERT INTO usersgroups \
+                              VALUES ( \
+                                ( \
+                                SELECT u.id FROM users u \
+                                WHERE u.username = \'' + newMember + '\' \
+                                ),' +
+                                groupID +
+                              ');'
+                          }, 
+
+                          function(err5, rows5) {
+                            err5 ? callback(err5, null) : callback(null, true);
+                          });
+                        }
+                      }
+                    });
+                  }
                 }
               });
             }
-          });
-        }
-      });
+          }
+        });
+      }
     }
   });
 };
