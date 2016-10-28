@@ -26,7 +26,8 @@
       "css": ["lib/medium-editor/dist/css/medium-editor.css"],
       "js": [
         "lib/jquery.min.js",
-        "lib/medium-editor/dist/js/medium-editor.js", 
+        "lib/medium-editor/dist/js/medium-editor.js",
+        "lib/MediumButton.js", 
         "app/scripts/selectionScript.js"
       ]
     }

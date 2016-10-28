@@ -4,10 +4,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   var selection = request.selection;
   $.ajax({
     type: "POST",
-    url: 'http://127.0.0.1:3000/api/markups/create',
+    url: 'http://104.237.1.118:3000/test/markups/create',
     data: {
       username: username,
-      selection: selection
+      anchor: selection
     },
     success: function() {
       alert('success');
