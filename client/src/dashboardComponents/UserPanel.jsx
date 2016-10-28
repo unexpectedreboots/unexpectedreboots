@@ -1,18 +1,49 @@
-var UserPanel = (props) => {
+class UserPanel extends React.Component {
 
-  return (
-    <div className='row col-sm-12 user-panel'>
-        { props.users.map(function(user) {
-          return (
-           <div>
-              <User name={user} />
-            </div>
-        ); })
-      }
-    </div>
-  );
+  constructor(props) {
+    super(props);
 
-};
+    this.state = {
+      users: []
+    };
+  }
+
+  componentDidMount() {
+    var context = this;
+
+    fetch('http://104.237.1.118:3000/test/groups/users', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({groupID: this.props.groupid})
+    })
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(value) {
+      context.setState({
+        users: value
+      });
+    });
+
+  }
+
+
+  render() {
+    
+    return (
+      <div className='row col-sm-12 user-panel'>
+          { this.state.users.map(function(user) {
+            return (
+              <div>
+                <User user={user} />
+              </div>
+            ); })
+        }
+      </div>
+    );
+  }
+
+}
 
 
 window.UserPanel = UserPanel;
