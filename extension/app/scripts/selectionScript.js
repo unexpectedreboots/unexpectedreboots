@@ -1,11 +1,12 @@
 $(document).ready(function() {
   var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
-  var postSelection = function() {
+  var postSelection = function(targetText) {
     var testExport = editor.exportSelection();
     console.log('before send');
     chrome.runtime.sendMessage({
       action : 'add',
-      selection: JSON.stringify(testExport)
+      selection: JSON.stringify(testExport),
+      text: targetText
     }, function(response) {
       console.log('received a response', response)
     });
@@ -13,7 +14,7 @@ $(document).ready(function() {
   editor = new MediumEditor(elements, {
     anchorPreview: false,
     placeholder: false,
-    disableEditing: false,
+    disableEditing: true,
     toolbar: {
       buttons: ['bold', 'italic','sendSelection']
     },
@@ -21,8 +22,8 @@ $(document).ready(function() {
         'sendSelection': new MediumButton({
           label: 'Send',
           action: function(html, mark) {
-            postSelection();
-            alert(html,mark,"html,mark");
+            postSelection(html);
+            alert(html);
             return html;
           }
         })
