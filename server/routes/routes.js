@@ -19,7 +19,7 @@ exports.createUser = function(req, res) {
   var email = req.query.email || req.body.email;
   var password = req.query.password || req.body.password;
 
-  console.log('Creating new user: ', username, email, password);
+  console.log('!!! Creating new user: ', username, email, password, '!!!');
 
   bcrypt.hash(password, saltRounds, function(error, hash) {
     if (error) {
@@ -206,7 +206,29 @@ exports.createMarkup = function(req, res) {
 };
 
 exports.shareMarkup = function(req, res) {
-  markups.share();
+  var url = req.query.url || req.body.url;
+  var title = req.query.title || req.body.title;
+  var username = req.query.username || req.body.username;
+  var anchor = req.query.anchor || req.body.anchor;
+  var text = req.query.text || req.body.text;
+  var comment = req.query.comment || req.body.comment;
+  var groupID = req.query.groupID || req.body.groupID;
+
+  /** 
+  DB Logic for markup sharing:
+  1. Find userID from username
+  2. Find siteID from site, if found, use siteID
+  3. If not found, insert site and use siteID
+  4. Insert into markup table:
+    siteID, authorID, anchor, text, comment
+    >> returning markupID
+  5. Insert into markupsgroups table:
+    markupID, groupID
+  **/
+
+  markups.share(url, title, username, anchor, text, comment, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 exports.deleteMarkup = function(req, res) {
