@@ -12,6 +12,7 @@ var CONFIG = {
 var pool = new Pool(CONFIG);
 
 exports.createSite = function(url, title, callback) {
+
   pool.query({
     // check if website already exists
     text: 'SELECT * FROM sites \
@@ -37,6 +38,22 @@ exports.createSite = function(url, title, callback) {
   });
 };
 
-exports.shareSite = function() {
+exports.shareSite = function(username, groupID, url, title) {
 
+  pool.query({
+    // check if url & title already exist
+    text: 'SELECT s.id AS siteid FROM sites s \
+      WHERE url = \'' + url + '\' \
+      AND title = \'' + title + '\''
+  },
+
+  function(err, rows) {
+    if (rows.rowCount > 0) {
+      var siteID = rows.rows.siteID;
+      console.log('found siteID: ', siteID);
+    } else {
+      // doesnt exist
+      // so insert it into db returning siteid
+    }
+  });
 };

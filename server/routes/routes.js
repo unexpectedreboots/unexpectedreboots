@@ -155,17 +155,24 @@ exports.createSite = function(req, res) {
 };
 
 exports.shareSite = function(req, res) {
+  var username = req.query.username || req.body.username;
   var groupID = req.query.groupID || req.body.groupID;
   var url = req.query.url || req.body.url;
+  var title = req.query.title || req.body.title;
 
   /* DB query logic
   1. Try to find matching URL + title in database
   2. If match found, take the siteID
   3. If not found, create the URL + title in sites table
     -- RETURNING siteID
-  4. Using siteID and groupID, insert into sitesgroups table
-  5. Use siteID, groupID, sharedtime as PK
+  4. Find userID from username
+  5. Using siteID, groupID, and userID insert into sitesgroups table
+  6. Use siteID, groupID, sharedtime as PK
   */
+
+  websites.shareSite(username, groupID, url, title, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  })
 
 };
 
