@@ -45,6 +45,10 @@ $(document).ready(function() {
     if (!flag) {
       testExport = editor.exportSelection();
       flag = true;
+      chrome.extension.sendMessage({
+        action : 'add',
+        selection: JSON.stringify(testExport);
+      });
     }
 
   })
