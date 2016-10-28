@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// var handlers = require('./ORMhandlers');
 var app = express();
 var routes = require('./routes/routes');
 var session = require('express-session');
@@ -61,6 +60,8 @@ app.use('/test/users/groups', routes.getUserGroups);
 app.use('/test/groups/users', routes.getGroupMembers);
 app.use('/test/websites/create', routes.createSite);
 app.use('/test/websites/share', routes.shareSite);
+app.use('/test/markups/create', routes.createMarkup);
+app.use('/test/markups/share', routes.shareMarkup);
 
 
 

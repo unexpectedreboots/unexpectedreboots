@@ -11,7 +11,7 @@ var CONFIG = {
 
 var pool = new Pool(CONFIG);
 
-exports.createSite = function(url, title, callback) {
+exports.create = function(url, title, callback) {
 
   pool.query({
     // check if website already exists
@@ -38,37 +38,75 @@ exports.createSite = function(url, title, callback) {
   });
 };
 
-exports.shareSite = function(username, groupID, url, title, callback) {
+exports.share = function(username, groupID, url, title, callback) {
+
+  console.log('/**', username, 'is sharing:', url, '(', title, ') with group:', groupID);
+
+  var siteID;
 
   pool.query({
-    // create the site object in the sites table
-    text: 'INSERT INTO sites(url, title) \
-      VALUES($1, $2) \
-      RETURNING *',
-    values: [url, title]
+    // attempt to find the existing site in the DB
+    text: 'SELECT * FROM sites \
+      WHERE url = \'' + url + '\' \
+      AND title = \'' + title + '\';'
   },
 
   function(err, rows) {
     if (err) {
       callback(err, null);
     } else {
-      var siteID = rows.rows[0].id;
+      if (rows.rowCount > 0) {
+        siteID = rows.rows[0].id;
 
-      pool.query({
-        text: 'INSERT INTO sitesgroups \
-          VALUES ( ' +
-            groupID + ', ' +
-            siteID + ', ' +
-            '( \
-            SELECT u.id FROM users u \
-            WHERE u.username = \'' + username + '\' \
-            ) \
-          );'
-      },
+        pool.query({
+          text: 'INSERT INTO sitesgroups \
+            VALUES ( ' +
+              groupID + ', ' +
+              siteID + ', ' +
+              '( \
+              SELECT u.id FROM users u \
+              WHERE u.username = \'' + username + '\' \
+              ) \
+            );'
+        },
 
-      function(err2, rows2) {
-        err2 ? callback(err2, null) : callback(null, true);
-      });
+        function(err2, rows2) {
+          err2 ? callback(err3, null) : callback(null, true);
+        });
+      } else {
+
+        pool.query({
+          text: 'INSERT INTO sites(url, title) \
+            VALUES($1, $2) \
+            RETURNING *',
+          values: [url, title]
+        },
+
+        function(err3, rows3) {
+          if (err3) {
+            callback(err3, null);
+          } else {
+
+            siteID = rows3.rows[0].id;
+
+            pool.query({
+              text: 'INSERT INTO sitesgroups \
+                VALUES ( ' +
+                  groupID + ', ' +
+                  siteID + ', ' +
+                  '( \
+                  SELECT u.id FROM users u \
+                  WHERE u.username = \'' + username + '\' \
+                  ) \
+                );'
+            },
+
+            function(err4, rows4) {
+              err4 ? callback(err4, null) : callback(null, true);
+            });
+          }
+        });
+      }
     }
   });
 };

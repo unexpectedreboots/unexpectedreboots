@@ -11,7 +11,7 @@ var CONFIG = {
 
 var pool = new Pool(CONFIG);
 
-exports.insertUser = function(username, email, password, callback) {
+exports.insert = function(username, email, password, callback) {
 
   pool.query({
     text: 'SELECT username FROM users \
@@ -36,7 +36,7 @@ exports.insertUser = function(username, email, password, callback) {
   });
 };
 
-exports.checkUser = function(username, password, callback) {
+exports.check = function(username, password, callback) {
 
   pool.query({
     text: 'SELECT username, password FROM users \
@@ -48,6 +48,36 @@ exports.checkUser = function(username, password, callback) {
   });
 };
 
-exports.updateUser = function(username, password, newPassword, email, newEmail, callback) {
+exports.update = function(username, password, newPassword, email, newEmail, callback) {
   // TODO: implement user updating
 }
+
+
+exports.getGroups = function(username, callback) {
+
+  pool.query({
+    // find all groups user is a part of (and their owners)
+    text: 'SELECT u.id AS userid, g.id AS groupid, g.name AS groupname, \
+      g.owner AS groupowner FROM users u \
+      LEFT JOIN usersgroups ug \
+      ON u.id = ug.userid \
+      LEFT JOIN groups g \
+      ON g.id = ug.groupid \
+      WHERE userid IN ( \
+        SELECT u.id FROM users u \
+        WHERE u.username = \'' + username + '\' \
+      );'
+  }, 
+
+  function(err, rows) {
+    if (err) {
+      callback(err, null);
+    } else {
+      if (rows.rowCount === 0) {
+        callback('user is not part of any groups', null);
+      } else {
+        callback(null, rows.rows);
+      }
+    }
+  });
+};
