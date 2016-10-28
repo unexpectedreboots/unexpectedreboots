@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// var handlers = require('./ORMhandlers');
 var app = express();
 var routes = require('./routes/routes');
 var session = require('express-session');

@@ -1,6 +1,7 @@
 var users = require('../../db/users');
 var groups = require('../../db/groups');
 var websites = require('../../db/websites');
+var markups = require('../../db/markups');
 
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
@@ -187,11 +188,11 @@ exports.deleteSite = function(req, res) {
 ****************************************************/
 
 exports.createMarkup = function(req, res) {
-
+  markups.create();
 };
 
 exports.shareMarkup = function(req, res) {
-
+  markups.share();
 };
 
 exports.deleteMarkup = function(req, res) {
