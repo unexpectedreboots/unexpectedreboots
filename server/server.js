@@ -26,18 +26,33 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Routes
-app.use('/api/users/register', routes.createUser); // done
-app.use('/api/users/login', routes.checkUser); // done
+// `/api/users/*` endpoints
+app.use('/api/users/register', routes.createUser);
+app.use('/api/users/login', routes.checkUser);
+app.use('/api/users/groups', sessionChecker, routes.getUserGroups);
+// TODO
 app.use('/api/users/update', sessionChecker, routes.updateUser);
-app.use('/api/users/groups', sessionChecker, routes.getUserGroups); // done
-app.use('/api/groups/create', sessionChecker, routes.createGroup); // done
-app.use('/api/groups/add', sessionChecker, routes.addMember); // done
-app.use('/api/groups/users', sessionChecker, routes.getGroupMembers); // done
-app.use('/api/websites/create', sessionChecker, routes.createSite); // done TOREMOVE
+
+// `/api/groups/*` endpoints
+app.use('/api/groups/create', sessionChecker, routes.createGroup);
+app.use('/api/groups/add', sessionChecker, routes.addMember);
+app.use('/api/groups/users', sessionChecker, routes.getGroupMembers);
+app.use('/api/groups/markups', sessionChecker, routes.getGroupMarkups);
+app.use('/api/groups/sites', sessionChecker, routes.getGroupSites);
+// TODO
+app.use('/api/groups/edit', sessionChecker, routes.editGroup);
+
+// `/api/websites/*` endpoints
+app.use('/api/websites/create', sessionChecker, routes.createSite);
+app.use('/api/websites/share', sessionChecker, routes.shareSite);
+// TODO
+app.use('/api/websites/delete', sessionChecker, routes.deleteSite);
+
+// `/api/markups/*` endpoints
 app.use('/api/markups/create', sessionChecker, routes.createMarkup);
-app.use('/api/groups/markups', sessionChecker, routes.markupGroup);
-app.use('/api/groups/sites', sessionChecker, routes.shareSite);
+app.use('/api/markups/share', sessionChecker, routes.shareMarkup);
+app.use('/api/markups/delete', sessionChecker, routes.deleteMarkup);
+
 
 // Test Routes: no authentication required
 app.use('/test/groups/create', routes.createGroup);
