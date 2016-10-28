@@ -190,6 +190,16 @@ exports.createMarkup = function(req, res) {
   var text = req.query.text || req.body.text;
   var comment = req.query.comment || req.body.comment;
 
+  /** 
+  DB Logic for markup creation:
+  1. Find userID from username
+  2. Find siteID from site, if found, use siteID
+  3. If not found, insert site and use siteID
+  4. Insert into markup table:
+    siteID, authorID, anchor, text, comment
+  5. Callback true
+  **/
+
   markups.create(url, title, username, anchor, text, comment, function(err, success) {
     err ? res.send(err) : res.send(success);
   });
