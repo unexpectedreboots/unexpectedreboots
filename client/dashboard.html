@@ -8,8 +8,27 @@
   <script src="../node_modules/jquery/dist/jquery.js"></script>
   <script src="../node_modules/react/dist/react.js"></script>
   <script src="../node_modules/react-dom/dist/react-dom.js"></script>
+  <link rel="stylesheet" href="../node_modules/remodal/dist/remodal.css">
+  <link rel="stylesheet" href="../node_modules/remodal/dist/remodal-default-theme.css">
+  <script src="../node_modules/remodal/dist/remodal.min.js"></script>
 <body>
   <div id="app"></div>
+
+  
+  <div class="remodal" data-remodal-id="modal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <h1>Group Name:</h1>
+  <form action='http://104.237.1.118:3000/test/groups/create' method="post">
+    <br>
+    <input type='text' name='groupname'>
+    <input type = 'hidden' name = 'owner' value = 'dylan' />
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+  <br>
+  </div>
+
+
   <script src="./compiled/client/src/dashboardComponents/App.js"></script>
   <script src="./compiled/client/src/dashboardComponents/Views.js"></script>
   <script src="./compiled/client/src/dashboardComponents/Heading.js"></script>
