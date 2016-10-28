@@ -18,15 +18,42 @@
   <div class="remodal" data-remodal-id="modal">
   <button data-remodal-action="close" class="remodal-close"></button>
   <h1>Group Name:</h1>
-  <form action='http://104.237.1.118:3000/test/groups/create' method="post">
+  <form>
     <br>
-    <input type='text' name='groupname'>
-    <input type = 'hidden' name = 'owner' value = 'dylan' />
+    <input class='groupName' type='text' name='groupName' />
     <br><br>
     <input type="submit" value="Submit">
   </form>
   <br>
   </div>
+
+  <script>
+    $(document).ready(function() {
+      var $form = $('form');
+      $form.submit(function() {
+        $.ajax({
+          url: 'http://104.237.1.118:3000/test/groups/create',
+          method: 'POST',
+          data: {
+            groupName: $('.groupName').val(),
+            owner: 'dylan'  //TODO: change this to the username in the cookie
+          },
+          success: function(data) {
+            if (data === true) {
+              //get rid of the modal
+              //rerender the controller
+              console.log('it was true');
+            } else {
+              //get rid of the modal
+              //show a 'duplicate group modal'
+              console.log('it was false');
+            } 
+          }
+        });
+        return false;
+      });
+    });
+  </script>
 
 
   <script src="./compiled/client/src/dashboardComponents/App.js"></script>
