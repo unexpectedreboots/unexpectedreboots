@@ -16,6 +16,7 @@ angular.module('dropdownController', [])
     }).then(function(response) {
       console.log('then statement sign up', response);
       if (response.data) {
+        localStorage.setItem('username', $scope.username);
         $state.transitionTo('home');
       }
     });
@@ -35,6 +36,7 @@ angular.module('dropdownController', [])
     }).then(function(response) {
       console.log('then statement logIn', response);
       if (response.data === true) {
+        localStorage.setItem('username', $scope.username);
         $state.transitionTo('home');
       }
     });

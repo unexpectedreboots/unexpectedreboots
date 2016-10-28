@@ -13,16 +13,21 @@
       "dropdownDashBaord.html"
   ],
 
-   "background": [
-     {
-     }
-   ],
+   "background": {
+     "scripts": [
+       "lib/jquery.min.js",
+       "app/scripts/background.js"
+     ]
+   },
 
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["lib/medium-editor/dist/css/medium-editor.css"],
       "js": [
+        "lib/jquery.min.js",
         "lib/medium-editor/dist/js/medium-editor.js",
+        "lib/MediumButton.js", 
         "app/scripts/selectionScript.js"
       ]
     }
@@ -33,6 +38,6 @@
     "activeTab",
     "identity",
     "storage",
-    "cookies","<all_urls>"
+    "cookies","<all_urls>", "http://*/*"
   ]
 }
