@@ -183,7 +183,16 @@ exports.deleteSite = function(req, res) {
 ****************************************************/
 
 exports.createMarkup = function(req, res) {
-  markups.create();
+  var url = req.query.url || req.body.url;
+  var title = req.query.title || req.body.title;
+  var username = req.query.username || req.body.username;
+  var anchor = req.query.anchor || req.body.anchor;
+  var text = req.query.text || req.body.text;
+  var comment = req.query.comment || req.body.comment;
+
+  markups.create(url, title, username, anchor, text, comment, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 exports.shareMarkup = function(req, res) {
