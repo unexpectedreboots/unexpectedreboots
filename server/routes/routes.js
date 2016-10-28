@@ -18,6 +18,8 @@ exports.createUser = function(req, res) {
   var email = req.query.email || req.body.email;
   var password = req.query.password || req.body.password;
 
+  console.log('Creating new user: ', username, email, password);
+
   bcrypt.hash(password, saltRounds, function(error, hash) {
     if (error) {
       res.send(error);
