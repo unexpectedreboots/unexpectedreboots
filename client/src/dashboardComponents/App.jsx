@@ -4,7 +4,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      view: 'home'
+      view: 'home',
+      groupid: null
     };
 
   }
@@ -14,16 +15,17 @@ class App extends React.Component {
     
   }
 
-  changeView(event, state) {
+  changeView(event, state, groupid) {
     this.setState({
-      view: state
+      view: state, 
+      groupid: groupid
     });
   }
 
   
   render() {
     return (
-      <Views viewType={this.state.view} changeViewCb={this.changeView.bind(this)} />
+      <Views groupid={this.state.groupid} viewType={this.state.view} changeViewCb={this.changeView.bind(this)} />
     );
   }
 }
