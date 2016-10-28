@@ -163,10 +163,14 @@ exports.getUserGroups = function(username, callback) {
   }, 
 
   function(err, rows) {
-    if (rows.rowCount === 0) {
-      callback('user is not part of any groups', null);
+    if (err) {
+      callback(err, null);
     } else {
-      err ? callback(err, null) : callback(null, rows.rows);
+      if (rows.rowCount === 0) {
+        callback('user is not part of any groups', null);
+      } else {
+        callback(null, rows.rows);
+      }
     }
   });
 };
@@ -187,10 +191,14 @@ exports.getGroupMembers = function(groupID, callback) {
   },
 
   function(err, rows) {
-    if (rows.rowCount === 0) {
-      callback('group has no members', null);
+    if (err) {
+      callback(err, null);
     } else {
-      err ? callback(err, null) : callback(null, rows.rows);
+      if (rows.rowCount === 0) {
+        callback('group has no members', null);
+      } else {
+        err ? callback(err, null) : callback(null, rows.rows);
+      } 
     }
   });
 };
