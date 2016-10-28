@@ -28,6 +28,8 @@ class GroupPanel extends React.Component {
 
   }
 
+  
+
   render() {
     return (
       <div>

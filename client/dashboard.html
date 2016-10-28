@@ -22,15 +22,25 @@
     <br>
     <input class='groupName' type='text' name='groupName' />
     <br><br>
-    <input type="submit" value="Submit">
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
   </form>
   <br>
   </div>
 
+  <div class="remodal" data-remodal-id="group-fail-modal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <h1>You alraedy have a group with that name  ¯\_(ツ)_/¯</h1>
+  <br>
+  <button data-remodal-action="cancel" class="remodal-cancel">OK ...</button>
+  </div>
+
   <script>
     $(document).ready(function() {
-      var $form = $('form');
-      $form.submit(function() {
+      var askGroup = $('[data-remodal-id=modal]').remodal();
+      var failGroup = $('[data-remodal-id=group-fail-modal]').remodal();
+
+      var $bttn = $('.remodal-confirm');
+      $bttn.click(function() {
         $.ajax({
           url: 'http://104.237.1.118:3000/test/groups/create',
           method: 'POST',
@@ -41,13 +51,13 @@
           success: function(data) {
             if (data === true) {
               //get rid of the modal
-              $('.remodal-close').click();
-              //rerender the controller
-              console.log('it was true');
+              askGroup.close();
+              //rerender the GroupPanel controller
             } else {
               //get rid of the modal
+              askGroup.close();
               //show a 'duplicate group modal'
-              console.log('it was false');
+              failGroup.open();
             } 
           }
         });
