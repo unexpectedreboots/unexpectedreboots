@@ -13,7 +13,7 @@ var Views = (props) => {
     return (
       <div className='container'>
         <Heading title={props.viewType} changeViewCb={props.changeViewCb} />
-        <UserPanel users={['ron', 'fred', 'george', 'bill', 'charlie']}/>
+        <UserPanel groupid={props.groupid} />
         <MarkupPanel markups={[1, 2]}/>
         <SharedPanel sites={[1, 2, 3]}/>
       </div>

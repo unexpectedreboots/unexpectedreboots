@@ -5,7 +5,7 @@ var Heading = (props) => {
     <div>
       <div className='col-sm-4 heading-title'>{props.title}</div> 
       <div className='col-sm-4 heading-bttn'>Logout</div>
-      <div className='col-sm-4 heading-bttn' onClick={() => props.changeViewCb(event, 'home')}>Home</div>
+      <div className='col-sm-4 heading-bttn' onClick={() => props.changeViewCb(event, 'home', null)}>Home</div>
     </div>
     </div>
   );

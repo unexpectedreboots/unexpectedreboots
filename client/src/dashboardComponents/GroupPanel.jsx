@@ -15,19 +15,17 @@ class GroupPanel extends React.Component {
     fetch('http://104.237.1.118:3000/test/users/groups', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username: '1'})
+      body: JSON.stringify({username: 'dylan'})
     })
     .then(function(res) {
       return res.json();
     })
     .then(function(value) {
-      console.log(value);
       context.setState({
         groups: value
       });
     });
 
-    
   }
 
   render() {
