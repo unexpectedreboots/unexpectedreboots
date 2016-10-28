@@ -11,7 +11,7 @@ var CONFIG = {
 
 var pool = new Pool(CONFIG);
 
-exports.createGroup = function(groupName, owner, callback) {
+exports.create = function(groupName, owner, callback) {
 
   console.log('/** Creating Group:', groupName, 'for:', owner, '**/');
 
@@ -78,7 +78,7 @@ exports.createGroup = function(groupName, owner, callback) {
   });
 };
 
-exports.addMember = function(groupID, username, newMember, callback) {
+exports.add = function(groupID, username, newMember, callback) {
 
   console.log('/**', username, 'is adding:', newMember, 'to group:', groupID, '**/');
 
@@ -177,37 +177,7 @@ exports.addMember = function(groupID, username, newMember, callback) {
   });
 };
 
-exports.getUserGroups = function(username, callback) {
-
-  pool.query({
-    // find all groups user is a part of (and their owners)
-    text: 'SELECT u.id AS userid, g.id AS groupid, g.name AS groupname, \
-      g.owner AS groupowner FROM users u \
-      LEFT JOIN usersgroups ug \
-      ON u.id = ug.userid \
-      LEFT JOIN groups g \
-      ON g.id = ug.groupid \
-      WHERE userid IN ( \
-        SELECT u.id FROM users u \
-        WHERE u.username = \'' + username + '\' \
-      );'
-      // TODO implement invisible-group ignore
-  }, 
-
-  function(err, rows) {
-    if (err) {
-      callback(err, null);
-    } else {
-      if (rows.rowCount === 0) {
-        callback('user is not part of any groups', null);
-      } else {
-        callback(null, rows.rows);
-      }
-    }
-  });
-};
-
-exports.getGroupMembers = function(groupID, callback) {
+exports.getMembers = function(groupID, callback) {
 
   pool.query({
     text: 'SELECT member, groupname, u2.username AS owner FROM ( \

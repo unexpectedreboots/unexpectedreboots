@@ -11,7 +11,7 @@ var CONFIG = {
 
 var pool = new Pool(CONFIG);
 
-exports.createSite = function(url, title, callback) {
+exports.create = function(url, title, callback) {
 
   pool.query({
     // check if website already exists
@@ -38,7 +38,7 @@ exports.createSite = function(url, title, callback) {
   });
 };
 
-exports.shareSite = function(username, groupID, url, title, callback) {
+exports.share = function(username, groupID, url, title, callback) {
 
   console.log('/**', username, 'is sharing:', url, '(', title, ') with group:', groupID);
 

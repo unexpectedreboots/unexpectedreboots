@@ -27,19 +27,13 @@ exports.createUser = function(req, res) {
     } else {
       password = hash;
 
-      users.insertUser(username, email, password, function(err, result) {
+      users.insert(username, email, password, function(err, result) {
         if (err) {
-          res.send(err)
+          res.send(err);
         } else {
           createSession(req, res, username, function() {
-            console.log(req.session); // TODO remove
-            var groupName = 'invisible-' + username;
-
-            groups.createGroup(groupName, username, function(err3, success2) {
-              err3 ? res.send(err3) : res.send(success2);
-            });
+            res.send(result);
           });
-          
         }
       });
     }
@@ -50,7 +44,7 @@ exports.checkUser = function(req, res) {
   var username = req.query.username || req.body.username;
   var password = req.query.password || req.body.password;
 
-  users.checkUser(username, password, function(err, result) {
+  users.check(username, password, function(err, result) {
     if (err) {
       res.send(err);
     } else {
@@ -58,13 +52,14 @@ exports.checkUser = function(req, res) {
         res.send('user does not exist');
       } else {        
         var retrievedPassword = result.rows[0].password;
+
         bcrypt.compare(password, retrievedPassword, function(err2, success) {
           if (success) {
             createSession(req, res, username, function(){
               res.send(success);
             });
           } else {
-            res.send(success);
+            res.send(err2);
           }
         });
       }
@@ -81,7 +76,7 @@ exports.updateUser = function(req, res) {
 exports.getUserGroups = function(req, res) {
   var username = req.query.username || req.body.username;
 
-  groups.getUserGroups(username, function(err, result) {
+  users.getGroups(username, function(err, result) {
     err ? res.send(err) : res.send(result);
   });
 }
@@ -94,7 +89,7 @@ exports.getUserGroups = function(req, res) {
 exports.getGroupMembers = function(req, res) {
   var groupID = req.query.groupID || req.body.groupID;
 
-  groups.getGroupMembers(groupID, function(err, result) {
+  groups.getMembers(groupID, function(err, result) {
     err ? res.send(err) : res.send(result);
   });
 }
@@ -103,7 +98,7 @@ exports.createGroup = function(req, res) {
   var groupName = req.query.groupName || req.body.groupName;
   var owner = req.query.owner || req.body.owner;
 
-  groups.createGroup(groupName, owner, function(err, success) {
+  groups.create(groupName, owner, function(err, success) {
     err ? res.send(err) : res.send(success);
   });
 };
@@ -124,7 +119,7 @@ exports.addMember = function(req, res) {
   7. Insert member + group into UG join table 
   */
 
-  groups.addMember(groupID, username, newMember, function(err, success) {
+  groups.add(groupID, username, newMember, function(err, success) {
     err ? res.send(err) : res.send(success);
   });
 };
@@ -152,7 +147,7 @@ exports.createSite = function(req, res) {
   var url = req.query.url || req.body.url;
   var title = req.query.title || req.body.title;
 
-  websites.createSite(url, title, function(err, success) {
+  websites.create(url, title, function(err, success) {
     err ? res.send(err) : res.send(success);
   });
 };
@@ -171,7 +166,7 @@ exports.shareSite = function(req, res) {
   4. Use siteID, groupID, sharedtime as PK
   */
 
-  websites.shareSite(username, groupID, url, title, function(err, success) {
+  websites.share(username, groupID, url, title, function(err, success) {
     err ? res.send(err) : res.send(success);
   })
 
