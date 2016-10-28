@@ -13,6 +13,8 @@ var pool = new Pool(CONFIG);
 
 exports.createGroup = function(groupName, owner, callback) {
 
+  console.log('/** Creating Group:', groupName, 'for:', owner, '**/');
+
   pool.query({
     text: 'SELECT ug.groupid, ug.userid FROM users u \
       LEFT JOIN usersgroups ug \
@@ -77,6 +79,8 @@ exports.createGroup = function(groupName, owner, callback) {
 };
 
 exports.addMember = function(groupID, username, newMember, callback) {
+
+  console.log('/**', username, 'is adding:', newMember, 'to group:', groupID);
 
   pool.query({
     // check if new user exists
