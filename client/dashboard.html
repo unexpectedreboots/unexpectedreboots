@@ -41,6 +41,7 @@
           success: function(data) {
             if (data === true) {
               //get rid of the modal
+              $('.remodal-close').click();
               //rerender the controller
               console.log('it was true');
             } else {
