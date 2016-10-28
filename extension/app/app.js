@@ -1,7 +1,8 @@
 var myApp = angular.module('Markable', [
   'ui.router',
   'dropdownController',
-  'mainController' 
+  'mainController',
+  'Markable.directives'
 ])
 
 .config(function($stateProvider) {
@@ -17,7 +18,7 @@ var myApp = angular.module('Markable', [
     templateUrl: '../views/signInOrUp.html',
     controller: 'dropdown',
     authenticate: false
-  })
+  });
 })
 .run(['$state', function ($state) {
    console.log($state);

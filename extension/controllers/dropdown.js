@@ -21,7 +21,8 @@ angular.module('dropdownController', [])
     });
   };
 
-  $scope.usernamePattern = '^$|^[A-Za-z]+[A-Za-z0-9_-.]+';
+
+  $scope.usernamePattern = '^$|^[a-z]+[A-Za-z0-9_-.]+';
   
   $scope.logIn = function() {
 
@@ -39,5 +40,7 @@ angular.module('dropdownController', [])
         $state.transitionTo('home');
       }
     });
-  }
+  };
 });
+
+
