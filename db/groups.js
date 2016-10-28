@@ -64,7 +64,7 @@ exports.createGroup = function(groupName, owner, callback) {
   });
 };
 
-exports.addMember = function(groupName, username, newMember, callback) {
+exports.addMember = function(groupID, username, newMember, callback) {
 
   pool.query({
     // check if new user exists
@@ -85,7 +85,7 @@ exports.addMember = function(groupName, username, newMember, callback) {
           LEFT JOIN groups g \
           on g.id = ug.groupid \
           WHERE u.username = \'' + username + '\' \
-          AND g.name = \'' + groupName + '\''
+          AND g.id = \'' + groupID + '\''
       }, 
 
       function(err2, rows2) {
@@ -93,7 +93,6 @@ exports.addMember = function(groupName, username, newMember, callback) {
           callback('current user is not the owner of specified group', null);
         } else {
           var ownerID = rows2.rows[0].userid;
-          var groupID = rows2.rows[0].groupid;
           
           pool.query({
             // check if new member already has membership to specified group
