@@ -70,8 +70,8 @@ exports.share = function(username, groupID, url, title, callback) {
             );'
         },
 
-        function(err3, rows3) {
-          err3 ? callback(err3, null) : callback(null, true);
+        function(err2, rows2) {
+          err2 ? callback(err3, null) : callback(null, true);
         });
       } else {
 
@@ -82,10 +82,12 @@ exports.share = function(username, groupID, url, title, callback) {
           values: [url, title]
         },
 
-        function(err2, rows2) {
-          if (err2) {
-            callback(err2, null);
+        function(err3, rows3) {
+          if (err3) {
+            callback(err3, null);
           } else {
+
+            siteID = rows3.rows[0].id;
 
             pool.query({
               text: 'INSERT INTO sitesgroups \
