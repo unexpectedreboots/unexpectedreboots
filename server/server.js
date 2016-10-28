@@ -60,6 +60,7 @@ app.use('/test/groups/add', routes.addMember);
 app.use('/test/users/groups', routes.getUserGroups);
 app.use('/test/groups/users', routes.getGroupMembers);
 app.use('/test/websites/create', routes.createSite);
+app.use('/test/websites/share', routes.shareSite);
 
 
 
