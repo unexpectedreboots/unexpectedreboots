@@ -39,19 +39,23 @@ $(document).ready(function() {
   var flag = false;
   var testExport = '';
   document.addEventListener('mouseup', function(event) {
-    // console.log(editor.checkSelection(), 'editor.checkSelection');
+    console.log(editor.checkSelection(), 'editor.checkSelection');
     // console.log(editor.getFocusedElement(), 'editor.getFocusedElement');
     console.log(JSON.stringify(editor.exportSelection()), 'editor.exportSelection');
     if (!flag) {
       testExport = editor.exportSelection();
+      console.log('before send');
       flag = true;
-      chrome.extension.sendMessage({
+      chrome.runtime.sendMessage({
         action : 'add',
-        selection: JSON.stringify(testExport);
+        selection: JSON.stringify(testExport)
+      }, function(response) {
+        console.log('received a response', response)
       });
     }
 
-  })
+  });
+});
 //need to send storage object from background script to server
 //   window.onkeyup = function(e) {
 //     console.log('window');

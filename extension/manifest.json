@@ -25,8 +25,8 @@
       "matches": ["http://*/*", "https://*/*"],
       "css": ["lib/medium-editor/dist/css/medium-editor.css"],
       "js": [
-        "lib/medium-editor/dist/js/medium-editor.js",
         "lib/jquery.min.js",
+        "lib/medium-editor/dist/js/medium-editor.js", 
         "app/scripts/selectionScript.js"
       ]
     }
@@ -37,6 +37,6 @@
     "activeTab",
     "identity",
     "storage",
-    "cookies","<all_urls>"
+    "cookies","<all_urls>", "http://*/*"
   ]
 }
