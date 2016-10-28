@@ -44,7 +44,7 @@ exports.create = function(url, title, username, anchor, text, comment, callback)
           if (err2) {
             callback(err2, null);
           } else {
-            if (rows.rowCount > 0) {
+            if (rows2.rowCount > 0) {
               siteID = rows2.rows[0].id;
 
               pool.query({
