@@ -9,7 +9,7 @@
     <p ng-show="signup.username.$dirty && (signup.username.$error.minlength || signup.username.$error.maxlength) ">Name should be between 8 and 20 characters.</p>
     <p ng-show="signup.username.$dirty && signup.username.$error.pattern">Name can contain alphanumeric and _.</p>
 
-    <input placeholder="password" name="password" ng-model="password"  ng-minlength="8" ng-maxlength="20" required />
+    <input placeholder="password" type="password" name="password" ng-model="password"  ng-minlength="8" ng-maxlength="20" required />
     <ul id="strength" check-strength="password"></ul>
     <p ng-show="signup.password.$dirty && signup.password.$error.required">Password is required.</p>
     <p ng-show="signup.password.$dirty && (signup.password.$error.minlength || signup.password.$error.maxlength) ">Password should be between 8 and 20 characters.</p>
