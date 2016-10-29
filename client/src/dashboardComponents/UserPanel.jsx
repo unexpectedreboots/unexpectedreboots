@@ -8,7 +8,7 @@ class UserPanel extends React.Component {
     };
   }
 
-  componentDidMount() {
+  fetchUsers() {
     var context = this;
 
     fetch('http://104.237.1.118:3000/test/groups/users', {
@@ -24,6 +24,10 @@ class UserPanel extends React.Component {
         users: value
       });
     });
+  }
+
+  handleUserAddition() {
+    var context = this;
 
     $(document).ready(function() {
       var askUser = $('[data-remodal-id=add-user-modal]').remodal();
@@ -43,7 +47,7 @@ class UserPanel extends React.Component {
             console.log(data);
             if (data === true) {
               askUser.close();
-              context.componentDidMount();
+              context.fetchUsers();
             } else {
               askUser.close();
               failUser.open();
@@ -54,7 +58,11 @@ class UserPanel extends React.Component {
       });
     });
 
+  }
 
+  componentDidMount() {
+    this.fetchUsers();
+    this.handleUserAddition();
   }
 
 
