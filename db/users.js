@@ -86,11 +86,27 @@ exports.getGroups = function(username, callback) {
 exports.getMarkups = function(username, callback) {
 
   pool.query({
-    text: 'SELECT * FROM markups m \
-      WHERE m.authorid IN ( \
-        SELECT u.id FROM users u \
-        WHERE u.username = \'' + username + '\' \
-      )'
+    text:
+      'SELECT u2.username AS author, \
+        s2.title AS title, \
+        s2.url AS url \
+        anchor, text, comment, temp.createdat \
+      FROM ( \
+        SELECT m.authorid AS authorid, \
+          m.siteid AS siteid, \
+          m.anchor AS anchor, \
+          m.text AS text, \
+          m.comment AS comment, \
+          m.createdat AS createdat \
+        FROM markups m \
+        WHERE m.authorid IN ( \
+          SELECT u.id FROM users u \
+          WHERE u.username = \'' + username + '\' \
+        ) \
+      ) temp LEFT JOIN users u2 \
+      ON temp.authorid = u2.id \
+      LEFT JOIN sites s2 \
+      ON temp.siteid = s2.id;'
   },
 
   function(err, rows) {
