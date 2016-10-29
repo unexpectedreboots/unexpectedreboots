@@ -97,7 +97,12 @@ span {
   border: 0;
   margin: 20px;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
-  border-radius: 3px
+  border-radius: 3px;
+  transition: all 0.3s ease 0s;
+}
+
+.entry:hover {
+  filter: brightness(75%);
 }
 
 .group-bttn {
@@ -109,7 +114,12 @@ span {
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
   height: 120px;
-  width: 22%
+  width: 22%;
+  transition: all 0.3s ease 0s;
+}
+
+.group-bttn:hover {
+  filter: brightness(75%);
 }
 
 .role-label {
@@ -132,7 +142,12 @@ span {
   margin: 20px 0px 0px 14%;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
-  height: 75px
+  height: 75px;
+  transition: all 0.3s ease 0s;
+}
+
+.add-group-bttn:hover {
+  filter: brightness(75%);
 }
 
 .add-group-label {
@@ -170,5 +185,10 @@ span {
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
   height: 100px;
-  width: 30%
+  width: 30%;
+  transition: all 0.3s ease 0s;
+}
+
+.user-bttn.add:hover {
+  filter: brightness(75%);
 }
