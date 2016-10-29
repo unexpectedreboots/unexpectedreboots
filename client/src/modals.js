@@ -19,6 +19,18 @@ $('body').append(
   "<h1>You alraedy have a group with that name  ¯\\_(ツ)_/¯</h1>"+
   "<br>"+
   "<button data-remodal-action='cancel' class='remodal-cancel'>OK ...</button>"+
+"</div>"+
+
+"<div class='remodal' data-remodal-id='add-user-modal'>"+
+  "<button data-remodal-action='close' class='remodal-close'></button>"+
+  "<h1>Add User By User Name:</h1>"+
+  "<form>"+
+    "<br>"+
+   "<input class='newMember' type='text' name='newMember' />"+
+    "<br><br>"+
+    "<button data-remodal-action='confirm' class='remodal-confirm'>OK</button>"+
+  "</form>"+
+  "<br>"+
 "</div>"
 
 );
