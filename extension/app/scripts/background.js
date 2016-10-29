@@ -1,4 +1,19 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { 
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab ) {
+  if ( changeInfo.status === 'complete' ) {
+    var username = localStorage.getItem('username');
+    var tab = tabId;
+    $.ajax({
+      type: 'GET',
+      url: 'http://104.237.1.118:3000/test/users/markups',
+      data: {username: username},
+      success: function(response) {
+        alert(JSON.stringify(response) + 'markups yo');
+        chrome.tabs.sendMessage(tab, {selection: response[0]});
+      }
+    })        
+  }
+});
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { 
   console.log('background script triggered');    
   var username = localStorage.getItem('username');
   var selection = request.selection;
