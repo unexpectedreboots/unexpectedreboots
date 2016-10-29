@@ -9,7 +9,7 @@ class GroupPanel extends React.Component {
   }
 
   
-  componentDidMount() {
+  fetchGroups() {
     var context = this;
 
     fetch('http://104.237.1.118:3000/test/users/groups', {
@@ -26,6 +26,11 @@ class GroupPanel extends React.Component {
       });
     });
 
+  }
+
+
+  handleGroupCreation() {
+    var context = this;
 
     $(document).ready(function() {
       var askGroup = $('[data-remodal-id=modal]').remodal();
@@ -42,14 +47,14 @@ class GroupPanel extends React.Component {
           },
           success: function(data) {
             if (data === true) {
-              //get rid of the modal
+            //get rid of the modal
               askGroup.close();
-              //rerender the GroupPanel controller
-              context.componentDidMount();
+            //rerender the GroupPanel controller
+              context.fetchGroups();
             } else {
-              //get rid of the modal
+            //get rid of the modal
               askGroup.close();
-              //show a 'duplicate group modal'
+            //show a 'duplicate group modal'
               failGroup.open();
             } 
           }
@@ -57,7 +62,12 @@ class GroupPanel extends React.Component {
         return false;
       });
     });
+  }
 
+  
+  componentDidMount() {
+    this.fetchGroups();
+    this.handleGroupCreation();
   }
 
   
