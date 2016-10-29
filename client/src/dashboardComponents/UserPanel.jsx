@@ -27,7 +27,7 @@ class UserPanel extends React.Component {
 
     $(document).ready(function() {
       var askUser = $('[data-remodal-id=add-user-modal]').remodal();
-      //var failUser = $('[data-remodal-id=group-fail-modal]').remodal();
+      var failUser = $('[data-remodal-id=user-fail-modal]').remodal();
 
       var $bttn = $('button.user');
       $bttn.click(function() {
@@ -46,6 +46,7 @@ class UserPanel extends React.Component {
               context.componentDidMount();
             } else {
               askUser.close();
+              failUser.open();
             }
           }
         });
