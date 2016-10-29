@@ -29,16 +29,25 @@ class UserPanel extends React.Component {
 
 
   render() {
-    
+    var context = this;
     return (
       <div className='row col-sm-12 user-panel'>
-          { this.state.users.map(function(user) {
+        { this.state.users.map(function(user) {
+          return (
+            <div>
+              <User user={user} />
+            </div>
+          ); })
+        }
+        {function() {
+          if (context.state.users.length < 6) {
             return (
               <div>
-                <User user={user} />
+                <AddUser />
               </div>
-            ); })
-        }
+            );
+          }
+        }()}
       </div>
     );
   }
