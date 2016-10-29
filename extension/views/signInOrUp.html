@@ -31,6 +31,7 @@
       <input placeholder="password" type="password" name="password" ng-model="password"  ng-minlength="8" ng-maxlength="20" required />
       <p ng-show="signup.password.$dirty && signup.password.$error.required">Password is required.</p>
       <p ng-show="signup.password.$dirty && (signup.password.$error.minlength || signup.password.$error.maxlength) ">Password should be between 8 and 20 characters.</p>
+      <p ng-show="showError">Invalid username/password.</p>
       <button ng-click="logIn()" class="signupButton" type="button">Log In</button>
       <a href ng-click="showSection('signup')">Sign up</a>
     </div>

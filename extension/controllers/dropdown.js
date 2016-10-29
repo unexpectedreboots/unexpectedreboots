@@ -4,7 +4,8 @@ angular.module('dropdownController', [])
   $scope.signinMode = true;
   $scope.signupMode = false;
   $scope.usernamePattern = '^$|^[a-z]+[A-Za-z0-9_-.]+';
- 
+  $scope.showError = false;
+
   $scope.signUp = function() {
 
     $http({ 
@@ -48,8 +49,12 @@ angular.module('dropdownController', [])
     }).then(function(response) {
       console.log('then statement logIn', response);
       if (response.data === true) {
+        $scope.showError = false;
         localStorage.setItem('username', $scope.username);
         $state.transitionTo('home');
+      } else {
+        $scope.password = '';
+        $scope.showError = true;
       }
     });
   };
