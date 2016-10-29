@@ -15,7 +15,7 @@ class GroupPanel extends React.Component {
     fetch('http://104.237.1.118:3000/test/users/groups', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username: 'dylan'})
+      body: JSON.stringify({username: 'dylan'}) //TODO: change to username in cookie 
     })
     .then(function(res) {
       return res.json();
@@ -26,9 +26,43 @@ class GroupPanel extends React.Component {
       });
     });
 
+
+    $(document).ready(function() {
+      var askGroup = $('[data-remodal-id=modal]').remodal();
+      var failGroup = $('[data-remodal-id=group-fail-modal]').remodal();
+
+      var $bttn = $('.group');
+      $bttn.click(function() {
+        $.ajax({
+          url: 'http://104.237.1.118:3000/test/groups/create',
+          method: 'POST',
+          data: {
+            groupName: $('.groupName').val(),
+            owner: 'dylan'  //TODO: change this to the username in the cookie
+          },
+          success: function(data) {
+            if (data === true) {
+              //get rid of the modal
+              askGroup.close();
+              //rerender the GroupPanel controller
+              context.componentDidMount();
+            } else {
+              //get rid of the modal
+              askGroup.close();
+              //show a 'duplicate group modal'
+              failGroup.open();
+            } 
+          }
+        });
+        return false;
+      });
+    });
+
   }
 
   
+
+
 
   render() {
     return (

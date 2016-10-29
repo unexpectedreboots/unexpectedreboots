@@ -15,58 +15,8 @@
   <div id="app"></div>
 
   
-  <div class="remodal" data-remodal-id="modal">
-  <button data-remodal-action="close" class="remodal-close"></button>
-  <h1>Group Name:</h1>
-  <form>
-    <br>
-    <input class='groupName' type='text' name='groupName' />
-    <br><br>
-    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
-  </form>
-  <br>
-  </div>
 
-  <div class="remodal" data-remodal-id="group-fail-modal">
-  <button data-remodal-action="close" class="remodal-close"></button>
-  <h1>You alraedy have a group with that name  ¯\_(ツ)_/¯</h1>
-  <br>
-  <button data-remodal-action="cancel" class="remodal-cancel">OK ...</button>
-  </div>
-
-  <script>
-    $(document).ready(function() {
-      var askGroup = $('[data-remodal-id=modal]').remodal();
-      var failGroup = $('[data-remodal-id=group-fail-modal]').remodal();
-
-      var $bttn = $('.remodal-confirm');
-      $bttn.click(function() {
-        $.ajax({
-          url: 'http://104.237.1.118:3000/test/groups/create',
-          method: 'POST',
-          data: {
-            groupName: $('.groupName').val(),
-            owner: 'dylan'  //TODO: change this to the username in the cookie
-          },
-          success: function(data) {
-            if (data === true) {
-              //get rid of the modal
-              askGroup.close();
-              //rerender the GroupPanel controller
-            } else {
-              //get rid of the modal
-              askGroup.close();
-              //show a 'duplicate group modal'
-              failGroup.open();
-            } 
-          }
-        });
-        return false;
-      });
-    });
-  </script>
-
-
+  <script src="./compiled/client/src/modals.js"></script>
   <script src="./compiled/client/src/dashboardComponents/App.js"></script>
   <script src="./compiled/client/src/dashboardComponents/Views.js"></script>
   <script src="./compiled/client/src/dashboardComponents/Heading.js"></script>
