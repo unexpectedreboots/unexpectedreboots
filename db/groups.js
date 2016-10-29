@@ -181,7 +181,8 @@ exports.getMembers = function(groupID, callback) {
 
   pool.query({
     text: 'SELECT member, groupname, u2.username AS owner FROM ( \
-      SELECT u.username AS member, g.name AS groupname, g.owner AS ownerid \
+      SELECT u.username AS member, g.name AS groupname, g.owner AS ownerid, \
+        ug.membersince AS membersince \
       FROM users u \
       LEFT JOIN usersgroups ug \
       ON u.id = ug.userid \
