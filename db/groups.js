@@ -230,11 +230,16 @@ exports.getMarkups = function(groupID, callback) {
 exports.getSites = function(groupID, callback) {
 
   pool.query({
-    text: 'SELECT * FROM sites s \
-      WHERE s.id IN ( \
-        SELECT sg.siteid AS siteid FROM sitesgroups sg \
-        WHERE sg.groupid = \'' + siteID + '\' \
-      );'
+    text: 'SELECT u.username AS username, s.url AS siteurl, \
+      s.title AS sitetitle \
+      FROM ( \
+        SELECT sg.siteid FROM sitesgroups sg \
+        FROM sitesgroups sg \
+        WHERE sg.groupid = \'' + groupID + '\' \
+      ) t LEFT JOIN sites s \
+        ON t.siteid = s.id \
+        LEFT JOIN users u \
+        ON t.authorid = u.id;'
   },
 
   function(err, rows) {
