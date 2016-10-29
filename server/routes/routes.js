@@ -12,6 +12,7 @@ var createSession = require('../lib/utility.js').createSession;
 /***************************************************
   `/API/USERS/*` ENDPOINTS
   Used for creation and management of user-based endpoints
+  -- POST ENDPOINTS --
 ****************************************************/
 
 exports.createUser = function(req, res) {
@@ -73,13 +74,28 @@ exports.updateUser = function(req, res) {
   // send in old pw as new pw if user does not change it, same for email
 };
 
+/***************************************************
+  `/API/USERS/*` ENDPOINTS
+  Used for creation and management of user-based endpoints
+  -- GET ENDPOINTS --
+****************************************************/
+
 exports.getUserGroups = function(req, res) {
   var username = req.query.username || req.body.username;
 
   users.getGroups(username, function(err, result) {
     err ? res.send(err) : res.send(result);
   });
-}
+};
+
+exports.getUserMarkups = function(req, res) {
+  var username = req.query.username || req.body.username;
+
+  users.getMarkups(username, function(err, result) {
+    err ? res.send(err) : res.send(result);
+  });
+};
+
 
 /***************************************************
   `/API/GROUPS/*` ENDPOINTS

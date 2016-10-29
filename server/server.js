@@ -29,6 +29,7 @@ app.use(session({
 app.use('/api/users/register', routes.createUser);
 app.use('/api/users/login', routes.checkUser);
 app.use('/api/users/groups', sessionChecker, routes.getUserGroups);
+app.use('/api/users/markups', sessionChecker, routes.getUserMarkups)
 // TODO
 app.use('/api/users/update', sessionChecker, routes.updateUser);
 
@@ -62,6 +63,7 @@ app.use('/test/websites/create', routes.createSite);
 app.use('/test/websites/share', routes.shareSite);
 app.use('/test/markups/create', routes.createMarkup);
 app.use('/test/markups/share', routes.shareMarkup);
+app.use('/test/users/markups', routes.getUserMarkups);
 
 
 
