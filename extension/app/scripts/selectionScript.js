@@ -1,4 +1,4 @@
-$(document).ready(function() {
+// $(document).ready(function() {
   // var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
   var elements = document.getElementsByTagName("*");
   var postSelection = function(targetText) {
@@ -38,47 +38,62 @@ $(document).ready(function() {
       console.log(editable,'editable');
 
   });
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  console.log('received message', JSON.parse(request.selection.anchor));
+  var importedSelection = JSON.parse(request.selection.anchor);
+  editor.importSelection(importedSelection);
+  var html = '<span style="background-color: yellow;">' + getCurrentSelection() + '</span>';
+  var sel = window.getSelection();
+      var range;
+          //Set new Content
+          if (sel.getRangeAt && sel.rangeCount) {
+              range = window.getSelection().getRangeAt(0);
+              range.deleteContents();
+
+              // Create a DocumentFragment to insert and populate it with HTML
+              // Need to test for the existence of range.createContextualFragment
+              // because it's non-standard and IE 9 does not support it
+              if (range.createContextualFragment) {
+                  fragment = range.createContextualFragment(html);
+              } else {
+                  var div = document.createElement('div');
+                  div.innerHTML = html;
+                  fragment = document.createDocumentFragment();
+                  while ((child = div.firstChild)) {
+                      fragment.appendChild(child);
+                  }
+          
+              }
+              var firstInsertedNode = fragment.firstChild;
+              var lastInsertedNode = fragment.lastChild;
+              range.insertNode(fragment);
+              if (firstInsertedNode) {
+                  range.setStartBefore(firstInsertedNode);
+                  range.setEndAfter(lastInsertedNode);
+              }
+              sel.removeAllRanges();
+              sel.addRange(range);
+          }
+    
 });
-// document.addEventListener('mouseup',function(event) {
-//   // var selectedText = window.getSelection();
-//   // var parentElement = window.getSelection().anchorNode.parentElement;
-//   // console.log(parentElement);
-//   // if (selectedText.length) {
-//     // console.log(selectedText);
-//     // console.log(Document.activeElement);
-//     // // console.log(window.getSelection());
-//     // // var node = document.createElement("H1");
-//     // // var textnode = document.createTextNode("test");
-//     // // console.log(node,'node')
-//     // // node.appendChild(textnode);
-//     // // parentElement.appendChild(node);
-//     // // console.log(selectedText);
+function getCurrentSelection() {
 
-//     // console.log(window.getSelection().anchorNode.textContent.substring(
-//     //   window.getSelection().extentOffset,
-//     //   window.getSelection().anchorOffset));
-//   // }
-
-//   var savedSel = rangy.saveSelection();
-//   console.log(savedSel);
-// });
-//to use later
-// var HighlighterButton = MediumEditor.extensions.button.extend({
-//     name: 'highlighter',
-//     tagNames: ['mark'],
-//     contentDefault: '<b>H</b>',
-//     contentFA: '<i class="fa fa-paint-brush"></i>',
-//     aria: 'Hightlight',
-//     action: 'highlight',
-
-//     init: function () {
-//         MediumEditor.extensions.button.prototype.init.call(this);
-//         this.button.classList.add('medium-editor-action');
-//     },
-
-//     handleClick: function (event) {
-//         this.classApplier.toggleSelection();
-
-//         this.base.checkContentChanged();
-//     }
-// });
+  var html = '', sel;
+       if (typeof window.getSelection != 'undefined') {
+           sel = window.getSelection();
+           if (sel.rangeCount) {
+               var container = document.createElement('div');
+               for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                   container.appendChild(sel.getRangeAt(i).cloneContents());
+               }
+               html = container.innerHTML;
+           }
+       } else if (typeof document.selection != 'undefined') {
+           if (document.selection.type == 'Text') {
+               html = document.selection.createRange().htmlText;
+           }
+       }
+  
+  return html;
+  
+};
