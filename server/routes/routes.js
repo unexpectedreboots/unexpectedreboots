@@ -154,7 +154,11 @@ exports.getGroupMarkups = function(req, res) {
 };
 
 exports.getGroupSites = function(req, res) {
+  var groupID = req.query.groupID || req.body.groupID;
 
+  groups.getSites(groupID, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 

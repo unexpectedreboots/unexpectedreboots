@@ -222,4 +222,15 @@ exports.getMarkups = function(groupID, callback) {
 
 exports.getSites = function(groupID, callback) {
 
+  pool.query({
+    text: 'SELECT * FROM sites s \
+      WHERE s.id IN ( \
+        SELECT sg.siteid AS siteid FROM sitesgroups sg \
+        WHERE sg.groupid = \'' + siteID + '\' \
+      );'
+  },
+
+  function(err, rows) {
+    err ? callback(err, null) : callback(null, rows.rows);
+  });
 };
