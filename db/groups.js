@@ -243,23 +243,21 @@ exports.getSites = function(groupID, callback) {
       'SELECT u2.username AS author, \
         s2.title AS title, \
         s2.url AS url, \
-        anchor, text, comment, temp.createdat \
+        g2.groupname AS group, \
+        temp.sharedat AS sharedat \
       FROM ( \
-        SELECT m.authorid AS authorid, \
-          m.siteid AS siteid, \
-          m.anchor AS anchor, \
-          m.text AS text, \
-          m.comment AS comment, \
-          m.createdat AS createdat \
-        FROM markups m \
-        WHERE m.id IN ( \
-          SELECT mg.markupid FROM markupsgroups mg \
-          WHERE mg.groupid = \'' + groupID + '\' \
-        ) \
+        SELECT sg.groupid AS groupid, \
+          sg.siteid AS siteid, \
+          sg.sharedby AS sharedby \
+          sg.sharedat AS sharedat \
+          FROM sitesgroups sg \
+          WHERE sg.groupid = '\'' + groupID + '\' \
       ) temp LEFT JOIN users u2 \
       ON temp.authorid = u2.id \
       LEFT JOIN sites s2 \
-      ON temp.siteid = s2.id;'
+      ON temp.siteid = s2.id \
+      LEFT JOIN groups g2 \
+      ON temp.groupid = g2.id;'
   },
 
   function(err, rows) {
