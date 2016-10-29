@@ -209,3 +209,7 @@ exports.getMembers = function(groupID, callback) {
 exports.getMarkups = function(groupID, callback) {
 
 };
+
+exports.getSites = function(groupID, callback) {
+
+};
