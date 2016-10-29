@@ -17,7 +17,7 @@ class MarkupPanel extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchMarkupsFor();
+    this.fetchMarkupsFor(this.props.groupid);
   }
 
   render() {

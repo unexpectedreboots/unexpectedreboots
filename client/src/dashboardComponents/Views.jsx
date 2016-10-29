@@ -4,7 +4,7 @@ var Views = (props) => {
     return (
       <div className='container'>
         <Heading title={'Dashboard'} changeViewCb={props.changeViewCb} />
-        <MarkupPanel markups={[1, 2, 3, 4, 5, 6, 7, 8]} />
+        <MarkupPanel groupid={props.groupid} markups={[1, 2, 3, 4, 5, 6, 7, 8]} />
         <GroupPanel changeViewCb={props.changeViewCb} />
       </div>
     );
@@ -14,7 +14,7 @@ var Views = (props) => {
       <div className='container'>
         <Heading title={props.viewType} changeViewCb={props.changeViewCb} />
         <UserPanel owner={props.owner} groupid={props.groupid} />
-        <MarkupPanel markups={[1, 2]}/>
+        <MarkupPanel groupid={props.groupid} markups={[1, 2]}/>
         <SharedPanel sites={[1, 2, 3]}/>
       </div>
     ); 
