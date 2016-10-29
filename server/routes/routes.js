@@ -146,11 +146,19 @@ exports.editGroup = function(req, res) {
 };
 
 exports.getGroupMarkups = function(req, res) {
+  var groupID = req.query.groupID || req.body.groupID;
 
+  groups.getMarkups(groupID, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 exports.getGroupSites = function(req, res) {
+  var groupID = req.query.groupID || req.body.groupID;
 
+  groups.getSites(groupID, function(err, success) {
+    err ? res.send(err) : res.send(success);
+  });
 };
 
 

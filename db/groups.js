@@ -205,3 +205,44 @@ exports.getMembers = function(groupID, callback) {
     }
   });
 };
+
+exports.getMarkups = function(groupID, callback) {
+
+  pool.query({
+    text: 'SELECT u.username AS author, s.url AS siteurl, \
+      s.title AS sitetitle, t.anchor AS anchor, t.text AS text, \
+      t.comment AS comment, t.createdat AS createdat FROM (\
+        SELECT * FROM markups m \
+        WHERE m.id IN ( \
+          SELECT mg.markupid AS markupid FROM markupsgroups mg \
+          WHERE mg.groupid = \'' + groupID + '\' \
+        ) t LEFT JOIN sites s \
+        ON t.siteid = s.id \
+        LEFT JOIN users u \
+        ON t.authorid = u.id \
+      );'
+
+  }, function(err, rows) {
+    err ? callback(err, null) : callback(null, rows.rows);
+  });
+};
+
+exports.getSites = function(groupID, callback) {
+
+  pool.query({
+    text: 'SELECT u.username AS username, s.url AS siteurl, \
+      s.title AS sitetitle \
+      FROM ( \
+        SELECT sg.siteid FROM sitesgroups sg \
+        FROM sitesgroups sg \
+        WHERE sg.groupid = \'' + groupID + '\' \
+      ) t LEFT JOIN sites s \
+        ON t.siteid = s.id \
+        LEFT JOIN users u \
+        ON t.authorid = u.id;'
+  },
+
+  function(err, rows) {
+    err ? callback(err, null) : callback(null, rows.rows);
+  });
+};
