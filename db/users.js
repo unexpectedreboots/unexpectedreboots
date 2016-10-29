@@ -58,7 +58,8 @@ exports.getGroups = function(username, callback) {
   pool.query({
     // find all groups user is a part of (and their owners)
     text: 'SELECT u.id AS userid, g.id AS groupid, g.name AS groupname, \
-      g.owner AS groupowner FROM users u \
+      g.owner AS groupowner, g.createdat AS createdat \
+      FROM users u \
       LEFT JOIN usersgroups ug \
       ON u.id = ug.userid \
       LEFT JOIN groups g \
