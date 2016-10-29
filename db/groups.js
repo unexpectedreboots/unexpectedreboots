@@ -209,18 +209,27 @@ exports.getMembers = function(groupID, callback) {
 exports.getMarkups = function(groupID, callback) {
 
   pool.query({
-    text: 'SELECT u.username AS author, s.url AS siteurl, \
-      s.title AS sitetitle, t.anchor AS anchor, t.text AS text, \
-      t.comment AS comment, t.createdat AS createdat FROM (\
-        SELECT * FROM markups m \
+    text: 
+      'SELECT u2.username AS author, \
+        s2.title AS title, \
+        s2.url AS url, \
+        anchor, text, comment, temp.createdat \
+      FROM ( \
+        SELECT m.authorid AS authorid, \
+          m.siteid AS siteid, \
+          m.anchor AS anchor, \
+          m.text AS text, \
+          m.comment AS comment, \
+          m.createdat AS createdat \
+        FROM markups m \
         WHERE m.id IN ( \
-          SELECT mg.markupid AS markupid FROM markupsgroups mg \
+          SELECT mg.markupid FROM markupsgroups mg \
           WHERE mg.groupid = \'' + groupID + '\' \
-        ) t LEFT JOIN sites s \
-        ON t.siteid = s.id \
-        LEFT JOIN users u \
-        ON t.authorid = u.id \
-      );'
+        ) \
+      ) temp left join users u2 \
+      ON temp.authorid = u2.id \
+      LEFT JOIN sites s2 \
+      ON temp.siteID = s2.id;'
 
   }, function(err, rows) {
     err ? callback(err, null) : callback(null, rows.rows);
@@ -230,16 +239,25 @@ exports.getMarkups = function(groupID, callback) {
 exports.getSites = function(groupID, callback) {
 
   pool.query({
-    text: 'SELECT u.username AS username, s.url AS siteurl, \
-      s.title AS sitetitle \
+    text: 
+      'SELECT u2.username AS author, \
+        s2.title AS title, \
+        s2.url AS url, \
+        g2.groupname AS group, \
+        temp.sharedat AS sharedat \
       FROM ( \
-        SELECT sg.siteid FROM sitesgroups sg \
-        FROM sitesgroups sg \
-        WHERE sg.groupid = \'' + groupID + '\' \
-      ) t LEFT JOIN sites s \
-        ON t.siteid = s.id \
-        LEFT JOIN users u \
-        ON t.authorid = u.id;'
+        SELECT sg.groupid AS groupid, \
+          sg.siteid AS siteid, \
+          sg.sharedby AS sharedby \
+          sg.sharedat AS sharedat \
+          FROM sitesgroups sg \
+          WHERE sg.groupid = '\'' + groupID + '\' \
+      ) temp LEFT JOIN users u2 \
+      ON temp.authorid = u2.id \
+      LEFT JOIN sites s2 \
+      ON temp.siteid = s2.id \
+      LEFT JOIN groups g2 \
+      ON temp.groupid = g2.id;'
   },
 
   function(err, rows) {
