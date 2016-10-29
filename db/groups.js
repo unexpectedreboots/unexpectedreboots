@@ -205,3 +205,7 @@ exports.getMembers = function(groupID, callback) {
     }
   });
 };
+
+exports.getMarkups = function(groupID, callback) {
+
+};
