@@ -1,7 +1,8 @@
 var myApp = angular.module('Markable', [
   'ui.router',
   'dropdownController',
-  'mainController' 
+  'mainController',
+  'Markable.directives'
 ])
 
 .config(function($stateProvider) {
