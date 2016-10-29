@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
+  // var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
+  var elements = document.getElementsByTagName("*");
   var postSelection = function(targetText) {
     var testExport = editor.exportSelection();
     console.log('before send');
@@ -21,6 +22,8 @@ $(document).ready(function() {
     extensions: {
         'sendSelection': new MediumButton({
           label: 'Send',
+          start: '<span style="background-color: powderblue;">',
+          end: '</span>',
           action: function(html, mark) {
             postSelection(html);
             alert(html);

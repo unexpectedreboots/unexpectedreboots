@@ -64,7 +64,8 @@ app.use('/test/websites/share', routes.shareSite);
 app.use('/test/markups/create', routes.createMarkup);
 app.use('/test/markups/share', routes.shareMarkup);
 app.use('/test/users/markups', routes.getUserMarkups);
-
+app.use('/test/groups/markups', routes.getGroupMarkups);
+app.use('/test/groups/sites', routes.getGroupSites);
 
 
 app.listen(3000);
