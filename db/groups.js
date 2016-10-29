@@ -208,19 +208,49 @@ exports.getMembers = function(groupID, callback) {
 
 exports.getMarkups = function(groupID, callback) {
 
+  // select u2.username as author,
+  //   s2.title as title,
+  //   s2.url as url,
+  //   anchor, text, comment, temp.createdat
+  // from (
+  //   select m.authorid as authorid,
+  //     m.siteid as siteid,
+  //     m.anchor as anchor,
+  //     m.text as text,
+  //     m.comment as comment,
+  //     m.createdat as createdat
+  //   from markups m
+  //   where m.id in (
+  //     select mg.markupid from markupsgroups mg
+  //     where mg.groupid = 1
+  //   )
+  // ) temp left join users u2
+  // on temp.authorid = u2.id
+  // left join sites s2
+  // on temp.siteid = s2.id;
+
   pool.query({
-    text: 'SELECT u.username AS author, s.url AS siteurl, \
-      s.title AS sitetitle, t.anchor AS anchor, t.text AS text, \
-      t.comment AS comment, t.createdat AS createdat FROM (\
-        SELECT * FROM markups m \
+    text: 
+      'SELECT u2.username AS author, \
+        s2.title AS title, \
+        s2.url AS url, \
+        anchor, text, comment, temp.createdat \
+      FROM ( \
+        SELECT m.authorid AS authorid, \
+          m.siteid AS siteid, \
+          m.anchor AS anchor, \
+          m.text AS text, \
+          m.comment AS comment, \
+          m.createdat AS createdat \
+        FROM markups m \
         WHERE m.id IN ( \
-          SELECT mg.markupid AS markupid FROM markupsgroups mg \
+          SELECT mg.markupid FROM markupsgroups mg \
           WHERE mg.groupid = \'' + groupID + '\' \
-        ) t LEFT JOIN sites s \
-        ON t.siteid = s.id \
-        LEFT JOIN users u \
-        ON t.authorid = u.id \
-      );'
+        ) \
+      ) temp left join users u2 \
+      ON temp.authorid = u2.id \
+      LEFT JOIN sites s2 \
+      ON temp.siteID = s2.id;'
 
   }, function(err, rows) {
     err ? callback(err, null) : callback(null, rows.rows);
