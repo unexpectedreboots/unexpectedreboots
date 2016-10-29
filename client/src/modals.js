@@ -8,7 +8,7 @@ $('body').append(
     "<br>"+
    "<input class='groupName' type='text' name='groupName' />"+
     "<br><br>"+
-    "<button data-remodal-action='confirm' class='remodal-confirm'>OK</button>"+
+    "<button data-remodal-action='confirm' class='remodal-confirm group'>OK</button>"+
   "</form>"+
   "<br>"+
 "</div>"+
@@ -28,7 +28,7 @@ $('body').append(
     "<br>"+
    "<input class='newMember' type='text' name='newMember' />"+
     "<br><br>"+
-    "<button data-remodal-action='confirm' class='remodal-confirm'>OK</button>"+
+    "<button data-remodal-action='confirm' class='remodal-confirm user'>OK</button>"+
   "</form>"+
   "<br>"+
 "</div>"
