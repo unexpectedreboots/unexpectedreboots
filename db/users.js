@@ -81,3 +81,26 @@ exports.getGroups = function(username, callback) {
     }
   });
 };
+
+exports.getMarkups = function(username, callback) {
+
+  pool.query({
+    text: 'SELECT * FROM markups m \
+      WHERE m.authorid IN ( \
+        SELECT u.id FROM users u \
+        WHERE u.username = \'' + username + '\' \
+      )'
+  },
+
+  function(err, rows) {
+    if (err) {
+      callback(err, null);
+    } else {
+      if (rows.rowCount === 0) {
+        callback('no markups found for this user', null);
+      } else {
+        callback(null, rows.rows);
+      }
+    }
+  });
+};
