@@ -208,6 +208,16 @@ exports.getMembers = function(groupID, callback) {
 
 exports.getMarkups = function(groupID, callback) {
 
+  pool.query({
+    text: 'SELECT * FROM markups m \
+      WHERE m.id IN ( \
+        SELECT mg.markupid AS markupid FROM markupsgroups mg \
+        WHERE mg.groupid = \'' + groupID + '\' \
+      );'
+
+  }, function(err, rows) {
+    err ? callback(err, null) : callback(null, rows.rows);
+  });
 };
 
 exports.getSites = function(groupID, callback) {
