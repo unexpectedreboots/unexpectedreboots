@@ -3,7 +3,6 @@
   <h1> Test</h1>
   <form  name="signup">
     <h2>Welcome</h2>
-    <div ng-show="signupMode">
       <input placeholder="what's your name?" type="text" name="username" ng-model="username" ng-minlength="6" ng-maxlength="20" ng-pattern="usernamePattern" required />
 
       <p ng-show="signup.username.$dirty && signup.username.$error.required">Name is required.</p>
@@ -11,26 +10,18 @@
       <p ng-show="signup.username.$dirty && signup.username.$error.pattern">Name can contain alphanumeric and _.</p>
 
       <input placeholder="password" type="password" name="password" ng-model="password"  ng-minlength="8" ng-maxlength="20" required />
-      <ul id="strength" check-strength="password"></ul>
       <p ng-show="signup.password.$dirty && signup.password.$error.required">Password is required.</p>
       <p ng-show="signup.password.$dirty && (signup.password.$error.minlength || signup.password.$error.maxlength) ">Password should be between 8 and 20 characters.</p>
+    <div ng-show="signupMode">
+      <ul id="strength" check-strength="password"></ul>
       <input placeholder="email" name="email" type="email" ng-model="email" required ng-minlength="8" ng-maxlength="64" />
-      <p ng-show="signup.$dirty && signup.email.$error.required" >Your email is required.</p>
+      <p ng-show="signup.email.$dirty && signup.email.$error.required" >Your email is required.</p>
       <p ng-show="signup.email.$dirty && (signup.email.$error.minlength || signup.email.$error.maxlength) ">Email should be between 8 and 64 characters.</p>
       <p ng-show="signup.email.$dirty && signup.email.$error.email ">Enter valid email.</p>
       <button ng-click="signUp()" class="signupButton" type="button">Register</button>
       <a href ng-click="showSection('login')">Sign in</a>
     </div>
     <div ng-show="signinMode">
-      <input placeholder="what's your name?" type="text" name="username" ng-model="username" ng-minlength="6" ng-maxlength="20" ng-pattern="usernamePattern" required />
-
-      <p ng-show="signup.username.$dirty && signup.username.$error.required">Name is required.</p>
-      <p ng-show="signup.username.$dirty && (signup.username.$error.minlength || signup.username.$error.maxlength) ">Name should be between 8 and 20 characters.</p>
-      <p ng-show="signup.username.$dirty && signup.username.$error.pattern">Name can contain alphanumeric and _.</p>
-
-      <input placeholder="password" type="password" name="password" ng-model="password"  ng-minlength="8" ng-maxlength="20" required />
-      <p ng-show="signup.password.$dirty && signup.password.$error.required">Password is required.</p>
-      <p ng-show="signup.password.$dirty && (signup.password.$error.minlength || signup.password.$error.maxlength) ">Password should be between 8 and 20 characters.</p>
       <p ng-show="showError">Invalid username/password.</p>
       <button ng-click="logIn()" class="signupButton" type="button">Log In</button>
       <a href ng-click="showSection('signup')">Sign up</a>
