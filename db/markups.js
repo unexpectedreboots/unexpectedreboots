@@ -101,7 +101,7 @@ exports.create = function(url, title, username, anchor, text, comment, callback)
 
 exports.share = function(url, title, username, anchor, text, comment, groupID, callback) {
 
-  console.log('~~~ Creating private markup:', text, 'for username:', username, 'on site:', url, title, 'with the following comment:', comment, '~~~');
+  console.log('~~~ Sharing public markup:', text, 'by username:', username, 'on site:', url, title, 'with the following comment:', comment, 'with groupID:', groupID, '~~~');
 
   var authorID;
   var siteID;
@@ -216,5 +216,4 @@ exports.share = function(url, title, username, anchor, text, comment, groupID, c
       }
     }
   });
-
 };

@@ -81,3 +81,8 @@ exports.getGroups = function(username, callback) {
     }
   });
 };
+
+exports.getMarkups = function(username, callback) {
+
+};
+
