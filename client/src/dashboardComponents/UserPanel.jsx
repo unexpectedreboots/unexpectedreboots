@@ -88,3 +88,4 @@ class UserPanel extends React.Component {
 window.UserPanel = UserPanel;
 
 //cannot add a user that is already a member of the group
+ //user is already part of a group called ''...

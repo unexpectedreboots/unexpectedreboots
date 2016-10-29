@@ -65,16 +65,28 @@ class GroupPanel extends React.Component {
 
 
   render() {
+  
+
     return (
       <div>
         <AddGroup />
-        { this.state.groups.map((group) => {
+        { this.state.groups.filter((group) => {
+          return (group.userid === group.groupowner);
+        }).map((group) => {
           return (
             <div>
               <Group group={group} changeViewCb={this.props.changeViewCb} />
             </div>
-        ); })
-        }  
+        ); }) }
+
+        { this.state.groups.filter((group) => {
+          return (group.userid !== group.groupowner);
+        }).map((group) => {
+          return (
+            <div>
+              <Group group={group} changeViewCb={this.props.changeViewCb} />
+            </div>
+        ); }) }
       </div>
     );
   }
