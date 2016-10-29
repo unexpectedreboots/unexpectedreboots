@@ -1,6 +1,10 @@
 angular.module('dropdownController', [])
 
 .controller('dropdown', function($scope, $http, $location, $state) {
+  $scope.signinMode = true;
+  $scope.signupMode = false;
+  $scope.usernamePattern = '^$|^[a-z]+[A-Za-z0-9_-.]+';
+  $scope.showError = false;
 
   $scope.signUp = function() {
 
@@ -22,9 +26,16 @@ angular.module('dropdownController', [])
     });
   };
 
+  $scope.showSection = function (section) {
+    if (section === 'login') {
+      $scope.signinMode = true;
+      $scope.signupMode = false;
+    } else {
+      $scope.signinMode = false;
+      $scope.signupMode = true;
+    }
+  };
 
-  $scope.usernamePattern = '^$|^[a-z]+[A-Za-z0-9_-.]+';
-  
   $scope.logIn = function() {
 
     $http({ 
@@ -34,12 +45,16 @@ angular.module('dropdownController', [])
         username: $scope.username, 
         password: $scope.password
       },
-      headers:{'Content-Type': 'application/json'} 
+      headers: {'Content-Type': 'application/json'} 
     }).then(function(response) {
       console.log('then statement logIn', response);
       if (response.data === true) {
+        $scope.showError = false;
         localStorage.setItem('username', $scope.username);
         $state.transitionTo('home');
+      } else {
+        $scope.password = '';
+        $scope.showError = true;
       }
     });
   };
