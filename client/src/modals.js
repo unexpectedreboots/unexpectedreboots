@@ -40,6 +40,14 @@ $('body').append(
   "<h1>User by that Username does not exist</h1>"+
   "<br>"+
   "<button data-remodal-action='cancel' class='remodal-cancel'>OK ...</button>"+
+"</div>"+
+
+//already part of a group with that name
+"<div class='remodal' data-remodal-id='already-user-fail-modal'>"+
+  "<button data-remodal-action='close' class='remodal-close'></button>"+
+  "<h1>User already belongs to a group with this name</h1>"+
+  "<br>"+
+  "<button data-remodal-action='cancel' class='remodal-cancel'>OK ...</button>"+
 "</div>"
 
 );
