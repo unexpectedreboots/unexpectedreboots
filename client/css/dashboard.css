@@ -35,13 +35,16 @@ span {
 .heading-title {
   background-color: #bfbfbf;
   position: absolute;
-
-  padding: 15px;
+  padding: 0px 15px 15px 15px;
   height: 100px;
   width: 45%;
   font-size: 2.1em;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px
+}
+
+.welcome {
+  font-size: 0.5em;
 }
 
 .panel {
