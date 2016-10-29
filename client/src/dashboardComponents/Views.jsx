@@ -5,7 +5,7 @@ var Views = (props) => {
       <div className='container'>
         <Heading title={'Dashboard'} changeViewCb={props.changeViewCb} />
         <MarkupPanel markups={[1, 2, 3, 4, 5, 6, 7, 8]} />
-        <GroupPanel groups={['Animals Tech HackReactor', 'Tech', 'Family', 'HackReactor', 'CoWorkers']} changeViewCb={props.changeViewCb} />
+        <GroupPanel changeViewCb={props.changeViewCb} />
       </div>
     );
   } else {
@@ -13,7 +13,7 @@ var Views = (props) => {
     return (
       <div className='container'>
         <Heading title={props.viewType} changeViewCb={props.changeViewCb} />
-        <UserPanel groupid={props.groupid} />
+        <UserPanel owner={props.owner} groupid={props.groupid} />
         <MarkupPanel markups={[1, 2]}/>
         <SharedPanel sites={[1, 2, 3]}/>
       </div>

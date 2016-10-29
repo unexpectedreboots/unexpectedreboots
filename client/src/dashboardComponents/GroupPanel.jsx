@@ -15,7 +15,7 @@ class GroupPanel extends React.Component {
     fetch('http://104.237.1.118:3000/test/users/groups', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username: 'dylan'}) //TODO: change to username in cookie 
+      body: JSON.stringify({username: 'alec'}) //TODO: change to username in cookie 
     })
     .then(function(res) {
       return res.json();
@@ -38,7 +38,7 @@ class GroupPanel extends React.Component {
           method: 'POST',
           data: {
             groupName: $('.groupName').val(),
-            owner: 'dylan'  //TODO: change this to the username in the cookie
+            owner: 'alec'  //TODO: change this to the username in the cookie
           },
           success: function(data) {
             if (data === true) {

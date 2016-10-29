@@ -36,7 +36,7 @@ class UserPanel extends React.Component {
           method: 'POST',
           data: {
             groupID: context.props.groupid, 
-            username: 'dylan',  //TODO: change this to the username in the cookie
+            username: 'alec',  //TODO: change this to the username in the cookie
             newMember: $('.newMember').val()
           },
           success: function(data) {
@@ -70,7 +70,7 @@ class UserPanel extends React.Component {
           ); })
         }
         {function() {
-          if (context.state.users.length < 6) {
+          if (context.state.users.length < 6 && context.props.owner) {
             return (
               <div>
                 <AddUser />
@@ -86,3 +86,5 @@ class UserPanel extends React.Component {
 
 
 window.UserPanel = UserPanel;
+
+//cannot add a user that is already a member of the group

@@ -15,17 +15,18 @@ class App extends React.Component {
     
   }
 
-  changeView(event, state, groupid) {
+  changeView(event, state, groupid, owner) {
     this.setState({
       view: state, 
-      groupid: groupid
+      groupid: groupid,
+      owner: owner || false
     });
   }
 
   
   render() {
     return (
-      <Views groupid={this.state.groupid} viewType={this.state.view} changeViewCb={this.changeView.bind(this)} />
+      <Views owner={this.state.owner} groupid={this.state.groupid} viewType={this.state.view} changeViewCb={this.changeView.bind(this)} />
     );
   }
 }
