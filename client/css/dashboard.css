@@ -30,7 +30,12 @@ span {
   width: 160px;
   height: 60px;
   border-radius: 3px;
-  font-size: 1.7em
+  font-size: 1.7em;
+  transition: all 0.3s ease 0s;
+}
+
+.heading-bttn:hover {
+  filter: brightness(75%);
 }
 
 .heading-title {
