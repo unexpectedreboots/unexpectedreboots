@@ -5,7 +5,8 @@ var myApp = angular.module('Markable', [
   'Markable.directives'
 ])
 
-.config(function($stateProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
   $stateProvider
   .state('home', {
     url: '/',
@@ -26,7 +27,7 @@ var myApp = angular.module('Markable', [
 .run(function ($rootScope, $state) {
   $rootScope.$on('$stateChangeStart', function (evt, toState) {
     chrome.cookies.getAll({url: 'http://104.237.1.118:3000/'}, function(cookie) {
-      console.log(cookie);
+      console.log('cookie:', cookie);
       if (cookie) {
         if (!cookie.length > 0) {
           if (toState.authenticate) {
