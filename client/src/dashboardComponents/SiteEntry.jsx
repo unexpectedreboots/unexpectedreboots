@@ -2,7 +2,9 @@ var SiteEntry = (props) => {
 
   return (
     <div>
-      <div>Site #{props.site}</div>
+      <a target="_blank" href={props.url}>
+        <div>{props.title}</div>
+      </a>
     </div>
   );
 
