@@ -13,7 +13,7 @@ $('body').append(
   "<br>"+
 "</div>"+
 
-//failed to make group a group because you already have one with that name
+//failed to make group because you already have one with that name
 "<div class='remodal' data-remodal-id='group-fail-modal'>"+
   "<button data-remodal-action='close' class='remodal-close'></button>"+
   "<h1>You alraedy have a group with that name  ¯\\_(ツ)_/¯</h1>"+
@@ -38,6 +38,14 @@ $('body').append(
 "<div class='remodal' data-remodal-id='user-fail-modal'>"+
   "<button data-remodal-action='close' class='remodal-close'></button>"+
   "<h1>User by that Username does not exist</h1>"+
+  "<br>"+
+  "<button data-remodal-action='cancel' class='remodal-cancel'>OK ...</button>"+
+"</div>"+
+
+//already part of a group with that name
+"<div class='remodal' data-remodal-id='already-user-fail-modal'>"+
+  "<button data-remodal-action='close' class='remodal-close'></button>"+
+  "<h1>User already belongs to a group with this name</h1>"+
   "<br>"+
   "<button data-remodal-action='cancel' class='remodal-cancel'>OK ...</button>"+
 "</div>"

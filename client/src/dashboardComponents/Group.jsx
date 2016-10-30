@@ -7,7 +7,7 @@ var Group = (props) => {
   }
 
   return (
-    <div onClick={() => props.changeViewCb(event, props.group.groupname, props.group.groupid)} className='col-sm-2 group-bttn'>
+    <div onClick={() => props.changeViewCb(event, props.group.groupname, props.group.groupid, props.group.userid === props.group.groupowner)} className='col-sm-2 group-bttn'>
       <div className='group-label'>{props.group.groupname}</div>
       <div className='role-label'>
         <span className='group-label'>Role:  

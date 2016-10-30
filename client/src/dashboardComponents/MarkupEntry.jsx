@@ -2,8 +2,9 @@ var MarkupEntry = (props) => {
 
   return (
     <div>
-      <div>Site</div>
-      <MarkupAnnotes />
+      <a target="_blank" href={props.url}>
+        <div>{props.title}</div>
+      </a>
     </div>
   );
 

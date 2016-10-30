@@ -8,7 +8,7 @@ class UserPanel extends React.Component {
     };
   }
 
-  componentDidMount() {
+  fetchUsers() {
     var context = this;
 
     fetch('http://104.237.1.118:3000/test/groups/users', {
@@ -24,10 +24,15 @@ class UserPanel extends React.Component {
         users: value
       });
     });
+  }
+
+  handleUserAddition() {
+    var context = this;
 
     $(document).ready(function() {
       var askUser = $('[data-remodal-id=add-user-modal]').remodal();
       var failUser = $('[data-remodal-id=user-fail-modal]').remodal();
+      var failAlreadyUser = $('[data-remodal-id=already-user-fail-modal]').remodal();
 
       var $bttn = $('button.user');
       $bttn.click(function() {
@@ -43,9 +48,12 @@ class UserPanel extends React.Component {
             console.log(data);
             if (data === true) {
               askUser.close();
-              context.componentDidMount();
+              context.fetchUsers();
+            } else if (data === 'cannot add a user that is already a member of the group') {
+              //askUser.close();
+              failAlreadyUser.open();
             } else {
-              askUser.close();
+              //askUser.close();
               failUser.open();
             }
           }
@@ -54,7 +62,11 @@ class UserPanel extends React.Component {
       });
     });
 
+  }
 
+  componentDidMount() {
+    this.fetchUsers();
+    this.handleUserAddition();
   }
 
 
@@ -70,7 +82,7 @@ class UserPanel extends React.Component {
           ); })
         }
         {function() {
-          if (context.state.users.length < 6) {
+          if (context.state.users.length < 6 && context.props.owner) {
             return (
               <div>
                 <AddUser />
@@ -86,3 +98,6 @@ class UserPanel extends React.Component {
 
 
 window.UserPanel = UserPanel;
+
+//cannot add a user that is already a member of the group
+ //user is already part of a group called ''...

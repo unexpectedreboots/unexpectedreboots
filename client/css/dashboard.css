@@ -24,24 +24,33 @@ span {
 .heading-bttn {
   float: right;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 5px;
   margin: 20px;
   background-color: #bfbfbf;
-  width: 150px;
-  height: 50px;
+  width: 160px;
+  height: 60px;
   border-radius: 3px;
+  font-size: 1.7em;
+  transition: all 0.3s ease 0s;
+}
+
+.heading-bttn:hover {
+  filter: brightness(75%);
 }
 
 .heading-title {
   background-color: #bfbfbf;
   position: absolute;
-
-  padding: 15px;
+  padding: 0px 15px 15px 15px;
   height: 100px;
   width: 45%;
   font-size: 2.1em;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px
+}
+
+.welcome {
+  font-size: 0.4em;
 }
 
 .panel {
@@ -88,7 +97,12 @@ span {
   border: 0;
   margin: 20px;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
-  border-radius: 3px
+  border-radius: 3px;
+  transition: all 0.3s ease 0s;
+}
+
+.entry:hover {
+  filter: brightness(75%);
 }
 
 .group-bttn {
@@ -100,7 +114,12 @@ span {
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
   height: 120px;
-  width: 22%
+  width: 22%;
+  transition: all 0.3s ease 0s;
+}
+
+.group-bttn:hover {
+  filter: brightness(75%);
 }
 
 .role-label {
@@ -123,7 +142,12 @@ span {
   margin: 20px 0px 0px 14%;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
-  height: 75px
+  height: 75px;
+  transition: all 0.3s ease 0s;
+}
+
+.add-group-bttn:hover {
+  filter: brightness(75%);
 }
 
 .add-group-label {
@@ -161,5 +185,10 @@ span {
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   border-radius: 3px;
   height: 100px;
-  width: 30%
+  width: 30%;
+  transition: all 0.3s ease 0s;
+}
+
+.user-bttn.add:hover {
+  filter: brightness(75%);
 }
