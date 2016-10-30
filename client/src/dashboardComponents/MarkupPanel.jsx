@@ -15,7 +15,7 @@ class MarkupPanel extends React.Component {
       fetch('http://104.237.1.118:3000/test/users/markups', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username: 'nytimes2'}) //TODO: change to username in cookie
+        body: JSON.stringify({username: document.cookie.split('=')[1]}) //TODO: change to username in cookie
       })
       .then(function(res) {
         return res.json();
@@ -29,7 +29,7 @@ class MarkupPanel extends React.Component {
       fetch('http://104.237.1.118:3000/test/groups/markups', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({groupID: '1'}) //TODO: change to groupid passed into function
+        body: JSON.stringify({groupID: context.props.groupid}) //TODO: change to groupid passed into function
       })
       .then(function(res) {
         return res.json();
