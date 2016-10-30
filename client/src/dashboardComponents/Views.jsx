@@ -15,7 +15,7 @@ var Views = (props) => {
         <Heading title={props.viewType} changeViewCb={props.changeViewCb} />
         <UserPanel owner={props.owner} groupid={props.groupid} />
         <MarkupPanel groupid={props.groupid} markups={[1, 2]}/>
-        <SharedPanel sites={[1, 2, 3]}/>
+        <SharedPanel groupid={props.groupid} sites={[1, 2, 3]}/>
       </div>
     ); 
   }
