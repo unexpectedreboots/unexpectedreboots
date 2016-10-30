@@ -13,7 +13,7 @@ $('body').append(
   "<br>"+
 "</div>"+
 
-//failed to make group a group because you already have one with that name
+//failed to make group because you already have one with that name
 "<div class='remodal' data-remodal-id='group-fail-modal'>"+
   "<button data-remodal-action='close' class='remodal-close'></button>"+
   "<h1>You alraedy have a group with that name  ¯\\_(ツ)_/¯</h1>"+

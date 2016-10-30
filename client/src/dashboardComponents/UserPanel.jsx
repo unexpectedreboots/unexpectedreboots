@@ -50,10 +50,10 @@ class UserPanel extends React.Component {
               askUser.close();
               context.fetchUsers();
             } else if (data === 'cannot add a user that is already a member of the group') {
-              askUser.close();
+              //askUser.close();
               failAlreadyUser.open();
             } else {
-              askUser.close();
+              //askUser.close();
               failUser.open();
             }
           }
