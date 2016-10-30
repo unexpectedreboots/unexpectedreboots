@@ -1,6 +1,7 @@
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab ) {
   if ( changeInfo.status === 'complete' ) {
     var username = localStorage.getItem('username');
+    var tabUrl = tab.url;
     if (username) {
       var tab = tabId;
       $.ajax({
@@ -8,8 +9,16 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab ) {
         url: 'http://104.237.1.118:3000/test/users/markups',
         data: {username: username},
         success: function(response) {
-          alert(JSON.stringify(response) + 'markups yo');
-          chrome.tabs.sendMessage(tab, {selection: response[0]});
+          var targetMarkups = [];
+          for (var i = 0; i < response.length; i++) {
+            if (tabUrl === response[i].url) {
+              targetMarkups.push(response[i]);
+            }
+          }
+          // alert(tabUrl + "tab url, " + JSON.stringify(response) + 'markups yo');
+          if (targetMarkups.length) {
+           chrome.tabs.sendMessage(tab, {selection: targetMarkups});
+         }
         }
       });
     }

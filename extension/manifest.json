@@ -38,6 +38,6 @@
     "activeTab",
     "identity",
     "storage",
-    "cookies","<all_urls>", "http://*/*"
+    "cookies","<all_urls>", "http://*/*", "tabs"
   ]
 }
