@@ -1,7 +1,7 @@
 // $(document).ready(function() {
-  // var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
+  var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
   
-  var elements = document.getElementsByTagName("*");
+  // var elements = document.getElementsByTagName("*");
   var postSelection = function(targetText) {
     var testExport = editor.exportSelection();
     console.log('before send');
