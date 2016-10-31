@@ -26,7 +26,7 @@
       "css": [
         "lib/medium-editor/dist/css/medium-editor.css",
         "lib/medium-editor/dist/css/themes/beagle.css",
-        "css/styles.css"
+        "css/tooltip.css"
       ],
       "js": [
         "lib/jquery.min.js",
