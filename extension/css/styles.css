@@ -1,15 +1,15 @@
-a.markable-tooltip {
+span.markable-tooltip {
   position: relative; 
   /*top: 50px; */
   /*left: 50px;*/
 }
 
-a.markable-tooltip:hover span {
+span.markable-tooltip:hover span {
   opacity: 1; 
   visibility: visible;
 }
 
-a.markable-tooltip span {
+span.markable-tooltip span {
   padding: 10px;
   top: 20px;     
   min-width: 75px;
