@@ -55,9 +55,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     // <a href="#" class="markable-tooltip" style="background-color: yellow;">' + getCurrentSelection() + '<span> Testing a long tooltip </a>';
 
-    var html = '<span href="#" class="markable-tooltip"' + 
+    var html = '<span class="markable-tooltip"' + 
       'style="background-color:' + colors[userSet[allSelections[i].author]] +
-      ';">' + getCurrentSelection() + '<span>' + allSelections[i].author 
+      ';">' + getCurrentSelection() + '<span class="markable-tooltip-popup">' + allSelections[i].author 
       + allSelections[i].createdat + '</span></span>';
     var sel = window.getSelection();
         var range;
