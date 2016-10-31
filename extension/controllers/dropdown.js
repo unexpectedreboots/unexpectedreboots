@@ -59,7 +59,7 @@ angular.module('dropdownController', [])
         $scope.showError = false;
         localStorage.setItem('username', $scope.username);
         chrome.cookies.set({
-          url: 'http://127.0.0.1:8080/client/dashboard.html',
+          url: 'http://104.237.1.118:3000/dashboard.html',
           name: 'username',
           value: $scope.username
         }, function(cookies) {
