@@ -30,18 +30,15 @@ class UserPanel extends React.Component {
     var context = this;
 
     $(document).ready(function() {
-      var askUser = $('[data-remodal-id=add-user-modal]').remodal();
-      var failUser = $('[data-remodal-id=user-fail-modal]').remodal();
-      var failAlreadyUser = $('[data-remodal-id=already-user-fail-modal]').remodal();
+      
 
-      var $bttn = $('button.user');
-      $bttn.click(function() {
+     $('button.user').click(function() {
         $.ajax({
           url: 'http://104.237.1.118:3000/test/groups/add',
           method: 'POST',
           data: {
             groupID: context.props.groupid, 
-            username: 'dylan',  //TODO: change this to the username in the cookie
+            username: document.cookie.split('=')[1],  //TODO: change this to the username in the cookie
             newMember: $('.newMember').val()
           },
           success: function(data) {
@@ -50,10 +47,10 @@ class UserPanel extends React.Component {
               askUser.close();
               context.fetchUsers();
             } else if (data === 'cannot add a user that is already a member of the group') {
-              //askUser.close();
+              askUser.close();
               failAlreadyUser.open();
             } else {
-              //askUser.close();
+              askUser.close();
               failUser.open();
             }
           }

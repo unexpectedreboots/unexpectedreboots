@@ -15,7 +15,7 @@ class GroupPanel extends React.Component {
     fetch('http://104.237.1.118:3000/test/users/groups', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username: 'dylan'}) //TODO: change to username in cookie 
+      body: JSON.stringify({username: document.cookie.split('=')[1]}) //TODO: change to username in cookie 
     })
     .then(function(res) {
       return res.json();
@@ -33,17 +33,14 @@ class GroupPanel extends React.Component {
     var context = this;
 
     $(document).ready(function() {
-      var askGroup = $('[data-remodal-id=modal]').remodal();
-      var failGroup = $('[data-remodal-id=group-fail-modal]').remodal();
 
-      var $bttn = $('.group');
-      $bttn.click(function() {
+      $('.group').click(function() {
         $.ajax({
           url: 'http://104.237.1.118:3000/test/groups/create',
           method: 'POST',
           data: {
             groupName: $('.groupName').val(),
-            owner: 'dylan'  //TODO: change this to the username in the cookie
+            owner: document.cookie.split('=')[1]  //TODO: change this to the username in the cookie
           },
           success: function(data) {
             if (data === true) {

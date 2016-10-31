@@ -4,10 +4,12 @@ var Heading = (props) => {
     <div className='row heading'>
     <div>
       <div className='col-sm-4 heading-title'>{props.title} 
-        <div className='welcome' >Welcome back,</div>  
+        <div className='welcome' >Welcome back,{' ' + document.cookie.split('=')[1]}</div>  
       </div>
       <div className='col-sm-4 heading-bttn'>Logout</div>
-      <div className='col-sm-4 heading-bttn' onClick={() => props.changeViewCb(event, 'home', null)}>Home</div>
+      <a href="javascript:history.go(0)">
+        <div className='col-sm-4 heading-bttn' >Home</div>
+      </a>
     </div>
     </div>
   );
