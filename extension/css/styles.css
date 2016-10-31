@@ -29,3 +29,31 @@ span.markable-tooltip-popup {
        -o-transition: all 0.5s; 
           transition: all 0.5s;    
 }
+
+body{
+  background-color: lightblue;
+  width:200px;
+  height:200px;
+}
+
+h2{
+  text-align: center;
+  font: italic 3em;
+}
+h3{
+  text-align: center;
+  font: italic 3em;
+}
+
+h1{
+  text-align: center;
+  font: italic 3em;
+  
+}
+
+button{
+  text-align: center;
+  font-size: 100%;
+  font-style: italic;
+  background-color: lightyellow;
+}
