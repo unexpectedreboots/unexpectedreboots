@@ -23,7 +23,10 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "css": ["lib/medium-editor/dist/css/medium-editor.css"],
+      "css": [
+        "lib/medium-editor/dist/css/medium-editor.css",
+        "css/styles.css"
+      ],
       "js": [
         "lib/jquery.min.js",
         "lib/medium-editor/dist/js/medium-editor.js",

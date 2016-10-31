@@ -52,7 +52,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
     var importedSelection = JSON.parse(allSelections[i].anchor);
     editor.importSelection(importedSelection);
-    var html = '<span style="background-color:' + colors[userSet[allSelections[i].author]] + ';">' + getCurrentSelection() + '</span>';
+
+    // <a href="#" class="markable-tooltip" style="background-color: yellow;">' + getCurrentSelection() + '<span> Testing a long tooltip </a>';
+
+    var html = '<span href="#" class="markable-tooltip"' + 
+      'style="background-color:' + colors[userSet[allSelections[i].author]] +
+      ';">' + getCurrentSelection() + '<span>' + allSelections[i].author 
+      + allSelections[i].createdat + '</span></span>';
     var sel = window.getSelection();
         var range;
             //Set new Content
