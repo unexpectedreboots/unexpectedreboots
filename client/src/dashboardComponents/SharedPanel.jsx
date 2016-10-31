@@ -14,7 +14,7 @@ class SharedPanel extends React.Component {
     fetch('http://104.237.1.118:3000/test/groups/sites', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({groupID: props.groupid}) //TODO: change to groupid in props
+      body: JSON.stringify({groupID: this.props.groupid}) //TODO: change to groupid in props
     })
     .then(function(res) {
       return res.json();
