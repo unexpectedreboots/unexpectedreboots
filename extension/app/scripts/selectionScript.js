@@ -22,7 +22,7 @@
     },
     extensions: {
         'sendSelection': new MediumButton({
-          label: 'Send',
+          label: 'SHARE',
           start: '<span style="background-color: powderblue;">',
           end: '</span>',
           action: function(html, mark) {
@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     var importedSelection = JSON.parse(allSelections[i].anchor);
     editor.importSelection(importedSelection);
-    var html = '<span style="background-color: yellow;">' + getCurrentSelection() + '</span>';
+    var html = '<a href="#" class="markable-tooltip" style="background-color: yellow;">' + getCurrentSelection() + '<span> Testing a long tooltip </a>';
     var sel = window.getSelection();
         var range;
             //Set new Content
