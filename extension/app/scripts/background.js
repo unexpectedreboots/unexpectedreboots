@@ -78,7 +78,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           comment: null
         },
         success: function() {
-          alert('success');
+          // alert('success');
         }
       });
       $.ajax({
@@ -91,7 +91,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             for(var i = 0; i < response.length; i++) {
               postGroups.push(response[i].groupid);
             }
-            alert(postGroups);
+            // alert(postGroups);
             for (var j = 0; j <postGroups.length; j++) {
               $.ajax({
                 type: 'POST',
@@ -108,7 +108,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 success: function() {
                 },
                 error: function(obj,string,other) {
-                  alert(obj + string + other)
+                  // alert(obj + string + other)
                 }
               });
             }

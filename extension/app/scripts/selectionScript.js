@@ -1,44 +1,41 @@
 // $(document).ready(function() {
-  var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
-  
-  // var elements = document.getElementsByTagName("*");
-  var postSelection = function(targetText) {
-    var testExport = editor.exportSelection();
-    console.log('before send');
-    chrome.runtime.sendMessage({
-      action : 'add',
-      selection: JSON.stringify(testExport),
-      text: targetText
-    }, function(response) {
-      console.log('received a response', response)
-    });
-  }
-  editor = new MediumEditor(elements, {
-    anchorPreview: false,
-    placeholder: false,
-    disableEditing: true,
-    toolbar: {
-      buttons: ['sendSelection']
-    },
-    extensions: {
-        'sendSelection': new MediumButton({
-          label: 'Share',
-          start: '<span style="background-color: powderblue;">',
-          end: '</span>',
-          action: function(html, mark) {
-            postSelection(html);
-            alert(html);
-            return html;
-          }
-        })
-      }
-  });
-  editor.subscribe('editableInput', function (event, editable) {
-      // Do some work
-      console.log(event, 'event');
-      console.log(editable,'editable');
+var elements = document.querySelectorAll("p, li, em, span, h1, h2, h3, h4, h5, td, tr, th, tbody");
 
+// var elements = document.getElementsByTagName("*");
+var postSelection = function(targetText) {
+  var testExport = editor.exportSelection();
+  chrome.runtime.sendMessage({
+    action : 'add',
+    selection: JSON.stringify(testExport),
+    text: targetText
+  }, function(response) {
   });
+}
+editor = new MediumEditor(elements, {
+  anchorPreview: false,
+  placeholder: false,
+  disableEditing: true,
+  toolbar: {
+    buttons: ['sendSelection']
+  },
+  extensions: {
+      'sendSelection': new MediumButton({
+        label: 'Share',
+        start: '<span style="background-color: powderblue;">',
+        end: '</span>',
+        action: function(html, mark) {
+          postSelection(html);
+          return html;
+        }
+      })
+    }
+});
+editor.subscribe('editableInput', function (event, editable) {
+    // Do some work
+    console.log(event, 'event');
+    console.log(editable,'editable');
+
+});
 var colors = {0: '#EDE2AF', 1: '#E2BACB', 2: '#BECFE8', 3: '#F4CCB0', 4: '#BCE0B5'};
 var userSet = {};
 var numbers = [0,1,2,3,4]  
