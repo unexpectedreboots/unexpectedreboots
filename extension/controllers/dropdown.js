@@ -20,6 +20,13 @@ angular.module('dropdownController', [])
     }).then(function(response) {
       console.log('then statement sign up', response);
       if (response.data) {
+        chrome.cookies.set({
+          url: 'http://127.0.0.1:8080/client/dashboard.html',
+          name: 'username',
+          value: $scope.username
+        }, function(cookies) {
+          console.log(cookies);
+        });
         localStorage.setItem('username', $scope.username);
         $state.transitionTo('home');
       }
