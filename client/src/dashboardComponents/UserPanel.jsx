@@ -30,9 +30,12 @@ class UserPanel extends React.Component {
     var context = this;
 
     $(document).ready(function() {
-      
+      var askUser = $('[data-remodal-id=add-user-modal]').remodal();
+      var failUser = $('[data-remodal-id=user-fail-modal]').remodal();
+      var failAlreadyUser = $('[data-remodal-id=already-user-fail-modal]').remodal();
 
-     $('button.user').click(function() {
+      var $bttn = $('button.user');
+      $bttn.click(function() {
         $.ajax({
           url: 'http://104.237.1.118:3000/test/groups/add',
           method: 'POST',
