@@ -2,5 +2,5 @@
 # unexpectedreboots
 
 * The struscure of the react components that make the dashboard
-http://dylanlrrb.github.io/GroupView.png
-http://dylanlrrb.github.io/HomeView.png
+![HomeView](http://dylanlrrb.github.io/HomeView.png)
+![GroupView](http://dylanlrrb.github.io/GroupView.png)
