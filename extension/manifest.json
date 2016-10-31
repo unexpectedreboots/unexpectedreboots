@@ -25,6 +25,7 @@
       "matches": ["http://*/*", "https://*/*"],
       "css": [
         "lib/medium-editor/dist/css/medium-editor.css",
+        "lib/medium-editor/dist/css/themes/beagle.css",
         "css/styles.css"
       ],
       "js": [
