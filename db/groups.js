@@ -251,7 +251,7 @@ exports.getSites = function(groupID, callback) {
           sg.sharedby AS sharedby \
           sg.sharedat AS sharedat \
           FROM sitesgroups sg \
-          WHERE sg.groupid = '\'' + groupID + '\' \
+          WHERE sg.groupid = \'' + groupID + '\' \
       ) temp LEFT JOIN users u2 \
       ON temp.authorid = u2.id \
       LEFT JOIN sites s2 \
