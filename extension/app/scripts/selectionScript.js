@@ -18,11 +18,11 @@
     placeholder: false,
     disableEditing: true,
     toolbar: {
-      buttons: ['bold', 'italic','sendSelection']
+      buttons: ['sendSelection']
     },
     extensions: {
         'sendSelection': new MediumButton({
-          label: 'Send',
+          label: 'Share',
           start: '<span style="background-color: powderblue;">',
           end: '</span>',
           action: function(html, mark) {
@@ -57,8 +57,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     var html = '<span class="markable-tooltip"' + 
       'style="background-color:' + colors[userSet[allSelections[i].author]] +
-      ';">' + getCurrentSelection() + '<span class="markable-tooltip-popup">' + allSelections[i].author 
-      + allSelections[i].createdat + '</span></span>';
+      ';">' + getCurrentSelection() + '<span class="markable-tooltip-popup">' + 'author: ' + allSelections[i].author 
+      + '<br>' + 'created: ' + allSelections[i].createdat + '</span></span>';
     var sel = window.getSelection();
         var range;
             //Set new Content
