@@ -39,14 +39,20 @@
       console.log(editable,'editable');
 
   });
+var colors = {0: '#EDE2AF', 1: '#E2BACB', 2: '#BECFE8', 3: '#F4CCB0', 4: '#BCE0B5'};
+var userSet = {};
+var numbers = [0,1,2,3,4]  
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   console.log(request, 'request');
+
   var allSelections = request.selection;
   for (var i = 0; i < allSelections.length; i++) {
-
+    if (!userSet[allSelections[i].author]) {
+      userSet[allSelections[i].author] = numbers.splice(0,1);
+    }
     var importedSelection = JSON.parse(allSelections[i].anchor);
     editor.importSelection(importedSelection);
-    var html = '<span style="background-color: yellow;">' + getCurrentSelection() + '</span>';
+    var html = '<span style="background-color:' + colors[userSet[allSelections[i].author]] + ';">' + getCurrentSelection() + '</span>';
     var sel = window.getSelection();
         var range;
             //Set new Content
