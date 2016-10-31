@@ -26,7 +26,8 @@ var myApp = angular.module('Markable', [
 }])
 .run(function ($rootScope, $state) {
   $rootScope.$on('$stateChangeStart', function (evt, toState) {
-    chrome.cookies.getAll({url: 'http://104.237.1.118:3000/'}, function(cookie) {
+
+    chrome.cookies.getAll({url: 'http://104.237.1.118:3000/dashboard.html'}, function(cookie) {
       console.log('cookie:', cookie);
       if (cookie) {
         if (!cookie.length > 0) {
