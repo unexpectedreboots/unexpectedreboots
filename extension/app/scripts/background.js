@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     //need url, title, and text
       $.ajax({
         type: "POST",
-        url: 'http://104.237.1.118:3000/test/markups/create',
+        url: 'http://104.237.1.118:3000/api/markups/create',
         data: {
           username: username,
           anchor: selection,
@@ -86,29 +86,32 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         url: 'http://104.237.1.118:3000/test/users/groups',
         data: {username: username},
         success: function(response) {
-          var groups = [];
-          for(var i = 0; i < response.length; i++) {
-            groups.push(response[i].groupid);
-          }
-          for (var j = 0; j <groups.length; j++) {
-            $.ajax({
-              type: 'POST',
-              url: 'http://104.237.1.118:3000/test/markups/share',
-              data: {
-                username: username,
-                anchor: selection,
-                url: url,
-                title: title,
-                text: request.text,
-                comment: null,
-                groupID: groups[j]
-              },
-              success: function() {
-              },
-              error: function(obj,string,other) {
-                alert(obj + string + other)
-              }
-            });
+          var postGroups = [];
+          if(Array.isArray(response)){
+            for(var i = 0; i < response.length; i++) {
+              postGroups.push(response[i].groupid);
+            }
+            alert(postGroups);
+            for (var j = 0; j <postGroups.length; j++) {
+              $.ajax({
+                type: 'POST',
+                url: 'http://104.237.1.118:3000/test/markups/share',
+                data: {
+                  username: username,
+                  anchor: selection,
+                  url: url,
+                  title: title,
+                  text: request.text,
+                  comment: null,
+                  groupID: postGroups[j]
+                },
+                success: function() {
+                },
+                error: function(obj,string,other) {
+                  alert(obj + string + other)
+                }
+              });
+            }
           }
         }
       });
