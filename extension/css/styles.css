@@ -10,6 +10,7 @@ span.markable-tooltip:hover span {
 }
 
 span.markable-tooltip-popup {
+  z-index: 9000;
   padding: 10px;
   top: 20px;     
   min-width: 75px;

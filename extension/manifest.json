@@ -30,6 +30,8 @@
       ],
       "js": [
         "lib/jquery.min.js",
+        "lib/moment-min.js",
+        "lib/moment-twitter.js",
         "lib/medium-editor/dist/js/medium-editor.js",
         "lib/MediumButton.js", 
         "app/scripts/selectionScript.js"
