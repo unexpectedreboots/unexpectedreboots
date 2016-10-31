@@ -14,7 +14,7 @@
       <p ng-show="signup.password.$dirty && (signup.password.$error.minlength || signup.password.$error.maxlength) ">Password should be between 8 and 20 characters.</p>
     <div ng-show="signupMode">
       <ul id="strength" check-strength="password"></ul>
-      <input placeholder="email" name="email" type="email" ng-model="email" required ng-minlength="8" ng-maxlength="64" />
+      <input placeholder="email" name="email" type="email" ng-model="email" />
       <p ng-show="signup.email.$dirty && signup.email.$error.required" >Your email is required.</p>
       <p ng-show="signup.email.$dirty && (signup.email.$error.minlength || signup.email.$error.maxlength) ">Email should be between 8 and 64 characters.</p>
       <p ng-show="signup.email.$dirty && signup.email.$error.email ">Enter valid email.</p>
