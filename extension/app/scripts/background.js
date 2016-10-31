@@ -21,9 +21,10 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab ) {
           //get all groups for a user
           $.ajax({
             type: 'GET',
-            url: 'http://104.237.1.118:3000/test/users/groups',
+            url: 'http://104.237.1.118:3000/api/users/groups',
             data: {username: username},
             success: function(response) {
+              // alert('called api/users/groups');
               var groups = [];
               for(var i = 0; i< response.length; i++) {
                 groups.push(response[i].groupid);
