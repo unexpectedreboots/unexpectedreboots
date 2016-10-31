@@ -218,7 +218,8 @@
 
 .medium-editor-element {
   word-wrap: break-word;
-  min-height: 30px; }
+  /*min-height: 30px; */
+}
   .medium-editor-element img {
     max-width: 100%; }
   .medium-editor-element sub {
