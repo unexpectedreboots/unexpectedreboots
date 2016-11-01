@@ -33,8 +33,11 @@ class GroupPanel extends React.Component {
     var context = this;
 
     $(document).ready(function() {
+      var askGroup = $('[data-remodal-id=modal]').remodal();
+      var failGroup = $('[data-remodal-id=group-fail-modal]').remodal();
 
-      $('.group').click(function() {
+      var $bttn = $('.group');
+      $bttn.click(function() {
         $.ajax({
           url: 'http://104.237.1.118:3000/test/groups/create',
           method: 'POST',
